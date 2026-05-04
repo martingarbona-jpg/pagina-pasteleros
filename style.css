@@ -1,0 +1,1083 @@
+:root{
+  --verde-principal:#0f7a43;
+  --verde-secundario:#149e5f;
+  --verde-principal-rgb:15,122,67;
+  --verde-secundario-rgb:20,158,95;
+  --gris-fondo:#f5f7f6;
+  --texto:#1f2a2a;
+  --muted:#666;
+  --borde:#e6ecea;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:'Segoe UI', Arial, sans-serif;
+  color:var(--texto);
+  background:
+    radial-gradient(900px 500px at 10% 0%, rgba(var(--verde-secundario-rgb),0.18), transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, rgba(var(--verde-principal-rgb),0.14), transparent 55%),
+    var(--gris-fondo);
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+/* ============================= */
+/* HEADER PRO: TEXTO IZQ - LOGO CENTRO - MENU DER */
+/* + LINEA VERDE ANIMADA */
+/* ============================= */
+
+.topbar{
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
+  height: 112px; /* suficiente para logo protagonista */
+  background: linear-gradient(to right, #ffffff, #f4fbf7);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.topbar__inner{
+  position: relative;
+  height: 100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* Línea verde inferior animada */
+.topbar::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:4px;
+
+  background: linear-gradient(
+    90deg,
+    var(--verde-principal),
+    var(--verde-secundario),
+    var(--verde-secundario),
+    var(--verde-principal)
+  );
+  background-size: 220% 100%;
+  animation: barFlow 3.2s linear infinite;
+
+  opacity: 0.95;
+}
+@keyframes barFlow{
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 220% 50%; }
+}
+
+/* IZQUIERDA: texto */
+.brand--text{
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.brand__name{
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  color: var(--verde-principal);
+  line-height: 1.05;
+}
+
+.brand__sub{
+  font-size: 16px;
+  font-weight: 700;
+  color:#666;
+}
+
+/* CENTRO: logo protagonista (centrado real) */
+.brand--logo{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events: none; /* evita clicks raros sobre el logo */
+}
+
+.brand--logo img{
+  height: 130px;   /* más grande y protagonista */
+  width: auto;
+  max-width: 600px;
+  object-fit: contain;
+  display:block;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.18));
+}
+/* DERECHA: menú */
+.nav{
+  position: relative;
+  z-index: 2;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  justify-content:flex-end;
+  transform: translateX(80px);
+}
+
+.nav a{
+  padding:9px 14px;
+  border-radius:999px;
+  text-decoration:none;
+  font-weight:800;
+  font-size:14px;
+  color:#111;
+  background: rgba(var(--verde-principal-rgb),0.08);
+  transition: all .18s ease;
+}
+
+.nav a:hover{
+  background: rgba(var(--verde-principal-rgb),0.18);
+  transform: translateY(-1px);
+}
+
+/* ============================= */
+/* HERO */
+/* ============================= */
+
+.hero--institucional{
+  background:linear-gradient(135deg,var(--verde-principal),var(--verde-secundario));
+  color:#ffffff;
+  padding:20px 20px;
+  text-align:center;
+  border-radius: 0 0 26px 26px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.10);
+}
+
+.hero__title--big{
+  font-size:40px;
+  font-weight:900;
+  margin:0 0 14px 0;
+}
+
+.hero__subtitle--institucional{
+  font-size:19px;
+  max-width:900px;
+  margin:0 auto;
+  line-height:1.6;
+  opacity:0.95;
+}
+
+/* ============================= */
+/* SECCIONES */
+/* ============================= */
+
+.section{ padding:50px 0; }
+.section--alt{ background:#ffffff; }
+
+.section h2{
+  font-size:28px;
+  margin:0 0 8px 0;
+}
+
+.muted{ color: var(--muted); }
+
+/* ============================= */
+/* CARDS (verdes + blancas) */
+/* ============================= */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:18px;
+  margin-top:20px;
+}
+
+.card{
+  background: linear-gradient(135deg, var(--verde-principal) 0%, var(--verde-secundario) 100%);
+  color:#ffffff;
+  padding:25px;
+  border-radius:18px;
+  border:none;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
+  position:relative;
+  overflow:hidden;
+  transition: all .3s ease;
+}
+
+/* Brillo sutil superior */
+.card::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 45%);
+  pointer-events:none;
+}
+
+/* Hover más elegante */
+.card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.22);
+}
+.card h3{
+  margin-top:0;
+  color:#ffffff;
+  font-size:18px;
+  letter-spacing:0.2px;
+}
+
+.card .muted{
+  color: rgba(255,255,255,0.85);
+}
+
+.btn{
+  display:inline-block;
+  margin-top:10px;
+  padding:11px 18px;
+  background:#ffffff;
+  color: var(--verde-principal);
+  text-decoration:none;
+  border-radius:999px;
+  font-weight:900;
+  box-shadow:0 10px 22px rgba(0,0,0,0.10);
+  transition: transform .15s ease;
+}
+
+.btn:hover{
+  transform: translateY(-2px);
+}
+
+/* ============================= */
+/* CONSULTORIOS (hover + detalle) */
+/* ============================= */
+
+.consultorio-card{
+  cursor:pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.consultorio-title{
+  margin:0;
+  font-size:20px;
+  font-weight:900;
+}
+
+.consultorio-detalle{
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition: max-height 0.25s ease, opacity 0.25s ease;
+  margin-top:10px;
+  border-top:1px dashed rgba(255,255,255,0.4);
+  padding-top:0;
+}
+
+.consultorio-list{
+  margin:0;
+  padding-left:18px;
+  text-align:left;
+}
+
+.consultorio-card:hover{
+  transform: scale(1.06);
+  box-shadow: 0 22px 55px rgba(0,0,0,0.28);
+  z-index:10;
+}
+
+.consultorio-card:hover .consultorio-detalle,
+.consultorio-card.is-open .consultorio-detalle{
+  max-height:420px;
+  opacity:1;
+  padding-top:10px;
+}
+
+.consultorio-card.is-open{
+  transform: scale(1.06);
+  box-shadow: 0 22px 55px rgba(0,0,0,0.28);
+  z-index:10;
+}
+
+/* ============================= */
+/* LOADER CONSULTORIOS */
+/* ============================= */
+
+.consultorios-loader{
+  text-align:center;
+  padding:50px 0;
+  color:var(--verde-principal);
+}
+
+.consultorios-loader p{
+  font-weight:800;
+  margin-top:10px;
+}
+
+.spinner{
+  width:45px;
+  height:45px;
+  border:4px solid rgba(0,0,0,0.1);
+  border-top:4px solid var(--verde-principal);
+  border-radius:50%;
+  margin:0 auto;
+  animation:spin 0.8s linear infinite;
+}
+
+@keyframes spin{
+  to { transform: rotate(360deg); }
+}
+
+/* ============================= */
+/* WHATSAPP FLOTANTE + BURBUJA */
+/* ============================= */
+
+@keyframes wa-enter{
+  from{ opacity:0; transform: translateY(18px) scale(0.95); }
+  to{ opacity:1; transform: translateY(0) scale(1); }
+}
+
+@keyframes wa-pulse{
+  0%, 100%{ transform: scale(1); }
+  50%{ transform: scale(1.04); }
+}
+
+.wa-float{
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  animation: wa-enter .45s ease both;
+}
+
+.wa-float__bubble{
+  background:#ffffff;
+  color:#111;
+  font-weight:900;
+  font-size:13px;
+  padding:10px 12px;
+  border-radius:999px;
+  box-shadow:0 16px 40px rgba(0,0,0,0.18);
+  white-space: nowrap;
+  position: relative;
+}
+
+.wa-float__bubble::after{
+  content:"";
+  position:absolute;
+  right:-6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid #ffffff;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+}
+
+.wa-float__btn{
+  width:52px;
+  height:52px;
+  border-radius:999px;
+  background:var(--verde-principal);
+  display:grid;
+  place-items:center;
+  box-shadow:0 18px 45px rgba(0,0,0,0.25);
+  animation: wa-pulse 1.8s ease-in-out infinite;
+}
+
+.wa-float__svg{
+  width:26px;
+  height:26px;
+  color:#fff;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+.footer{
+  background:#ffffff;
+  text-align:center;
+  padding:25px 0;
+  border-top:1px solid var(--borde);
+  font-size:14px;
+}
+
+/* ============================= */
+/* RESPONSIVE (CELULAR) */
+/* Soluciona superposición: se apila */
+/* ============================= */
+
+@media (max-width:768px){
+
+  .topbar{
+    height: 124px; /* más alto para que no choque nada */
+  }
+
+  .topbar__inner{
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 6px;
+    align-content:center;
+    justify-items:center;
+  }
+
+  /* Logo arriba, centrado, sin superponerse */
+  .brand--logo{
+    position: static;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .brand--logo img{
+    height: 85px;
+    max-width: 260px;
+  }
+
+  /* Texto abajo, centrado */
+  .brand--text{
+    text-align:center;
+  }
+
+  .brand__name{
+    font-size: 18px;
+  }
+
+  .brand__sub{
+    font-size: 12px;
+  }
+
+  /* Menú se oculta en móvil */
+  .nav{
+    display:none;
+  }
+
+  /* Hero más compacto */
+  .hero--institucional{
+    padding:40px 20px;
+  }
+  .hero__title--big{ font-size:30px; }
+  .hero__subtitle--institucional{ font-size:16px; }
+
+  /* WhatsApp un poco más chico */
+  .wa-float{
+    right: 14px;
+    bottom: 104px;
+    gap: 0;
+  }
+  .wa-float__bubble{
+    display:none;
+  }
+  .wa-float__btn{
+    width:44px;
+    height:44px;
+    box-shadow:0 10px 24px rgba(0,0,0,0.2);
+  }
+
+  .wa-float__svg{
+    width:22px;
+    height:22px;
+  }
+}
+/* ============================= */
+/* (4) SCROLL SUAVE + OFFSET HEADER */
+/* ============================= */
+html{
+  scroll-behavior: smooth;
+}
+
+/* Evita que el header sticky tape el título al navegar por anclas */
+section[id]{
+  scroll-margin-top: 130px;
+}
+
+/* ============================= */
+/* (1) TAB BAR MOVIL (MODO APP) */
+/* ============================= */
+.tabbar{
+  display:none;
+}
+
+@media (max-width:768px){
+
+  /* Para que la tabbar no tape contenido */
+  body{ padding-bottom: 92px; }
+
+  .tabbar{
+    display:grid;
+    grid-template-columns: repeat(5, 1fr);
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 9998;
+
+    background: rgba(255,255,255,0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+    padding: 8px 6px;
+    gap: 6px;
+  }
+
+  .tabbar__item{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    gap: 3px;
+
+    text-decoration:none;
+    color:#111;
+    font-weight: 900;
+    padding: 8px 6px;
+    border-radius: 14px;
+
+    transition: transform .12s ease, background .12s ease;
+  }
+
+  .tabbar__icon{ font-size: 18px; line-height: 1; }
+  .tabbar__icon--emergency{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#d32f2f;
+    color:#fff;
+    font-size:13px;
+    font-weight:900;
+  }
+  .tabbar__txt{ font-size: 11px; opacity: 0.92; }
+
+  /* tap feedback */
+  .tabbar__item:active{
+    transform: scale(0.97);
+    background: rgba(var(--verde-principal-rgb),0.12);
+  }
+/* Bajar un poco el título en móvil */
+.brand--text{
+  margin-top: 12px;
+}
+
+  .tabbar__item--primary{
+    background: var(--verde-principal);
+    color:#fff;
+  }
+  .tabbar__item--primary:active{
+    transform: scale(0.97);
+    background: var(--verde-secundario);
+  }
+}
+
+/* ============================= */
+/* (5) MICRO-ANIMACIONES: CARDS ENTRAN SUAVE */
+/* ============================= */
+@keyframes cardIn{
+  from{ opacity:0; transform: translateY(10px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+.card{
+  animation: cardIn .35s ease both;
+}
+
+/* Tap feedback en botones */
+.btn:active{
+  transform: scale(0.98);
+}
+/* Cards siempre visibles (sin depender de JS) */
+.card{
+  opacity: 1;
+  transform: none;
+}
+/* Ajuste para que WhatsApp no choque con la tab bar */
+@media (max-width:768px){
+
+  .wa-float{
+    bottom: 104px;
+  }
+
+}
+/* ============================= */
+/* MOBILE: TITULO Y LOGO MÁS GRANDES */
+/* ============================= */
+
+@media (max-width:768px){
+
+  /* Hacemos el header un poco más alto */
+  .topbar{
+    height: 150px;
+  }
+
+  /* Título más grande */
+  .brand__name{
+    font-size: 24px;
+    font-weight: 900;
+  }
+
+  /* Subtítulo un poco más visible */
+  .brand__sub{
+    font-size: 14px;
+  }
+
+  /* Logo más protagonista */
+  .brand--logo img{
+    height: 105px;
+  }
+
+}
+/* MOBILE: bajar un poco el título */
+@media (max-width:768px){
+
+  .brand--text{
+    margin-top: 18px;  /* ajustá entre 14px y 22px si querés más o menos */
+  }
+
+}
+/* MOBILE ajuste fino título */
+@media (max-width:768px){
+
+  .brand__name{
+    font-size: 26px;   /* más grande */
+    margin-top: 14px;  /* lo baja un poco */
+  }
+
+}
+/* WhatsApp Gestiones */
+.gestiones-whatsapp{
+  margin-top:10px;
+}
+
+.gestiones-whatsapp a{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  font-weight:800;
+  color: var(--verde-principal);
+}
+
+.wa-icon{
+  width:18px;
+  height:18px;
+}
+/* Turnos en óvalo blanco (no toca Autorizaciones) */
+.turnos-oval{
+  margin-top:10px;
+}
+
+.turnos-oval a{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  background:#ffffff;
+  color:var(--verde-principal);
+
+  padding:10px 18px;
+  border-radius:999px;
+
+  text-decoration:none;
+  font-weight:900;
+  font-size:14px;
+
+  box-shadow:0 10px 25px rgba(0,0,0,0.12);
+  transition: transform .15s ease;
+}
+
+.turnos-oval a:hover{
+  transform: translateY(-2px);
+}
+
+.turnos-icon{
+  width:18px;
+  height:18px;
+  color:var(--verde-secundario);
+}
+/* Contacto - mails */
+.contacto-mails{
+  margin-top:15px;
+}
+
+.contacto-mails p{
+  margin:6px 0;
+  font-weight:600;
+}
+
+.contacto-mails a{
+  color: var(--verde-principal);
+  text-decoration:none;
+  font-weight:800;
+}
+
+.contacto-mails a:hover{
+  text-decoration:underline;
+}
+/* CONTACTO layout */
+.contacto-wrapper{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-top:15px;
+}
+
+/* Instagram */
+.contacto-instagram a{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  font-weight:800;
+  color: var(--verde-principal);
+  font-size:16px;
+}
+
+.instagram-icon{
+  width:22px;
+  height:22px;
+  color:#E1306C;
+  transition: transform .2s ease;
+}
+
+.contacto-instagram a:hover .instagram-icon{
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width:768px){
+  .contacto-wrapper{
+    flex-direction:column;
+  }
+
+  .contacto-instagram{
+    margin-top:10px;
+  }
+}
+/* ===== Carnet responsive (FIX MOBILE: que crezca hacia abajo) ===== */
+.carnet-card{
+  max-width:420px;
+  width:100%;
+  aspect-ratio: 1.58 / 1;   /* PC ok */
+  position:relative;
+  overflow:hidden;
+  border-radius:20px;
+}
+
+/* Header y Body (PC) */
+.carnet-header{
+  position:absolute;
+  left:0; right:0;
+  top:0;
+  height:30%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  padding:14px 14px 8px;
+  box-sizing:border-box;
+  z-index:2;
+}
+
+.carnet-body{
+  position:absolute;
+  left:14px; right:14px;
+  bottom:14px;
+  top:28%;
+  background:#fff;
+  border-radius:16px;
+  padding:14px;
+  box-sizing:border-box;
+  z-index:3;
+}
+
+/* ✅ MOBILE: sin “plantilla fija”, que el carnet se estire hacia abajo */
+@media (max-width: 480px){
+
+  .carnet-card{
+    aspect-ratio: auto;     /* clave */
+    height: auto;           /* clave */
+    min-height: 360px;      /* asegura espacio para que se lea TODO */
+    overflow: visible;
+    padding-bottom: 12px;
+  }
+
+  .carnet-header{
+    position: relative;
+    height: auto;
+    padding: 16px 14px 10px;
+    gap: 10px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .carnet-body{
+    position: relative;
+    top: auto; left: auto; right: auto; bottom: auto;
+    margin: 0 14px 14px;
+    padding: 14px 12px 18px;
+  }
+
+  .carnet-logo{ width:92px !important; }
+  .carnet-title{ font-size:12px !important; }
+  .carnet-name{ font-size:15px !important; }
+  .carnet-grid{ gap:8px !important; font-size:12px !important; line-height: 1.25; }
+}
+/* Direcciones contacto */
+.contacto-direcciones{
+  margin-top:15px;
+}
+
+.contacto-direcciones p{
+  margin:6px 0;
+  font-weight:600;
+  color:#333;
+}
+
+.contacto-direcciones strong{
+  font-weight:800;
+}
+/* Links a Google Maps en Contacto */
+.contacto-map{
+  color: inherit;
+  text-decoration:none;
+}
+
+.contacto-map strong{
+  color: var(--verde-principal);
+}
+
+.contacto-map:hover strong{
+  text-decoration: underline;
+}
+/* Botones Cartilla y Coseguros */
+.doc-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+/* Botón Ver (secundario) */
+.btn.btn--ghost{
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.45);
+  color:#fff;
+}
+
+.btn.btn--ghost:hover{
+  background: rgba(255,255,255,0.28);
+}
+/* ===== Carnet: en móvil que crezca en alto y no corte texto ===== */
+@media (max-width: 520px) {
+  .carnet-card{
+    aspect-ratio: auto;     /* deja de forzar proporción */
+    min-height: 420px;      /* más alto para que entre todo */
+  }
+
+  .carnet-body{
+    padding-bottom: 18px;   /* aire abajo */
+  }
+
+  .carnet-validado{
+    margin-top: 12px;
+    font-size: 12px;
+  }
+}
+/* ===== FIX: achicar SOLO el logo del header (no el del carnet) ===== */
+img[src*="logo-elevar"]:not(.carnet-logo) {
+  height: 52px !important;   /* probá 48px si lo querés más chico */
+  width: auto !important;
+  max-width: 260px !important;
+  object-fit: contain;
+}
+
+.pill-wa{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  background:#ffffff;
+  border:1px solid #ffffff;
+  color:var(--verde-principal);
+
+  padding:0 18px;
+  border-radius:999px;
+
+  text-decoration:none;
+  font-weight:900;
+  font-size:14px;
+
+  transition: transform .15s ease;
+}
+
+  padding:0 18px;
+  border-radius:999px;
+
+  text-decoration:none;
+  font-weight:900;
+  font-size:14px;
+
+  transition: transform .15s ease, background .15s ease;
+}
+
+.pill-wa:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.28);
+}
+.pill-wa__icon{
+  width:18px;
+  height:18px;
+  color:var(--verde-principal);
+}
+/* Alinear botón y WhatsApp dentro de Autorizaciones */
+.card-actions{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-top:14px;
+}
+
+.card-actions .btn,
+.card-actions .pill-wa{
+  height:46px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+/* FIX alineación real: el .btn tiene margin-top:10px por defecto */
+.card-actions .btn{
+  margin-top: 0;           /* <-- clave */
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;         /* consistente con el pill */
+}
+
+.card-actions .pill-wa{
+  height: 46px;            /* por las dudas, lo fijamos acá también */
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Pestaña lateral instalar app (solo móvil/tablet chica) */
+.install-panel{
+  display:none;
+}
+
+.install-panel--force-hide{
+  display:none !important;
+}
+
+@media (max-width: 900px){
+  .install-panel{
+    display:block;
+    position:fixed;
+    left:0;
+    top:60%;
+    transform:translateY(-50%);
+    z-index:9997;
+  }
+
+  .install-panel__tab{
+    border:none;
+    background:linear-gradient(145deg,var(--verde-principal),var(--verde-secundario));
+    color:#fff;
+    font-weight:800;
+    font-size:12px;
+    letter-spacing:.2px;
+    border-radius:0 12px 12px 0;
+    padding:11px 8px;
+    writing-mode:vertical-rl;
+    text-orientation:mixed;
+    transform:rotate(180deg);
+    box-shadow:0 10px 24px rgba(var(--verde-principal-rgb),.28);
+    cursor:pointer;
+  }
+
+  .install-panel__content{
+    position:absolute;
+    left:0;
+    top:50%;
+    width:220px;
+    background:rgba(255,255,255,.98);
+    border:1px solid rgba(var(--verde-principal-rgb),.2);
+    border-left:none;
+    border-radius:0 16px 16px 0;
+    padding:14px;
+    box-shadow:0 14px 36px rgba(0,0,0,.18);
+    transform:translate(-102%,-50%);
+    opacity:0;
+    pointer-events:none;
+    transition:transform .28s ease, opacity .28s ease;
+  }
+
+  .install-panel.is-open .install-panel__content{
+    transform:translate(0,-50%);
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  .install-panel__content h3{
+    margin:0 0 6px;
+    font-size:16px;
+    color:var(--verde-principal);
+  }
+
+  .install-panel__content p{
+    margin:0 0 10px;
+    font-size:13px;
+    color:#334;
+  }
+
+  .install-panel__btn{
+    width:100%;
+    border:none;
+    border-radius:999px;
+    padding:10px 12px;
+    background:var(--verde-principal);
+    color:#fff;
+    font-weight:800;
+  }
+
+  .install-panel__content small{
+    display:block;
+    margin-top:8px;
+    font-size:11px;
+    color:#546;
+    line-height:1.3;
+  }
+}
+
+/* Ocultar pestaña instalar cuando la web corre como app */
+@media (display-mode: standalone) {
+  #installPanel {
+    display: none !important;
+  }
+}
+
+/* Fallback para iPhone */
+body.is-standalone #installPanel {
+  display: none !important;
+}
