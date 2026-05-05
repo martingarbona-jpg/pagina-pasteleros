@@ -1,0 +1,190 @@
+{
+  "especialidades": [
+    {
+      "especialidad": "Cardiología",
+      "profesionales": [
+        {
+          "nombre": "Dr. Valentín Ojeda",
+          "horarios": "LUNES DE 10 A 12HS Y JUEVES DE 14 A 16HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Clínica Médica",
+      "profesionales": [
+        {
+          "nombre": "Dr. Juan García",
+          "horarios": "LUNES DE 10 A 12HS, MIÉRCOLES 9 A 12HS Y JUEVES DE 14 A 16HS"
+        },
+        {
+          "nombre": "Dra. Claudia Pereyra",
+          "horarios": "MARTES DE 14 A 18HS"
+        },
+        {
+          "nombre": "Dr. Eric Quiroga",
+          "horarios": "VIERNES DE 13:30 A 17HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Cirugía General",
+      "profesionales": [
+        {
+          "nombre": "Dr. Javier Rossi",
+          "horarios": "VIERNES DE 12:30 A 13HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Dermatología",
+      "profesionales": [
+        {
+          "nombre": "Dra. Valeria Violini",
+          "horarios": "VIERNES POR MEDIO DE 14 A 16HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Diabetología",
+      "profesionales": [
+        {
+          "nombre": "Dr. Eric Quiroga",
+          "horarios": "VIERNES DE 13:30 A 17HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Ecografistas",
+      "profesionales": [
+        {
+          "nombre": "Beatriz Burgos",
+          "horarios": "MIÉRCOLES DE 10 A 14HS"
+        },
+        {
+          "nombre": "Pablo Martín",
+          "horarios": "JUEVES DE 8:30 A 12HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Endocrinología",
+      "profesionales": [
+        {
+          "nombre": "Dr. Eric Quiroga",
+          "horarios": "VIERNES DE 13:30 A 17HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Ginecología Y Obstetricia",
+      "profesionales": [
+        {
+          "nombre": "Dra. Valeria Tapia",
+          "horarios": "MARTES DE 8:30 A 12HS"
+        },
+        {
+          "nombre": "Dr. Alejandro Pivetta",
+          "horarios": "LUNES DE 14:30 A 17:00HS, JUEVES DE 9:30 A 11:30HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Kinesiología",
+      "profesionales": [
+       {
+          "nombre": "Lic. Marcelo Palmarocci",
+          "horarios": "MARTES DE 8:30 A 12:30HS"
+       }
+      ]
+    },
+    {
+      "especialidad": "Neurocirugía",
+      "profesionales": [
+        {
+          "nombre": "Dra. Julieta Crescitelli",
+          "horarios": "MARTES POR MEDIO DE 11 A 12HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Nutrición",
+      "profesionales": [
+        {
+          "nombre": "Lic. Gabriela Julián",
+          "horarios": "MIÉRCOLES DE 8:30 A 11:00HS, VIERNES DE 15:00 A 18:00HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Odontología",
+      "profesionales": [
+        {
+          "nombre": "Dra. Laura Castillo",
+          "horarios": "MARTES DE 9 A 11:30HS, MIÉRCOLES DE 13 A 17:00HS Y VIERNES DE 9 A 11:30HS"
+        },
+        {
+          "nombre": "Dr. Diego Martínez",
+          "horarios": "LUNES Y JUEVES DE 11 A 14HS Y MARTES DE 14 A 16HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Otorrinolaringología",
+      "profesionales": [
+        {
+          "nombre": "Dr. Juan Aruani",
+          "horarios": "MIÉRCOLES DE 9 A 12HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Pediatría",
+      "profesionales": [
+        {
+          "nombre": "Dr. Fernando Millán",
+          "horarios": "MARTES Y VIERNES DE 14:30 A 17HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Psicología",
+      "profesionales": [
+        {
+          "nombre": "Lic. Gisela Muñóz",
+          "horarios": "MARTES DE 14:30 A 17:00HS, MIÉRCOLES DE 13:30 A 16:00HS"
+        },
+        {
+          "nombre": "Lic. Omar Suhaiman",
+          "horarios": "LUNES, MIÉRCOLES Y VIERNES DE 13:30 A 17:00HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Psiquiatría",
+      "profesionales": [
+        {
+          "nombre": "Dra. Lorena Anzorena",
+          "horarios": "MIÉRCOLES POR MEDIO DE 10 A 15:00HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Traumatología",
+      "profesionales": [
+        {
+          "nombre": "Dr. Hugo Flores",
+          "horarios": "MARTES DE 9 A 11HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Urología",
+      "profesionales": [
+        {
+          "nombre": "Dr. Federico Aveni",
+          "horarios": "JUEVES POR MEDIO DE 13 A 14HS"
+        }
+      ]
+    }
+  ]
+}
