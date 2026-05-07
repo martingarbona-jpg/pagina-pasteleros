@@ -6,6 +6,8 @@ const SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxHY6kNTNWcrHd0oX6Bx7M858utqxYZayKNxu1m3uiU-twY7TqTAWjYaX8mK_lTgLLN/exec";
 const ESTUDIOS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzqxIr6at79rPnuHJKt9IRRX2hHzo1RpMXmO9H5hVu4MJo7Hxt8RnMdJ30l6fQxP2pw/exec";
+const AUTORIZACIONES_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxBJvMaz5Uxnmjpr4p6woYEI49rJO0zvArqo4WNq0ICHt1GfJMdST9pa0UQz_O6pDc2Uw/exec";
 
 /* =========================
    JSONP
@@ -475,6 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
   registrarServiceWorker();
   activarBotonInstalarApp();
   activarSolicitudEstudios();
+  activarSolicitudAutorizaciones();
 
   const btn = document.getElementById("btnGenerar");
   if (!btn) return;
@@ -552,6 +555,147 @@ function abrirModalEstudios() {
   setTimeout(() => {
     document.getElementById("estudiosNombre")?.focus();
   }, 80);
+}
+
+function abrirModalAutorizaciones() {
+  const modal = document.getElementById("autorizacionesModal");
+  const msg = document.getElementById("autorizacionesMsg");
+  if (!modal) return;
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  if (msg) {
+    msg.textContent = "";
+    msg.classList.remove("is-error");
+  }
+  setTimeout(() => document.getElementById("autorizacionesNombre")?.focus(), 80);
+}
+
+function cerrarModalAutorizaciones() {
+  const modal = document.getElementById("autorizacionesModal");
+  if (!modal) return;
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+function validarFormularioAutorizaciones({ nombre, dniTitular, email, comentarios }) {
+  return Boolean(nombre && dniTitular && email && comentarios);
+}
+
+function leerArchivoComoBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = String(reader.result || "");
+      const base64 = result.includes(",") ? result.split(",")[1] : "";
+      resolve({ nombre: file.name, mimeType: file.type, base64 });
+    };
+    reader.onerror = () => reject(new Error("No se pudo leer el archivo."));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function convertirArchivosABase64(files) {
+  return Promise.all((files || []).map((file) => leerArchivoComoBase64(file)));
+}
+
+function actualizarResumenArchivosAutorizaciones(files) {
+  const resumen = document.getElementById("autorizacionesArchivosResumen");
+  if (!resumen) return;
+  if (!files.length) {
+    resumen.textContent = "Sin archivos seleccionados.";
+    return;
+  }
+  const nombres = files.map((file) => file.name).join(", ");
+  resumen.innerHTML = `<strong>${files.length}</strong> archivo(s) seleccionado(s): ${nombres}`;
+}
+
+function activarSolicitudAutorizaciones() {
+  const btnAbrir = document.getElementById("btnAbrirAutorizaciones");
+  const form = document.getElementById("autorizacionesForm");
+  const inputArchivos = document.getElementById("autorizacionesArchivos");
+  const btnEnviar = document.getElementById("btnEnviarAutorizaciones");
+  const msg = document.getElementById("autorizacionesMsg");
+
+  btnAbrir?.addEventListener("click", abrirModalAutorizaciones);
+  document.querySelectorAll("[data-close-autorizaciones]").forEach((el) => {
+    el.addEventListener("click", cerrarModalAutorizaciones);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") cerrarModalAutorizaciones();
+  });
+
+  inputArchivos?.addEventListener("change", () => {
+    const files = Array.from(inputArchivos.files || []);
+    actualizarResumenArchivosAutorizaciones(files);
+  });
+
+  if (!form) return;
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const nombre = (document.getElementById("autorizacionesNombre")?.value || "").trim();
+    const dniTitular = (document.getElementById("autorizacionesDniTitular")?.value || "").replace(/\D+/g, "");
+    const dniPaciente = (document.getElementById("autorizacionesDniPaciente")?.value || "").replace(/\D+/g, "");
+    const email = (document.getElementById("autorizacionesEmail")?.value || "").trim();
+    const comentarios = (document.getElementById("autorizacionesComentarios")?.value || "").trim();
+    const files = Array.from(inputArchivos?.files || []);
+
+    if (!validarFormularioAutorizaciones({ nombre, dniTitular, email, comentarios })) {
+      if (msg) {
+        msg.textContent = "Completá los campos obligatorios.";
+        msg.classList.add("is-error");
+      }
+      return;
+    }
+
+    if (btnEnviar) {
+      btnEnviar.disabled = true;
+      btnEnviar.textContent = "Enviando solicitud...";
+    }
+    if (msg) {
+      msg.textContent = "Enviando solicitud...";
+      msg.classList.remove("is-error");
+    }
+
+    try {
+      const archivos = await convertirArchivosABase64(files);
+      await fetch(AUTORIZACIONES_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          nombre,
+          dniTitular,
+          dniPaciente,
+          email,
+          comentarios,
+          archivos,
+        }),
+      });
+
+      if (msg) {
+        msg.textContent = "Solicitud enviada correctamente.";
+        msg.classList.remove("is-error");
+      }
+      form.reset();
+      actualizarResumenArchivosAutorizaciones([]);
+      setTimeout(() => cerrarModalAutorizaciones(), 1600);
+    } catch (error) {
+      console.error("Error enviando autorización:", error);
+      if (msg) {
+        msg.textContent = "No se pudo enviar la solicitud. Intentá nuevamente.";
+        msg.classList.add("is-error");
+      }
+    } finally {
+      if (btnEnviar) {
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = "Enviar solicitud";
+      }
+    }
+  });
 }
 
 function cerrarModalEstudios() {
