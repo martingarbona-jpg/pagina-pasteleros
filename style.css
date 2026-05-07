@@ -713,6 +713,21 @@ section[id]{
   height:18px;
   color:var(--verde-secundario);
 }
+
+/* Alineación desktop: cards superiores de Consultorios */
+@media (min-width:769px){
+  #consultorios .cards:first-of-type .card{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    gap:14px;
+  }
+
+  #consultorios .cards:first-of-type .card .card-actions,
+  #consultorios .cards:first-of-type .card .turnos-oval{
+    margin-top:auto;
+  }
+}
 /* Contacto - mails */
 .contacto-mails{
   margin-top:15px;
