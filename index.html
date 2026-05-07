@@ -20,7 +20,7 @@
 
 <meta name="keywords" content="obra social pasteleros mendoza, osp pasteleros mendoza, cartilla pasteleros mendoza, consultorios pasteleros mendoza">
 
-  <link rel="stylesheet" href="style.css?v=15">
+  <link rel="stylesheet" href="style.css?v=16">
 
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="shortcut icon" href="/favicon.png">
@@ -138,14 +138,12 @@
 
           <article class="card">
             <h3><span class="icon">📄</span>Autorizaciones y Órdenes</h3>
-            <p class="muted">Solicitá autorizaciones de estudios o prácticas médicas.</p>
+            <p class="muted">Completá tus datos y adjuntá pedidos médicos para solicitar autorizaciones.</p>
     <div class="card-actions">
 
-  <a class="btn"
-     href="https://docs.google.com/forms/d/e/1FAIpQLSf88Z_ZKdbA66wl1-UfR6wNHlMsSLGAkJaumCUKg6IJZ-TLhg/viewform?usp=header"
-     target="_blank" rel="noopener">
-    Ir al formulario
-  </a>
+  <button type="button" class="btn" id="btnAbrirAutorizaciones">
+    Solicitar autorización
+  </button>
 
   <a class="pill-wa"
      href="https://wa.me/5492615092602"
@@ -484,9 +482,49 @@
       </form>
     </div>
   </div>
+  <div class="autorizaciones-modal" id="autorizacionesModal" aria-hidden="true">
+    <div class="autorizaciones-modal__overlay" data-close-autorizaciones></div>
+
+    <div class="autorizaciones-modal__box" role="dialog" aria-modal="true" aria-labelledby="autorizacionesModalTitle">
+      <button type="button" class="autorizaciones-modal__close" data-close-autorizaciones aria-label="Cerrar">×</button>
+      <h3 id="autorizacionesModalTitle">Autorizaciones y Órdenes</h3>
+      <p class="muted">Completá el formulario para solicitar tu autorización.</p>
+
+      <form class="autorizaciones-form" id="autorizacionesForm">
+        <label>Apellido y Nombre
+          <input class="autorizaciones-input" type="text" id="autorizacionesNombre" required autocomplete="name">
+        </label>
+        <label>DNI titular
+          <input class="autorizaciones-input" type="text" id="autorizacionesDniTitular" required inputmode="numeric" autocomplete="off">
+        </label>
+        <label>DNI paciente
+          <input class="autorizaciones-input" type="text" id="autorizacionesDniPaciente" inputmode="numeric" autocomplete="off">
+        </label>
+        <label>Mail
+          <input class="autorizaciones-input" type="email" id="autorizacionesEmail" required autocomplete="email">
+        </label>
+        <label>Comentarios
+          <textarea class="autorizaciones-input autorizaciones-textarea" id="autorizacionesComentarios" required></textarea>
+        </label>
+        <label class="autorizaciones-file-label">Adjuntar pedidos
+          <input type="file" id="autorizacionesArchivos" multiple accept=".pdf,.jpg,.jpeg,.png">
+          <span class="autorizaciones-file-hint">Formatos permitidos: PDF, JPG, JPEG, PNG.</span>
+        </label>
+
+        <div id="autorizacionesArchivosResumen" class="autorizaciones-file-resumen">
+          Sin archivos seleccionados.
+        </div>
+
+        <div class="autorizaciones-actions">
+          <button type="submit" class="btn" id="btnEnviarAutorizaciones">Enviar solicitud</button>
+        </div>
+        <p class="autorizaciones-msg" id="autorizacionesMsg" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="app.js?v=17" defer></script>
+<script src="app.js?v=18" defer></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
