@@ -981,6 +981,26 @@ img[src*="logo-elevar"]:not(.carnet-logo) {
   align-items: center;
 }
 
+#btnAbrirEstudios{
+  margin-top:0;
+  min-height:46px;
+  padding:0 20px;
+  border:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#ffffff;
+  color:var(--verde-principal);
+  box-shadow:0 10px 24px rgba(0,0,0,0.12);
+  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+#btnAbrirEstudios:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 30px rgba(0,0,0,0.14);
+  filter:saturate(1.04);
+}
+
 /* Pestaña lateral instalar app (solo móvil/tablet chica) */
 .install-panel{
   display:none;
@@ -1159,7 +1179,7 @@ body.is-standalone #installPanel {
 .estudios-form{
   margin-top:18px;
   display:grid;
-  gap:12px;
+  gap:15px;
 }
 
 .estudios-form label{
@@ -1174,29 +1194,42 @@ body.is-standalone #installPanel {
   width:100%;
   border:1px solid var(--borde);
   border-radius:14px;
-  padding:12px 13px;
+  padding:13px 14px;
   font:inherit;
   outline:none;
-  background:#fff;
+  background:#fbfdfc;
   color:var(--texto);
+  transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
 .estudios-input:focus{
   border-color:var(--verde-principal);
   box-shadow:0 0 0 4px rgba(var(--verde-principal-rgb),0.12);
+  background:#fff;
 }
 
 .estudios-actions{
-  display:flex;
-  gap:12px;
-  justify-content:flex-end;
-  margin-top:8px;
+  display:block;
+  margin-top:10px;
 }
 
 .estudios-actions .btn{
+  width:100%;
   margin-top:0;
   border:none;
   cursor:pointer;
+  min-height:48px;
+  padding:0 22px;
+  border-radius:14px;
+  font-weight:900;
+  box-shadow:0 12px 26px rgba(0,0,0,0.12);
+  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.estudios-actions .btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 30px rgba(0,0,0,0.14);
+  filter:saturate(1.03);
 }
 
 .estudios-msg{
@@ -1221,10 +1254,6 @@ body.is-standalone #installPanel {
     max-width:100%;
     border-radius:22px 22px 16px 16px;
     padding:22px 18px;
-  }
-
-  .estudios-actions{
-    flex-direction:column-reverse;
   }
 
   .estudios-actions .btn{
