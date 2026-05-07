@@ -4,6 +4,8 @@
 
 const SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxHY6kNTNWcrHd0oX6Bx7M858utqxYZayKNxu1m3uiU-twY7TqTAWjYaX8mK_lTgLLN/exec";
+const ESTUDIOS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbzDcO1-tdXcutDkEfeEOMvIS7z_1fWCnaPpydnQpVgQvXtUWcXMQ04q9o7vjON6zlZ5Jw/exec";
 
 /* =========================
    JSONP
@@ -472,6 +474,7 @@ document.addEventListener("DOMContentLoaded", () => {
   activarAnimacionCards();
   registrarServiceWorker();
   activarBotonInstalarApp();
+  activarSolicitudEstudios();
 
   const btn = document.getElementById("btnGenerar");
   if (!btn) return;
@@ -529,3 +532,123 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+function abrirModalEstudios() {
+  const modal = document.getElementById("estudiosModal");
+  const msg = document.getElementById("estudiosMsg");
+
+  if (!modal) return;
+
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+
+  if (msg) {
+    msg.textContent = "";
+    msg.classList.remove("is-error");
+  }
+
+  setTimeout(() => {
+    document.getElementById("estudiosNombre")?.focus();
+  }, 80);
+}
+
+function cerrarModalEstudios() {
+  const modal = document.getElementById("estudiosModal");
+
+  if (!modal) return;
+
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+function activarSolicitudEstudios() {
+  const btnAbrir = document.getElementById("btnAbrirEstudios");
+  const form = document.getElementById("estudiosForm");
+  const msg = document.getElementById("estudiosMsg");
+  const btnEnviar = document.getElementById("btnEnviarEstudios");
+
+  if (btnAbrir) {
+    btnAbrir.addEventListener("click", abrirModalEstudios);
+  }
+
+  document.querySelectorAll("[data-close-estudios]").forEach((el) => {
+    el.addEventListener("click", cerrarModalEstudios);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") cerrarModalEstudios();
+  });
+
+  if (!form) return;
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const nombre = (document.getElementById("estudiosNombre")?.value || "").trim();
+    const dni = (document.getElementById("estudiosDni")?.value || "").replace(/\D+/g, "");
+    const email = (document.getElementById("estudiosEmail")?.value || "").trim();
+    const fechaEstudio = document.getElementById("estudiosFecha")?.value || "";
+    const tipoEstudio = document.getElementById("estudiosTipo")?.value || "";
+
+    if (!nombre || !dni || !email || !fechaEstudio || !tipoEstudio) {
+      if (msg) {
+        msg.textContent = "Completá todos los campos.";
+        msg.classList.add("is-error");
+      }
+      return;
+    }
+
+    if (btnEnviar) {
+      btnEnviar.disabled = true;
+      btnEnviar.textContent = "Enviando...";
+    }
+
+    if (msg) {
+      msg.textContent = "Enviando solicitud...";
+      msg.classList.remove("is-error");
+    }
+
+    try {
+      await fetch(ESTUDIOS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify({
+          nombre,
+          dni,
+          email,
+          fechaEstudio,
+          tipoEstudio,
+        }),
+      });
+
+      if (msg) {
+        msg.textContent = "Solicitud enviada correctamente.";
+        msg.classList.remove("is-error");
+      }
+
+      form.reset();
+
+      setTimeout(() => {
+        cerrarModalEstudios();
+      }, 1600);
+    } catch (error) {
+      console.error("Error enviando solicitud de estudios:", error);
+
+      if (msg) {
+        msg.textContent = "No se pudo enviar la solicitud. Intentá nuevamente.";
+        msg.classList.add("is-error");
+      }
+    } finally {
+      if (btnEnviar) {
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = "Enviar solicitud";
+      }
+    }
+  });
+}

@@ -1081,3 +1081,154 @@ img[src*="logo-elevar"]:not(.carnet-logo) {
 body.is-standalone #installPanel {
   display: none !important;
 }
+
+
+/* ============================= */
+/* MODAL SOLICITUD DE ESTUDIOS */
+/* ============================= */
+
+.estudios-modal{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.estudios-modal.is-open{
+  display:flex;
+}
+
+.estudios-modal__overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+
+.estudios-modal__box{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:520px;
+  background:#ffffff;
+  border-radius:22px;
+  padding:26px;
+  box-shadow:0 24px 70px rgba(0,0,0,0.28);
+  border:1px solid rgba(var(--verde-principal-rgb),0.18);
+  animation: estudiosModalIn .22s ease both;
+}
+
+@keyframes estudiosModalIn{
+  from{
+    opacity:0;
+    transform:translateY(12px) scale(0.98);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+.estudios-modal__box h3{
+  margin:0 0 6px;
+  color:var(--verde-principal);
+  font-size:24px;
+  font-weight:900;
+}
+
+.estudios-modal__close{
+  position:absolute;
+  top:12px;
+  right:14px;
+  width:34px;
+  height:34px;
+  border:none;
+  border-radius:999px;
+  background:rgba(var(--verde-principal-rgb),0.10);
+  color:var(--verde-principal);
+  font-size:24px;
+  line-height:1;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.estudios-form{
+  margin-top:18px;
+  display:grid;
+  gap:12px;
+}
+
+.estudios-form label{
+  display:grid;
+  gap:6px;
+  font-weight:800;
+  color:#263232;
+  font-size:14px;
+}
+
+.estudios-input{
+  width:100%;
+  border:1px solid var(--borde);
+  border-radius:14px;
+  padding:12px 13px;
+  font:inherit;
+  outline:none;
+  background:#fff;
+  color:var(--texto);
+}
+
+.estudios-input:focus{
+  border-color:var(--verde-principal);
+  box-shadow:0 0 0 4px rgba(var(--verde-principal-rgb),0.12);
+}
+
+.estudios-actions{
+  display:flex;
+  gap:12px;
+  justify-content:flex-end;
+  margin-top:8px;
+}
+
+.estudios-actions .btn{
+  margin-top:0;
+  border:none;
+  cursor:pointer;
+}
+
+.estudios-msg{
+  min-height:18px;
+  margin:2px 0 0;
+  font-weight:800;
+  font-size:13px;
+  color:var(--verde-principal);
+}
+
+.estudios-msg.is-error{
+  color:#c62828;
+}
+
+@media (max-width:520px){
+  .estudios-modal{
+    align-items:flex-end;
+    padding:10px;
+  }
+
+  .estudios-modal__box{
+    max-width:100%;
+    border-radius:22px 22px 16px 16px;
+    padding:22px 18px;
+  }
+
+  .estudios-actions{
+    flex-direction:column-reverse;
+  }
+
+  .estudios-actions .btn{
+    width:100%;
+    text-align:center;
+  }
+}

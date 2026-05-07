@@ -206,17 +206,13 @@
           </article>
 
           <article class="card">
-            <h3><span class="icon">📄</span>Solicita tus Estudios Aquí</h3>
-
-            <p class="muted">
-              Solicitá estudios médicos y documentación directamente por correo electrónico.
-            </p>
+            <h3><span class="icon">📄</span>Solicite Aquí sus Estudios</h3>
+            <p class="muted">Completá tus datos para solicitar estudios realizados en nuestros consultorios.</p>
 
             <div class="card-actions">
-              <a class="btn"
-                 href="mailto:consultorios@pastelerosmendoza.org">
-                Enviar Mail
-              </a>
+              <button type="button" class="btn" id="btnAbrirEstudios">
+                Solicitar estudios
+              </button>
             </div>
           </article>
         </div>
@@ -435,6 +431,63 @@
     </div>
   </aside>
 
+
+  <div class="estudios-modal" id="estudiosModal" aria-hidden="true">
+    <div class="estudios-modal__overlay" data-close-estudios></div>
+
+    <div class="estudios-modal__box" role="dialog" aria-modal="true" aria-labelledby="estudiosModalTitle">
+      <button type="button" class="estudios-modal__close" data-close-estudios aria-label="Cerrar">
+        ×
+      </button>
+
+      <h3 id="estudiosModalTitle">Solicitud de estudios</h3>
+      <p class="muted">Completá los datos para solicitar tus estudios.</p>
+
+      <form class="estudios-form" id="estudiosForm">
+        <label>
+          Apellido y Nombre
+          <input class="estudios-input" type="text" id="estudiosNombre" required autocomplete="name">
+        </label>
+
+        <label>
+          DNI
+          <input class="estudios-input" type="text" id="estudiosDni" required inputmode="numeric" autocomplete="off">
+        </label>
+
+        <label>
+          Mail
+          <input class="estudios-input" type="email" id="estudiosEmail" required autocomplete="email">
+        </label>
+
+        <label>
+          Fecha de realización del estudio
+          <input class="estudios-input" type="date" id="estudiosFecha" required>
+        </label>
+
+        <label>
+          Tipo de estudio
+          <select class="estudios-input" id="estudiosTipo" required>
+            <option value="">Seleccionar tipo de estudio</option>
+            <option value="Ecografía">Ecografía</option>
+            <option value="PAP">PAP</option>
+            <option value="Cardiología">Cardiología</option>
+          </select>
+        </label>
+
+        <div class="estudios-actions">
+          <button type="button" class="btn btn--ghost" data-close-estudios>
+            Cancelar
+          </button>
+
+          <button type="submit" class="btn" id="btnEnviarEstudios">
+            Enviar solicitud
+          </button>
+        </div>
+
+        <p class="estudios-msg" id="estudiosMsg" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="app.js?v=11" defer></script>
