@@ -5,7 +5,7 @@
 const SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxHY6kNTNWcrHd0oX6Bx7M858utqxYZayKNxu1m3uiU-twY7TqTAWjYaX8mK_lTgLLN/exec";
 const ESTUDIOS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxJ9cueAYvN5WpdSD7BrG0xkECRMW0R9y5Zp8p-BwlNHu9gNrS8gatl1S8VmO8ysBfaQg/exec";
+  "https://script.google.com/macros/s/AKfycbzqxIr6at79rPnuHJKt9IRRX2hHzo1RpMXmO9H5hVu4MJo7Hxt8RnMdJ30l6fQxP2pw/exec";
 
 /* =========================
    JSONP
