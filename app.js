@@ -9,7 +9,7 @@ const ESTUDIOS_SCRIPT_URL =
 const AUTORIZACIONES_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxBJvMaz5Uxnmjpr4p6woYEI49rJO0zvArqo4WNq0ICHt1GfJMdST9pa0UQz_O6pDc2Uw/exec";
 const ALTAS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzkRoWetF_HqBY-xA22nTHrLqGHqe7_wjF6E8s2rEPyPn6nUQXLdWjPPdg_R5-o1LDj/exec";
+  "https://script.google.com/macros/s/AKfycbyYfWGe0rYH8vs2fv7p1nEOhIyb0OfLZn5F-b3_ay6Yo4XQ3_xPb8J_T4LURXhhjF02/exec";
 
 /* =========================
    JSONP
@@ -637,8 +637,8 @@ function cerrarModalAltas() {
   document.body.style.overflow = "";
 }
 
-function validarFormularioAltas({ nombre, dni, dniFrente, dniDorso, bonoSueldo }) {
-  return Boolean(nombre && dni && dniFrente && dniDorso && bonoSueldo);
+function validarFormularioAltas({ nombre, dni, email, dniFrente, dniDorso, bonoSueldo }) {
+  return Boolean(nombre && dni && email && dniFrente && dniDorso && bonoSueldo);
 }
 
 function actualizarResumenArchivoAlta(inputId, resumenId) {
@@ -673,12 +673,13 @@ async function activarSolicitudAltas() {
     event.preventDefault();
     const nombre = (document.getElementById("altasNombre")?.value || "").trim();
     const dni = (document.getElementById("altasDni")?.value || "").replace(/\D+/g, "");
+    const email = (document.getElementById("altasEmail")?.value || "").trim();
     const comentarios = (document.getElementById("altasComentarios")?.value || "").trim();
     const dniFrente = dniFrenteInput?.files?.[0];
     const dniDorso = dniDorsoInput?.files?.[0];
     const bonoSueldo = bonoSueldoInput?.files?.[0];
 
-    if (!validarFormularioAltas({ nombre, dni, dniFrente, dniDorso, bonoSueldo })) {
+    if (!validarFormularioAltas({ nombre, dni, email, dniFrente, dniDorso, bonoSueldo })) {
       if (msg) {
         msg.textContent = "Completá los campos obligatorios y adjuntá la documentación.";
         msg.classList.add("is-error");
@@ -712,7 +713,7 @@ async function activarSolicitudAltas() {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ nombre, dni, comentarios, archivos: archivosNombrados }),
+        body: JSON.stringify({ nombre, dni, email, comentarios, archivos: archivosNombrados }),
       });
 
       if (msg) {
