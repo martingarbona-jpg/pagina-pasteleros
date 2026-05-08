@@ -20,7 +20,7 @@
 
 <meta name="keywords" content="obra social pasteleros mendoza, osp pasteleros mendoza, cartilla pasteleros mendoza, consultorios pasteleros mendoza">
 
-  <link rel="stylesheet" href="style.css?v=17">
+  <link rel="stylesheet" href="style.css?v=18">
 
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="shortcut icon" href="/favicon.png">
@@ -148,14 +148,12 @@
 
           <article class="card">
   <h3><span class="icon">👤</span>Altas</h3>
-  <p class="muted">Iniciá el trámite de alta y carga de documentación.</p>
+  <p class="muted">Completá tus datos y adjuntá la documentación para iniciar el trámite de alta.</p>
 
   <div class="card-actions">
-    <a class="btn"
-       href="https://docs.google.com/forms/d/e/1FAIpQLSdC-n0vNvrzywkGD3JlknQsabHP68Ha3KUP1zXqZna_XfWAhg/viewform?usp=dialog"
-       target="_blank" rel="noopener">
+    <button type="button" class="btn" id="btnAbrirAltas">
       Iniciar alta
-    </a>
+    </button>
   </div>
 </article>
 
@@ -465,6 +463,50 @@
       </form>
     </div>
   </div>
+  <div class="altas-modal" id="altasModal" aria-hidden="true">
+    <div class="altas-modal__overlay" data-close-altas></div>
+
+    <div class="altas-modal__box" role="dialog" aria-modal="true" aria-labelledby="altasModalTitle">
+      <button type="button" class="altas-modal__close" data-close-altas aria-label="Cerrar">×</button>
+      <h3 id="altasModalTitle">Alta Obra Social</h3>
+      <p class="muted">Completá los datos y adjuntá la documentación solicitada.</p>
+
+      <form class="altas-form" id="altasForm">
+        <label>Nombre y Apellido
+          <input class="altas-input" type="text" id="altasNombre" required autocomplete="name">
+        </label>
+        <label>DNI
+          <input class="altas-input" type="text" id="altasDni" required inputmode="numeric" autocomplete="off">
+        </label>
+        <label class="altas-file-label">DNI frente
+          <input type="file" id="altasDniFrente" required accept=".pdf,.jpg,.jpeg,.png">
+          <span class="altas-file-hint">Formatos permitidos: PDF, JPG, JPEG, PNG.</span>
+        </label>
+        <div id="altasDniFrenteResumen" class="altas-file-resumen">Sin archivo seleccionado.</div>
+
+        <label class="altas-file-label">DNI dorso
+          <input type="file" id="altasDniDorso" required accept=".pdf,.jpg,.jpeg,.png">
+          <span class="altas-file-hint">Formatos permitidos: PDF, JPG, JPEG, PNG.</span>
+        </label>
+        <div id="altasDniDorsoResumen" class="altas-file-resumen">Sin archivo seleccionado.</div>
+
+        <label class="altas-file-label">Último bono de sueldo
+          <input type="file" id="altasBonoSueldo" required accept=".pdf,.jpg,.jpeg,.png">
+          <span class="altas-file-hint">Formatos permitidos: PDF, JPG, JPEG, PNG.</span>
+        </label>
+        <div id="altasBonoSueldoResumen" class="altas-file-resumen">Sin archivo seleccionado.</div>
+
+        <label>Comentarios (opcional)
+          <textarea class="altas-input altas-textarea" id="altasComentarios"></textarea>
+        </label>
+
+        <div class="altas-actions">
+          <button type="submit" class="btn" id="btnEnviarAltas">Enviar solicitud</button>
+        </div>
+        <p class="altas-msg" id="altasMsg" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
   <div class="autorizaciones-modal" id="autorizacionesModal" aria-hidden="true">
     <div class="autorizaciones-modal__overlay" data-close-autorizaciones></div>
 
@@ -507,7 +549,7 @@
   </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="app.js?v=18" defer></script>
+<script src="app.js?v=19" defer></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {

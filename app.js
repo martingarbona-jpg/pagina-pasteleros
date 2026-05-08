@@ -8,6 +8,8 @@ const ESTUDIOS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzqxIr6at79rPnuHJKt9IRRX2hHzo1RpMXmO9H5hVu4MJo7Hxt8RnMdJ30l6fQxP2pw/exec";
 const AUTORIZACIONES_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxBJvMaz5Uxnmjpr4p6woYEI49rJO0zvArqo4WNq0ICHt1GfJMdST9pa0UQz_O6pDc2Uw/exec";
+const ALTAS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbz3CiGbzN_NgLRmNXQ1sWCOdc0lWpbIjlr_frHDmPr2Ucr9oAhN7JBwa9LUx9MAKzD7/exec";
 
 /* =========================
    JSONP
@@ -478,6 +480,7 @@ document.addEventListener("DOMContentLoaded", () => {
   activarBotonInstalarApp();
   activarSolicitudEstudios();
   activarSolicitudAutorizaciones();
+  activarSolicitudAltas();
 
   const btn = document.getElementById("btnGenerar");
   if (!btn) return;
@@ -609,6 +612,131 @@ function actualizarResumenArchivosAutorizaciones(files) {
   }
   const nombres = files.map((file) => file.name).join(", ");
   resumen.innerHTML = `<strong>${files.length}</strong> archivo(s) seleccionado(s): ${nombres}`;
+}
+
+
+function abrirModalAltas() {
+  const modal = document.getElementById("altasModal");
+  const msg = document.getElementById("altasMsg");
+  if (!modal) return;
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+  if (msg) {
+    msg.textContent = "";
+    msg.classList.remove("is-error");
+  }
+  setTimeout(() => document.getElementById("altasNombre")?.focus(), 80);
+}
+
+function cerrarModalAltas() {
+  const modal = document.getElementById("altasModal");
+  if (!modal) return;
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+function validarFormularioAltas({ nombre, dni, dniFrente, dniDorso, bonoSueldo }) {
+  return Boolean(nombre && dni && dniFrente && dniDorso && bonoSueldo);
+}
+
+function actualizarResumenArchivoAlta(inputId, resumenId) {
+  const input = document.getElementById(inputId);
+  const resumen = document.getElementById(resumenId);
+  if (!resumen) return;
+  const file = input?.files?.[0];
+  resumen.textContent = file ? `Archivo seleccionado: ${file.name}` : "Sin archivo seleccionado.";
+}
+
+async function activarSolicitudAltas() {
+  const btnAbrir = document.getElementById("btnAbrirAltas");
+  const form = document.getElementById("altasForm");
+  const btnEnviar = document.getElementById("btnEnviarAltas");
+  const msg = document.getElementById("altasMsg");
+  const dniFrenteInput = document.getElementById("altasDniFrente");
+  const dniDorsoInput = document.getElementById("altasDniDorso");
+  const bonoSueldoInput = document.getElementById("altasBonoSueldo");
+
+  btnAbrir?.addEventListener("click", abrirModalAltas);
+  document.querySelectorAll("[data-close-altas]").forEach((el) => el.addEventListener("click", cerrarModalAltas));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") cerrarModalAltas();
+  });
+
+  dniFrenteInput?.addEventListener("change", () => actualizarResumenArchivoAlta("altasDniFrente", "altasDniFrenteResumen"));
+  dniDorsoInput?.addEventListener("change", () => actualizarResumenArchivoAlta("altasDniDorso", "altasDniDorsoResumen"));
+  bonoSueldoInput?.addEventListener("change", () => actualizarResumenArchivoAlta("altasBonoSueldo", "altasBonoSueldoResumen"));
+
+  if (!form) return;
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const nombre = (document.getElementById("altasNombre")?.value || "").trim();
+    const dni = (document.getElementById("altasDni")?.value || "").replace(/\D+/g, "");
+    const comentarios = (document.getElementById("altasComentarios")?.value || "").trim();
+    const dniFrente = dniFrenteInput?.files?.[0];
+    const dniDorso = dniDorsoInput?.files?.[0];
+    const bonoSueldo = bonoSueldoInput?.files?.[0];
+
+    if (!validarFormularioAltas({ nombre, dni, dniFrente, dniDorso, bonoSueldo })) {
+      if (msg) {
+        msg.textContent = "Completá los campos obligatorios y adjuntá la documentación.";
+        msg.classList.add("is-error");
+      }
+      return;
+    }
+
+    if (btnEnviar) {
+      btnEnviar.disabled = true;
+      btnEnviar.textContent = "Enviando solicitud...";
+    }
+    if (msg) {
+      msg.textContent = "Enviando solicitud...";
+      msg.classList.remove("is-error");
+    }
+
+    try {
+      const archivos = await Promise.all([
+        leerArchivoComoBase64(dniFrente),
+        leerArchivoComoBase64(dniDorso),
+        leerArchivoComoBase64(bonoSueldo),
+      ]);
+
+      const archivosNombrados = [
+        { ...archivos[0], nombre: `DNI Frente - ${archivos[0].nombre}` },
+        { ...archivos[1], nombre: `DNI Dorso - ${archivos[1].nombre}` },
+        { ...archivos[2], nombre: `Bono de Sueldo - ${archivos[2].nombre}` },
+      ];
+
+      await fetch(ALTAS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ nombre, dni, comentarios, archivos: archivosNombrados }),
+      });
+
+      if (msg) {
+        msg.textContent = "Solicitud enviada correctamente.";
+        msg.classList.remove("is-error");
+      }
+      form.reset();
+      actualizarResumenArchivoAlta("altasDniFrente", "altasDniFrenteResumen");
+      actualizarResumenArchivoAlta("altasDniDorso", "altasDniDorsoResumen");
+      actualizarResumenArchivoAlta("altasBonoSueldo", "altasBonoSueldoResumen");
+      setTimeout(() => cerrarModalAltas(), 1600);
+    } catch (error) {
+      console.error("Error enviando alta:", error);
+      if (msg) {
+        msg.textContent = "No se pudo enviar la solicitud. Intentá nuevamente.";
+        msg.classList.add("is-error");
+      }
+    } finally {
+      if (btnEnviar) {
+        btnEnviar.disabled = false;
+        btnEnviar.textContent = "Enviar solicitud";
+      }
+    }
+  });
 }
 
 function activarSolicitudAutorizaciones() {

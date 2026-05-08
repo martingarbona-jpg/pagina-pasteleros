@@ -1287,6 +1287,126 @@ body.is-standalone #installPanel {
   }
 }
 
+
+/* ============================= */
+/* MODAL ALTAS */
+/* ============================= */
+.altas-modal{
+  position:fixed;
+  inset:0;
+  z-index:10001;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+.altas-modal.is-open{ display:flex; }
+.altas-modal__overlay{
+  position:absolute; inset:0;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(4px);
+}
+.altas-modal__box{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:560px;
+  max-height:calc(100vh - 30px);
+  overflow:auto;
+  background:#fff;
+  border:1px solid rgba(var(--verde-principal-rgb),0.2);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 24px 70px rgba(0,0,0,.25);
+}
+.altas-modal__close{
+  position:absolute;
+  top:12px; right:14px;
+  width:34px; height:34px;
+  border:none; border-radius:999px;
+  cursor:pointer;
+  background:rgba(var(--verde-principal-rgb),0.10);
+  color:var(--verde-principal);
+  font-size:24px; font-weight:900;
+}
+.altas-modal__box h3{
+  margin:0 0 6px;
+  color:var(--verde-principal);
+  font-size:24px;
+}
+.altas-form{ margin-top:14px; display:grid; gap:14px; }
+.altas-form label{
+  display:grid; gap:6px;
+  font-size:14px; font-weight:800; color:#263232;
+}
+.altas-input{
+  width:100%;
+  border:1px solid var(--borde);
+  border-radius:14px;
+  padding:12px 14px;
+  background:#fbfdfc;
+  color:var(--texto);
+}
+.altas-input:focus{
+  outline:none;
+  border-color:var(--verde-principal);
+  box-shadow:0 0 0 4px rgba(var(--verde-principal-rgb),.12);
+}
+.altas-textarea{ min-height:110px; resize:vertical; }
+.altas-file-label input[type="file"]{
+  border:1px dashed rgba(var(--verde-principal-rgb),.45);
+  border-radius:14px;
+  padding:12px;
+  background:#f6fbf8;
+}
+.altas-file-label input[type="file"]::file-selector-button{
+  border:none;
+  margin-right:10px;
+  background:var(--verde-principal);
+  color:#fff;
+  border-radius:999px;
+  padding:8px 12px;
+  font-weight:800;
+}
+.altas-file-hint{ font-size:12px; color:#557; }
+.altas-file-resumen{
+  background:#f6fbf8;
+  border:1px solid rgba(var(--verde-principal-rgb),.18);
+  border-radius:12px;
+  padding:10px 12px;
+  font-size:13px;
+  color:#2c3a37;
+  line-height:1.4;
+  word-break:break-word;
+}
+.altas-actions .btn{
+  width:100%;
+  margin-top:0;
+  border:none;
+  min-height:48px;
+}
+.altas-msg{
+  min-height:18px;
+  margin:2px 0 0;
+  font-weight:800;
+  font-size:13px;
+  color:var(--verde-principal);
+}
+.altas-msg.is-error{ color:#c62828; }
+
+@media (max-width:520px){
+  .altas-modal{
+    align-items:flex-end;
+    padding:10px;
+  }
+  .altas-modal__box{
+    max-width:100%;
+    border-radius:22px 22px 16px 16px;
+    padding:22px 18px;
+  }
+  .altas-actions .btn{ width:100%; }
+}
+
 /* ============================= */
 /* MODAL AUTORIZACIONES Y ORDENES */
 /* ============================= */
