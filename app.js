@@ -9,7 +9,7 @@ const ESTUDIOS_SCRIPT_URL =
 const AUTORIZACIONES_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbxBJvMaz5Uxnmjpr4p6woYEI49rJO0zvArqo4WNq0ICHt1GfJMdST9pa0UQz_O6pDc2Uw/exec";
 const ALTAS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxsczKRIXxkJOANMCI_ySoLrCTZ4u1II93tpyT7Wxgmj6RX0JXybgYyHQpa8hJ8Bw_z/exec";
+  "https://script.google.com/macros/s/AKfycbzkRoWetF_HqBY-xA22nTHrLqGHqe7_wjF6E8s2rEPyPn6nUQXLdWjPPdg_R5-o1LDj/exec";
 
 /* =========================
    JSONP
