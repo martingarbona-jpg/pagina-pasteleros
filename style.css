@@ -1010,6 +1010,26 @@ img[src*="logo-elevar"]:not(.carnet-logo) {
   transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
 }
 
+#btnAbrirAltas{
+  margin-top:0;
+  min-height:46px;
+  padding:0 20px;
+  border:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#ffffff;
+  color:var(--verde-principal);
+  box-shadow:0 10px 24px rgba(0,0,0,0.12);
+  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+#btnAbrirAltas:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 30px rgba(0,0,0,0.14);
+  filter:saturate(1.04);
+}
+
 #btnAbrirAutorizaciones{
   margin-top:0;
   min-height:46px;
