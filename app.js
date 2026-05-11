@@ -7,7 +7,7 @@ const SCRIPT_URL =
 const ESTUDIOS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzqxIr6at79rPnuHJKt9IRRX2hHzo1RpMXmO9H5hVu4MJo7Hxt8RnMdJ30l6fQxP2pw/exec";
 const AUTORIZACIONES_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxBJvMaz5Uxnmjpr4p6woYEI49rJO0zvArqo4WNq0ICHt1GfJMdST9pa0UQz_O6pDc2Uw/exec";
+  "https://script.google.com/macros/s/AKfycbzPaE0KQeE1xvX1HkSrBJn-u-45-aYcX2Ub3TTj-l5ybKFOdFKDVzVfIHFX-by4k5-u7Q/exec";
 const ALTAS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbyYfWGe0rYH8vs2fv7p1nEOhIyb0OfLZn5F-b3_ay6Yo4XQ3_xPb8J_T4LURXhhjF02/exec";
 
