@@ -3,7 +3,7 @@
  ******************************************************/
 
 const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxHY6kNTNWcrHd0oX6Bx7M858utqxYZayKNxu1m3uiU-twY7TqTAWjYaX8mK_lTgLLN/exec";
+  "https://script.google.com/macros/s/AKfycby86fvv4wOHh3eth7mLTmvSwXiD6INr7syd0tJ7DPQ0gPeH7SvoCfdk6wb5pCRSDh81/exec";
 const ESTUDIOS_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzqxIr6at79rPnuHJKt9IRRX2hHzo1RpMXmO9H5hVu4MJo7Hxt8RnMdJ30l6fQxP2pw/exec";
 const AUTORIZACIONES_SCRIPT_URL =
