@@ -91,10 +91,10 @@
     {
       "especialidad": "Kinesiología",
       "profesionales": [
-       {
+        {
           "nombre": "Lic. Marcelo Palmarocci",
           "horarios": "MARTES DE 8:30 A 12:30HS"
-       }
+        }
       ]
     },
     {
@@ -183,6 +183,15 @@
         {
           "nombre": "Dr. Federico Aveni",
           "horarios": "JUEVES POR MEDIO DE 13 A 14HS"
+        }
+      ]
+    },
+    {
+      "especialidad": "Análisis",
+      "profesionales": [
+        {
+          "nombre": "Horario de atención",
+          "horarios": "Lunes y miércoles de 8:00 a 10:00 hs."
         }
       ]
     }
