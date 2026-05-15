@@ -140,11 +140,31 @@ function renderConsultorios(container, especialidades) {
     html += `<div class="consultorio-detalle"><ul class="consultorio-list">`;
 
     (spec.profesionales || []).forEach((prof) => {
+      const nombre = prof.nombre || "";
+      const horarios = prof.whatsapp ? "" : (prof.horarios || "");
+      const whatsapp = (prof.whatsapp || "").toString().trim();
+
       html += `
         <li>
-          <strong>${prof.nombre || ""}</strong><br>
-          <span class="muted">${prof.horarios || ""}</span>
-        </li>`;
+          <strong>${nombre}</strong>`;
+
+      if (horarios) {
+        html += `<br><span class="muted">${horarios}</span>`;
+      }
+
+      if (whatsapp) {
+        html += `
+          <div class="consultorio-whatsapp-wrap">
+            <a class="consultorio-whatsapp-btn" href="https://wa.me/${encodeURIComponent(whatsapp)}" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+              <svg viewBox="0 0 32 32" class="consultorio-whatsapp-icon" aria-hidden="true">
+                <path fill="currentColor" d="M19.11 17.57c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.15-.42-2.2-1.35-.81-.72-1.36-1.6-1.52-1.87-.16-.27-.02-.42.12-.56.13-.13.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.83-2.01-.22-.54-.44-.47-.61-.48h-.52c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27s.98 2.64 1.12 2.82c.14.18 1.94 2.96 4.7 4.15.66.28 1.18.45 1.58.58.66.21 1.26.18 1.74.11.53-.08 1.6-.65 1.83-1.27.23-.61.23-1.14.16-1.27-.07-.13-.25-.2-.52-.34z"/>
+                <path fill="currentColor" d="M16 0C7.16 0 0 7.16 0 16c0 2.82.73 5.58 2.12 8.03L0 32l8.17-2.14C10.56 31.27 13.27 32 16 32c8.84 0 16-7.16 16-16S24.84 0 16 0zm0 29.09c-2.46 0-4.86-.66-6.97-1.9l-.5-.3-4.85 1.27 1.29-4.73-.33-.49A12.97 12.97 0 013.01 16C3.01 8.83 8.83 3.01 16 3.01S28.99 8.83 28.99 16 23.17 29.09 16 29.09z"/>
+              </svg>
+            </a>
+          </div>`;
+      }
+
+      html += `</li>`;
     });
 
     html += `</ul></div>`;

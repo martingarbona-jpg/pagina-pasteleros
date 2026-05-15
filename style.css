@@ -289,6 +289,35 @@ body{
   text-align:left;
 }
 
+.consultorio-whatsapp-wrap{
+  margin-top:10px;
+}
+
+.consultorio-whatsapp-btn{
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:#25D366;
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
+  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.consultorio-whatsapp-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 26px rgba(0,0,0,.24);
+  filter:saturate(1.06);
+}
+
+.consultorio-whatsapp-icon{
+  width:18px;
+  height:18px;
+}
+
 .consultorio-card:hover{
   transform: scale(1.06);
   box-shadow: 0 22px 55px rgba(0,0,0,0.28);

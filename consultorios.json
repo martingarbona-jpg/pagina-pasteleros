@@ -194,6 +194,16 @@
           "horarios": "Lunes y miércoles de 8:00 a 10:00 hs."
         }
       ]
+    },
+    {
+      "especialidad": "Fonoaudiología",
+      "profesionales": [
+        {
+          "nombre": "Lic. Laura Chaparro",
+          "horarios": "Turnos por WhatsApp",
+          "whatsapp": "5492615173178"
+        }
+      ]
     }
   ]
 }
