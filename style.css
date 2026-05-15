@@ -318,6 +318,27 @@ body{
   height:18px;
 }
 
+.consultorio-whatsapp-wrap--turno .consultorio-whatsapp-btn{
+  width:auto;
+  min-height:36px;
+  padding:0 12px;
+  gap:8px;
+  border-radius:999px;
+}
+
+.consultorio-whatsapp-label{
+  font-size:.82rem;
+  font-weight:600;
+  letter-spacing:.01em;
+  color:#ecfff3;
+  line-height:1;
+  white-space:nowrap;
+}
+
+.consultorio-whatsapp-wrap--turno .consultorio-whatsapp-btn:hover .consultorio-whatsapp-label{
+  color:#fff;
+}
+
 .consultorio-card:hover{
   transform: scale(1.06);
   box-shadow: 0 22px 55px rgba(0,0,0,0.28);
