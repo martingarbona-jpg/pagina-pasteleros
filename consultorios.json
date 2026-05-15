@@ -191,7 +191,7 @@
       "profesionales": [
         {
           "nombre": "Horario de atención",
-          "horarios": "Lunes y miércoles de 8:00 a 10:00 hs."
+          "horarios": "Lunes y miércoles de 8:00 a 10:00 hs.<br><small>Por orden de llegada, sin turno.</small>"
         }
       ]
     },
