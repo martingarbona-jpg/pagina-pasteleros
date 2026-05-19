@@ -9,7 +9,7 @@ const ESTUDIOS_SCRIPT_URL =
 const AUTORIZACIONES_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzPaE0KQeE1xvX1HkSrBJn-u-45-aYcX2Ub3TTj-l5ybKFOdFKDVzVfIHFX-by4k5-u7Q/exec";
 const ALTAS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbyYfWGe0rYH8vs2fv7p1nEOhIyb0OfLZn5F-b3_ay6Yo4XQ3_xPb8J_T4LURXhhjF02/exec";
+  "https://script.google.com/macros/s/AKfycbw53UsYFzWj-WMnaePao8zDwabcRGlcYHfFdGqLJ8FPy0ALysSd8w2JTLMqytqJLwTd/exec";
 
 /* =========================
    JSONP
@@ -681,6 +681,7 @@ async function activarSolicitudAltas() {
   const dniFrenteInput = document.getElementById("altasDniFrente");
   const dniDorsoInput = document.getElementById("altasDniDorso");
   const bonoSueldoInput = document.getElementById("altasBonoSueldo");
+  const archivosFamiliaresInput = document.getElementById("altasArchivosFamiliares");
 
   btnAbrir?.addEventListener("click", abrirModalAltas);
   document.querySelectorAll("[data-close-altas]").forEach((el) => el.addEventListener("click", cerrarModalAltas));
@@ -702,6 +703,7 @@ async function activarSolicitudAltas() {
     const dniFrente = dniFrenteInput?.files?.[0];
     const dniDorso = dniDorsoInput?.files?.[0];
     const bonoSueldo = bonoSueldoInput?.files?.[0];
+    const archivosFamiliaresFiles = Array.from(archivosFamiliaresInput?.files || []);
 
     if (!validarFormularioAltas({ nombre, dni, email, dniFrente, dniDorso, bonoSueldo })) {
       if (msg) {
@@ -732,12 +734,13 @@ async function activarSolicitudAltas() {
         { ...archivos[1], nombre: `DNI Dorso - ${archivos[1].nombre}` },
         { ...archivos[2], nombre: `Bono de Sueldo - ${archivos[2].nombre}` },
       ];
+      const archivosFamiliares = await convertirArchivosABase64(archivosFamiliaresFiles);
 
       await fetch(ALTAS_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ nombre, dni, email, comentarios, archivos: archivosNombrados }),
+        body: JSON.stringify({ nombre, dni, email, comentarios, archivos: archivosNombrados, archivosFamiliares }),
       });
 
       if (msg) {
