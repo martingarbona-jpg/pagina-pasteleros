@@ -324,6 +324,11 @@ body{
   padding:0 12px;
   gap:8px;
   border-radius:999px;
+  box-shadow:none;
+}
+
+.consultorio-whatsapp-wrap--turno .consultorio-whatsapp-btn:hover{
+  box-shadow:none;
 }
 
 .consultorio-whatsapp-label{
