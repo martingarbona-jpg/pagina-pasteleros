@@ -358,6 +358,11 @@ body{
   z-index:10;
 }
 
+.consultorio-card:has(.consultorio-whatsapp-wrap--turno):hover,
+.consultorio-card:has(.consultorio-whatsapp-wrap--turno).is-open{
+  box-shadow:0 10px 24px rgba(0,0,0,0.12);
+}
+
 /* ============================= */
 /* LOADER CONSULTORIOS */
 /* ============================= */
