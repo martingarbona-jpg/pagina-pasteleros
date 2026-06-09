@@ -1650,3 +1650,36 @@ body.is-standalone #installPanel {
     padding:22px 18px;
   }
 }
+/* FIX FINAL GESTIONES - botones alineados */
+@media (min-width:769px){
+  #gestiones .cards{
+    grid-template-columns:repeat(3, 1fr) !important;
+    align-items:stretch !important;
+  }
+
+  #gestiones .card{
+    min-height:220px !important;
+    display:flex !important;
+    flex-direction:column !important;
+  }
+
+  #gestiones .card h3{
+    min-height:48px !important;
+    margin-bottom:12px !important;
+  }
+
+  #gestiones .card p{
+    flex:1 1 auto !important;
+    margin-bottom:18px !important;
+  }
+
+  #gestiones .card .card-actions{
+    margin-top:auto !important;
+    display:flex !important;
+    align-items:flex-end !important;
+  }
+
+  #gestiones .card .btn{
+    margin-top:0 !important;
+  }
+}
