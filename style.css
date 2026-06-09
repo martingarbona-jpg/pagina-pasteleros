@@ -238,22 +238,35 @@ body{
   color: rgba(255,255,255,0.85);
 }
 
+/* FIX DEFINITIVO: Gestiones Online - 3 cards alineadas */
 #gestiones .cards{
   align-items:stretch;
 }
 
 #gestiones .card{
+  min-height:220px;
   display:flex;
   flex-direction:column;
-  height:100%;
+}
+
+#gestiones .card h3{
+  min-height:48px;
+  margin-bottom:12px;
 }
 
 #gestiones .card p{
-  flex-grow:1;
+  flex:1;
+  margin-bottom:18px;
 }
 
 #gestiones .card .card-actions{
   margin-top:auto;
+  display:flex;
+  align-items:flex-end;
+}
+
+#gestiones .card .btn{
+  margin-top:0;
 }
 
 @media (min-width:769px){
