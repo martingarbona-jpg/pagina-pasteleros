@@ -1710,3 +1710,27 @@ body.is-standalone #installPanel {
   border-radius:999px !important;
   box-shadow:0 10px 24px rgba(0,0,0,0.12) !important;
 }
+/* FIX TIPOGRAFÍA BOTONES GESTIONES */
+#gestiones .card .card-actions .btn,
+#gestiones .card .card-actions button.btn,
+#gestiones .card .card-actions a.btn{
+  font-family:'Segoe UI', Arial, sans-serif !important;
+  font-size:14px !important;
+  font-weight:900 !important;
+  line-height:1 !important;
+  letter-spacing:0 !important;
+  text-align:center !important;
+  height:46px !important;
+  min-height:46px !important;
+  padding:0 20px !important;
+  border:none !important;
+  border-radius:999px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:#ffffff !important;
+  color:var(--verde-principal) !important;
+  text-decoration:none !important;
+  appearance:none !important;
+  -webkit-appearance:none !important;
+}
