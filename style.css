@@ -238,18 +238,27 @@ body{
   color: rgba(255,255,255,0.85);
 }
 
+#gestiones .cards{
+  align-items:stretch;
+}
+
+#gestiones .card{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+
+#gestiones .card p{
+  flex-grow:1;
+}
+
+#gestiones .card .card-actions{
+  margin-top:auto;
+}
+
 @media (min-width:769px){
   #gestiones .cards{
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-  }
-
-  #gestiones .card{
-    display:flex;
-    flex-direction:column;
-  }
-
-  #gestiones .card .card-actions{
-    margin-top:auto;
+    grid-template-columns:repeat(3, 1fr);
   }
 }
 
