@@ -238,6 +238,21 @@ body{
   color: rgba(255,255,255,0.85);
 }
 
+@media (min-width:769px){
+  #gestiones .cards{
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+  }
+
+  #gestiones .card{
+    display:flex;
+    flex-direction:column;
+  }
+
+  #gestiones .card .card-actions{
+    margin-top:auto;
+  }
+}
+
 .btn{
   display:inline-block;
   margin-top:10px;
