@@ -112,8 +112,69 @@ function activarAnimacionCards() {
 /* =========================
    Consultorios
 ========================= */
+let consultoriosEspecialidades = [];
+
+function normalizarTextoConsultorios(valor) {
+  return (valor || "")
+    .toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+function filtrarConsultorios(especialidades, busqueda) {
+  const termino = normalizarTextoConsultorios(busqueda);
+  if (!termino) return especialidades || [];
+
+  return (especialidades || []).reduce((resultados, spec) => {
+    const especialidad = spec.especialidad || "";
+    const coincideEspecialidad = normalizarTextoConsultorios(especialidad).includes(termino);
+
+    if (coincideEspecialidad) {
+      resultados.push(spec);
+      return resultados;
+    }
+
+    const profesionales = (spec.profesionales || []).filter((prof) => {
+      const nombre = normalizarTextoConsultorios(prof.nombre);
+      const horarios = normalizarTextoConsultorios(prof.horarios);
+      return nombre.includes(termino) || horarios.includes(termino);
+    });
+
+    if (profesionales.length) {
+      resultados.push({ ...spec, profesionales });
+    }
+
+    return resultados;
+  }, []);
+}
+
+function setConsultoriosOpen(open) {
+  const container = document.getElementById("consultoriosContainer");
+  const toggle = document.getElementById("btnToggleConsultorios");
+
+  if (container) {
+    container.classList.toggle("is-open", open);
+  }
+
+  if (toggle) {
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.textContent = open ? "Ocultar especialidades" : "Ver especialidades";
+  }
+}
+
+function isConsultoriosMobile() {
+  return window.matchMedia("(max-width: 768px)").matches;
+}
+
 function renderConsultorios(container, especialidades) {
   container.innerHTML = "";
+
+  if (!(especialidades || []).length) {
+    container.innerHTML = `<article class="consultorios-empty">No se encontraron especialidades.</article>`;
+    return;
+  }
 
   function toggleCard(card) {
     const isOpen = card.classList.contains("is-open");
@@ -192,8 +253,23 @@ function renderConsultorios(container, especialidades) {
 function cargarConsultorios() {
   const container = document.getElementById("consultoriosContainer");
   const loader = document.getElementById("consultoriosLoader");
+  const buscador = document.getElementById("buscadorConsultorios");
+  const toggle = document.getElementById("btnToggleConsultorios");
 
   if (!container) return;
+
+  toggle?.addEventListener("click", () => {
+    setConsultoriosOpen(!container.classList.contains("is-open"));
+  });
+
+  buscador?.addEventListener("input", () => {
+    const resultados = filtrarConsultorios(consultoriosEspecialidades, buscador.value);
+    renderConsultorios(container, resultados);
+
+    if (isConsultoriosMobile() && buscador.value.trim()) {
+      setConsultoriosOpen(true);
+    }
+  });
 
   fetch("consultorios.json?v=" + Date.now(), { cache: "no-store" })
     .then((response) => {
@@ -203,7 +279,8 @@ function cargarConsultorios() {
     .then((data) => {
       if (loader) loader.style.display = "none";
       container.style.display = "grid";
-      renderConsultorios(container, data.especialidades || []);
+      consultoriosEspecialidades = data.especialidades || [];
+      renderConsultorios(container, filtrarConsultorios(consultoriosEspecialidades, buscador?.value || ""));
     })
     .catch((error) => {
       console.error("Error cargando consultorios:", error);
