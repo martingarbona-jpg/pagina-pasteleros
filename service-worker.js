@@ -1,4 +1,4 @@
-// VERSION SW 4
+// VERSION SW 5
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();
