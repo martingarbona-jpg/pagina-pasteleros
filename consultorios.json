@@ -76,6 +76,15 @@
       ]
     },
     {
+      "especialidad": "Gastroenterología",
+      "profesionales": [
+        {
+          "nombre": "Dra. Pamela Ruth Daffra",
+          "horarios": "Lunes de 11:30 a 13:15 hs"
+        }
+      ]
+    },
+    {
       "especialidad": "Ginecología Y Obstetricia",
       "profesionales": [
         {
