@@ -468,7 +468,7 @@ function registrarServiceWorker() {
 
   window.addEventListener("load", async () => {
     try {
-      const reg = await navigator.serviceWorker.register("service-worker.js?v=2");
+      const reg = await navigator.serviceWorker.register("service-worker.js?v=5");
 
       if (reg.update) {
         reg.update();
