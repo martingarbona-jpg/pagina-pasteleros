@@ -11,6 +11,16 @@
       "link": "https://wa.me/5492613434536",
       "popup": true,
       "activo": true
+    },
+    {
+      "id": "gastro-2026-06-b",
+      "titulo": "Gastroenterología: nuevos turnos disponibles",
+      "descripcion": "Consultá disponibilidad para atención de gastroenterología en Consultorios Pasteleros.",
+      "imagen": "banners/gastroenterologia2.jpg",
+      "linkTexto": "Solicitar turno",
+      "link": "https://wa.me/5492613434536",
+      "popup": false,
+      "activo": true
     }
   ]
 }

@@ -407,68 +407,84 @@ function cargarNovedades() {
       let timer = null;
       const hayVarios = items.length > 1;
 
+      carrusel.innerHTML = `
+        <div class="novedades-track">
+          ${items.map((item, index) => {
+            const titulo = escaparHtmlNovedades(item.titulo || "");
+            const descripcion = escaparHtmlNovedades(item.descripcion || "");
+            const imagen = escaparHtmlNovedades(item.imagen || "");
+            const link = (item.link || "").toString().trim();
+            const linkTexto = escaparHtmlNovedades(item.linkTexto || "Ver más");
+
+            return `
+              <article class="novedades-slide${index === 0 ? " is-active" : ""}" data-novedad-index="${index}" ${index === 0 ? "" : "hidden"} aria-hidden="${index === 0 ? "false" : "true"}">
+                ${imagen ? `
+                  <div class="novedades-slide__media">
+                    <img src="${imagen}" alt="${titulo}" onerror="this.closest('.novedades-slide__media').remove()">
+                  </div>
+                ` : ""}
+                <div class="novedades-slide__body">
+                  <h3>${titulo}</h3>
+                  ${descripcion ? `<p>${descripcion}</p>` : ""}
+                  ${link ? `<a class="btn novedades-slide__link" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener">${linkTexto}</a>` : ""}
+                </div>
+              </article>
+            `;
+          }).join("")}
+        </div>
+        ${hayVarios ? `
+          <button class="novedades-arrow novedades-arrow--prev" type="button" aria-label="Novedad anterior">‹</button>
+          <button class="novedades-arrow novedades-arrow--next" type="button" aria-label="Novedad siguiente">›</button>
+          <div class="novedades-dots" aria-label="Indicadores de novedades">
+            ${items.map((_, index) => `
+              <button type="button" class="novedades-dot${index === 0 ? " is-active" : ""}" data-novedad-dot="${index}" aria-label="Ver novedad ${index + 1}" aria-current="${index === 0 ? "true" : "false"}"></button>
+            `).join("")}
+          </div>
+        ` : ""}
+      `;
+
+      function mostrarNovedad(index) {
+        indiceActivo = (index + items.length) % items.length;
+
+        carrusel.querySelectorAll(".novedades-slide").forEach((slide) => {
+          const activo = Number(slide.getAttribute("data-novedad-index")) === indiceActivo;
+          slide.classList.toggle("is-active", activo);
+          slide.hidden = !activo;
+          slide.setAttribute("aria-hidden", activo ? "false" : "true");
+        });
+
+        carrusel.querySelectorAll(".novedades-dot").forEach((dot) => {
+          const activo = Number(dot.getAttribute("data-novedad-dot")) === indiceActivo;
+          dot.classList.toggle("is-active", activo);
+          dot.setAttribute("aria-current", activo ? "true" : "false");
+        });
+      }
+
       function mover(direccion) {
-        indiceActivo = (indiceActivo + direccion + items.length) % items.length;
-        render();
+        mostrarNovedad(indiceActivo + direccion);
         reiniciarTimer();
       }
 
       function reiniciarTimer() {
         if (!hayVarios) return;
         if (timer) clearInterval(timer);
-        timer = setInterval(() => mover(1), 6000);
+        timer = setInterval(() => mostrarNovedad(indiceActivo + 1), 6000);
       }
 
-      function render() {
-        const item = items[indiceActivo] || items[0];
-        const titulo = escaparHtmlNovedades(item.titulo || "");
-        const descripcion = escaparHtmlNovedades(item.descripcion || "");
-        const imagen = escaparHtmlNovedades(item.imagen || "");
-        const link = (item.link || "").toString().trim();
-        const linkTexto = escaparHtmlNovedades(item.linkTexto || "Ver más");
-
-        carrusel.innerHTML = `
-          <article class="novedades-slide">
-            ${imagen ? `
-              <div class="novedades-slide__media">
-                <img src="${imagen}" alt="${titulo}" onerror="this.closest('.novedades-slide__media').remove()">
-              </div>
-            ` : ""}
-            <div class="novedades-slide__body">
-              <h3>${titulo}</h3>
-              ${descripcion ? `<p>${descripcion}</p>` : ""}
-              ${link ? `<a class="btn novedades-slide__link" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener">${linkTexto}</a>` : ""}
-            </div>
-            ${hayVarios ? `
-              <button class="novedades-arrow novedades-arrow--prev" type="button" aria-label="Novedad anterior">‹</button>
-              <button class="novedades-arrow novedades-arrow--next" type="button" aria-label="Novedad siguiente">›</button>
-            ` : ""}
-          </article>
-          ${hayVarios ? `
-            <div class="novedades-dots" aria-label="Indicadores de novedades">
-              ${items.map((_, index) => `
-                <button type="button" class="novedades-dot${index === indiceActivo ? " is-active" : ""}" aria-label="Ver novedad ${index + 1}"></button>
-              `).join("")}
-            </div>
-          ` : ""}
-        `;
-
-        carrusel.querySelector(".novedades-arrow--prev")?.addEventListener("click", () => mover(-1));
-        carrusel.querySelector(".novedades-arrow--next")?.addEventListener("click", () => mover(1));
-        carrusel.querySelectorAll(".novedades-dot").forEach((dot, index) => {
-          dot.addEventListener("click", () => {
-            indiceActivo = index;
-            render();
-            reiniciarTimer();
-          });
+      carrusel.querySelector(".novedades-arrow--prev")?.addEventListener("click", () => mover(-1));
+      carrusel.querySelector(".novedades-arrow--next")?.addEventListener("click", () => mover(1));
+      carrusel.querySelectorAll(".novedades-dot").forEach((dot) => {
+        dot.addEventListener("click", () => {
+          mostrarNovedad(Number(dot.getAttribute("data-novedad-dot")) || 0);
+          reiniciarTimer();
         });
-      }
+      });
 
       section.hidden = false;
       carrusel.hidden = false;
       badge.textContent = items.length === 1 ? "1 novedad" : `${items.length} novedades`;
       badge.hidden = false;
-      render();
+      mostrarNovedad(0);
       reiniciarTimer();
 
       const popupItem = items.find((item) => item.popup === true);
@@ -653,7 +669,7 @@ function registrarServiceWorker() {
 
   window.addEventListener("load", async () => {
     try {
-      const reg = await navigator.serviceWorker.register("service-worker.js?v=7");
+      const reg = await navigator.serviceWorker.register("service-worker.js?v=8");
 
       if (reg.update) {
         reg.update();
