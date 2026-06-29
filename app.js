@@ -398,18 +398,31 @@ function cargarNovedades() {
   const badge = document.getElementById("novedadesBadge");
   if (!section || !carrusel || !badge) return;
 
+  function ocultarNovedades() {
+    section.hidden = true;
+    carrusel.hidden = true;
+    carrusel.innerHTML = "";
+    badge.hidden = true;
+    badge.textContent = "";
+
+    const modal = document.getElementById("novedadesModal");
+    if (modal) {
+      modal.hidden = true;
+    }
+  }
+
   fetch("novedades.json?v=" + Date.now(), { cache: "no-store" })
     .then((response) => {
       if (!response.ok) throw new Error("Error HTTP novedades.json");
       return response.json();
     })
     .then((data) => {
-      const items = (data.items || []).filter((item) => item && item.activo !== false);
+      const items = Array.isArray(data.items)
+        ? data.items.filter((item) => item && item.activo === true)
+        : [];
 
       if (data.activo === false || !items.length) {
-        section.hidden = true;
-        carrusel.hidden = true;
-        badge.hidden = true;
+        ocultarNovedades();
         return;
       }
 
@@ -512,11 +525,8 @@ function cargarNovedades() {
         setTimeout(() => abrirModalNovedades(popupItem, data.version), 350);
       }
     })
-    .catch((error) => {
-      console.error("Error cargando novedades:", error);
-      section.hidden = true;
-      carrusel.hidden = true;
-      badge.hidden = true;
+    .catch(() => {
+      ocultarNovedades();
     });
 }
 
