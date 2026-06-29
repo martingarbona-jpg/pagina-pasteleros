@@ -326,6 +326,63 @@ function setNovedadesVistas(version) {
   } catch (_) {}
 }
 
+function getArchivoNovedad(item) {
+  return (item.archivo || item.imagen || "").toString().trim();
+}
+
+function getTipoContenidoNovedad(item) {
+  const tipo = (item.tipoContenido || "").toString().trim();
+  if (["imagen", "video", "pdf", "texto"].includes(tipo)) return tipo;
+
+  const archivo = getArchivoNovedad(item);
+  const extension = archivo.split(".").pop().toLowerCase();
+  if (["mp4", "webm"].includes(extension)) return "video";
+  if (extension === "pdf") return "pdf";
+  if (archivo) return "imagen";
+  return "texto";
+}
+
+function getTipoVisualNovedad(item) {
+  const tipo = (item.tipo || "").toString().trim();
+  if (["banner", "aviso", "alerta"].includes(tipo)) return tipo;
+  return getTipoContenidoNovedad(item) === "texto" ? "aviso" : "banner";
+}
+
+function renderArchivoNovedad(item, titulo, contexto) {
+  const archivo = escaparHtmlNovedades(getArchivoNovedad(item));
+  const tipoContenido = getTipoContenidoNovedad(item);
+  const claseMedia = contexto === "modal" ? "novedades-modal__banner" : "novedades-slide__media";
+
+  if (tipoContenido === "imagen" && archivo) {
+    return `
+      <div class="${claseMedia}">
+        <img class="${contexto === "modal" ? "novedades-modal__img" : ""}" src="${archivo}" alt="${titulo}" onerror="this.closest('.${claseMedia}').remove()">
+      </div>
+    `;
+  }
+
+  if (tipoContenido === "video" && archivo) {
+    return `
+      <div class="${claseMedia} video novedades-video">
+        <video controls preload="metadata">
+          <source src="${archivo}">
+        </video>
+      </div>
+    `;
+  }
+
+  if (tipoContenido === "pdf" && archivo) {
+    return `
+      <div class="${claseMedia} pdf novedades-pdf">
+        <div class="novedades-pdf__icon" aria-hidden="true">PDF</div>
+        <a class="btn novedades-pdf__btn" href="${archivo}" target="_blank" rel="noopener">Abrir documento</a>
+      </div>
+    `;
+  }
+
+  return "";
+}
+
 function abrirModalNovedades(item, version) {
   const modal = document.getElementById("novedadesModal");
   const title = document.getElementById("novedadesModalTitle");
@@ -334,19 +391,17 @@ function abrirModalNovedades(item, version) {
 
   const titulo = escaparHtmlNovedades(item.titulo || "Novedad");
   const descripcion = escaparHtmlNovedades(item.descripcion || "");
-  const imagen = escaparHtmlNovedades(item.imagen || "");
-  const tipo = ["banner", "aviso", "alerta"].includes(item.tipo) ? item.tipo : "banner";
+  const archivo = getArchivoNovedad(item);
+  const tipoContenido = getTipoContenidoNovedad(item);
+  const tipo = getTipoVisualNovedad(item);
   const icono = tipo === "alerta" ? "⚠️" : (tipo === "aviso" ? "📢" : "");
   const link = (item.link || "").toString().trim();
   const linkTexto = escaparHtmlNovedades(item.linkTexto || "Ver más");
+  const mediaHtml = renderArchivoNovedad(item, titulo, "modal");
 
   title.textContent = item.titulo || "Novedad";
   content.innerHTML = `
-    ${imagen ? `
-      <div class="novedades-modal__banner">
-        <img class="novedades-modal__img" src="${imagen}" alt="${titulo}" onerror="this.closest('.novedades-modal__banner').remove()">
-      </div>
-    ` : `
+    ${mediaHtml || `
       <div class="novedad-texto novedad-texto--${tipo}">
         ${icono ? `<span class="novedad-icono" aria-hidden="true">${icono}</span>` : ""}
         <div>
@@ -355,7 +410,7 @@ function abrirModalNovedades(item, version) {
         </div>
       </div>
     `}
-    ${imagen && descripcion ? `<p class="novedades-modal__desc">${descripcion}</p>` : ""}
+    ${archivo && tipoContenido !== "texto" && descripcion ? `<p class="novedades-modal__desc">${descripcion}</p>` : ""}
     <div class="novedades-modal__actions">
       <button type="button" class="btn novedades-modal__btn novedades-modal__btn--secondary" data-close-novedades>Entendido</button>
       ${link ? `<a class="btn novedades-modal__btn novedades-modal__btn--primary" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener" data-close-novedades>${linkTexto}</a>` : ""}
@@ -435,19 +490,17 @@ function cargarNovedades() {
           ${items.map((item, index) => {
             const titulo = escaparHtmlNovedades(item.titulo || "");
             const descripcion = escaparHtmlNovedades(item.descripcion || "");
-            const imagen = escaparHtmlNovedades(item.imagen || "");
-            const tipo = ["banner", "aviso", "alerta"].includes(item.tipo) ? item.tipo : "banner";
+            const archivo = getArchivoNovedad(item);
+            const tipoContenido = getTipoContenidoNovedad(item);
+            const tipo = getTipoVisualNovedad(item);
             const icono = tipo === "alerta" ? "⚠️" : (tipo === "aviso" ? "📢" : "");
             const link = (item.link || "").toString().trim();
             const linkTexto = escaparHtmlNovedades(item.linkTexto || "Ver más");
+            const mediaHtml = renderArchivoNovedad(item, titulo, "slide");
 
             return `
               <article class="novedades-slide${index === 0 ? " is-active" : ""}" data-novedad-index="${index}" ${index === 0 ? "" : "hidden"} aria-hidden="${index === 0 ? "false" : "true"}">
-                ${imagen ? `
-                  <div class="novedades-slide__media">
-                    <img src="${imagen}" alt="${titulo}" onerror="this.closest('.novedades-slide__media').remove()">
-                  </div>
-                ` : `
+                ${mediaHtml || `
                   <div class="novedad-texto novedad-texto--${tipo}">
                     ${icono ? `<span class="novedad-icono" aria-hidden="true">${icono}</span>` : ""}
                     <div>
@@ -457,8 +510,8 @@ function cargarNovedades() {
                   </div>
                 `}
                 <div class="novedades-slide__body">
-                  ${imagen ? `<h3>${titulo}</h3>` : ""}
-                  ${imagen && descripcion ? `<p>${descripcion}</p>` : ""}
+                  ${archivo && tipoContenido !== "texto" ? `<h3>${titulo}</h3>` : ""}
+                  ${archivo && tipoContenido !== "texto" && descripcion ? `<p>${descripcion}</p>` : ""}
                   ${link ? `<a class="btn novedades-slide__link" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener">${linkTexto}</a>` : ""}
                 </div>
               </article>
