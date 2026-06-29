@@ -1,5 +1,5 @@
 <?php
-$ADMIN_PASSWORD = 'CAMBIAR_CLAVE';
+$ADMIN_PASSWORD = 'novedades2026';
 
 session_start();
 
