@@ -1942,6 +1942,52 @@ body.is-standalone #installPanel {
   background:#ffffff;
 }
 
+.video,
+.novedades-video{
+  min-height:260px;
+}
+
+.video video,
+.novedades-video video{
+  width:100%;
+  max-height:320px;
+  border-radius:18px;
+  background:#000;
+  display:block;
+}
+
+.pdf,
+.novedades-pdf{
+  min-height:260px;
+  flex-direction:column;
+  gap:14px;
+  text-align:center;
+}
+
+.novedades-pdf__icon{
+  width:88px;
+  height:108px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background:#ffffff;
+  color:#c62828;
+  border:2px solid #f1c4c4;
+  font-size:28px;
+  font-weight:900;
+  box-shadow:0 12px 26px rgba(0,0,0,0.10);
+}
+
+.novedades-pdf__btn{
+  margin-top:0;
+  background:var(--verde-principal);
+  color:#ffffff;
+}
+
+.aviso{
+  background:#f4fbf7;
+}
+
 .novedades-slide__body{
   display:flex;
   flex-direction:column;
@@ -2194,6 +2240,18 @@ body.is-standalone #installPanel {
   .novedades-slide__media img{
     max-height:230px;
     width:100%;
+  }
+
+  .video,
+  .novedades-video,
+  .pdf,
+  .novedades-pdf{
+    min-height:0;
+  }
+
+  .video video,
+  .novedades-video video{
+    max-height:240px;
   }
 
   .novedades-slide__body{
