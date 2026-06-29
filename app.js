@@ -299,6 +299,177 @@ function cargarConsultorios() {
 /* =========================
    Render Carnet Mejorado + QR + botón descargar
 ========================= */
+/* =========================
+   Novedades
+========================= */
+function escaparHtmlNovedades(valor) {
+  return (valor || "")
+    .toString()
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function getNovedadesVistas() {
+  try {
+    return localStorage.getItem("novedades_vistas");
+  } catch (_) {
+    return null;
+  }
+}
+
+function setNovedadesVistas(version) {
+  try {
+    localStorage.setItem("novedades_vistas", version);
+  } catch (_) {}
+}
+
+function abrirModalNovedades(item, version) {
+  const modal = document.getElementById("novedadesModal");
+  const title = document.getElementById("novedadesModalTitle");
+  const content = document.getElementById("novedadesModalContent");
+  if (!modal || !title || !content) return;
+
+  const titulo = escaparHtmlNovedades(item.titulo || "Novedad");
+  const descripcion = escaparHtmlNovedades(item.descripcion || "");
+  const imagen = escaparHtmlNovedades(item.imagen || "");
+  const link = (item.link || "").toString().trim();
+  const linkTexto = escaparHtmlNovedades(item.linkTexto || "Ver más");
+
+  title.textContent = item.titulo || "Novedad";
+  content.innerHTML = `
+    ${imagen ? `<img class="novedades-modal__img" src="${imagen}" alt="${titulo}" onerror="this.remove()">` : ""}
+    ${descripcion ? `<p>${descripcion}</p>` : ""}
+    ${link ? `<a class="btn novedades-modal__btn" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener">${linkTexto}</a>` : ""}
+  `;
+
+  function cerrar() {
+    modal.hidden = true;
+    document.body.style.overflow = "";
+    setNovedadesVistas(version);
+    document.querySelectorAll("[data-close-novedades]").forEach((el) => {
+      el.removeEventListener("click", cerrar);
+    });
+    document.removeEventListener("keydown", cerrarConEscape);
+  }
+
+  function cerrarConEscape(event) {
+    if (event.key === "Escape") cerrar();
+  }
+
+  document.querySelectorAll("[data-close-novedades]").forEach((el) => {
+    el.addEventListener("click", cerrar);
+  });
+  document.addEventListener("keydown", cerrarConEscape);
+
+  modal.hidden = false;
+  document.body.style.overflow = "hidden";
+}
+
+function cargarNovedades() {
+  const section = document.getElementById("novedades");
+  const carrusel = document.getElementById("novedadesCarrusel");
+  const badge = document.getElementById("novedadesBadge");
+  if (!section || !carrusel || !badge) return;
+
+  fetch("novedades.json?v=" + Date.now(), { cache: "no-store" })
+    .then((response) => {
+      if (!response.ok) throw new Error("Error HTTP novedades.json");
+      return response.json();
+    })
+    .then((data) => {
+      const items = (data.items || []).filter((item) => item && item.activo !== false);
+
+      if (data.activo === false || !items.length) {
+        section.hidden = true;
+        carrusel.hidden = true;
+        badge.hidden = true;
+        return;
+      }
+
+      let indiceActivo = 0;
+      let timer = null;
+      const hayVarios = items.length > 1;
+
+      function mover(direccion) {
+        indiceActivo = (indiceActivo + direccion + items.length) % items.length;
+        render();
+        reiniciarTimer();
+      }
+
+      function reiniciarTimer() {
+        if (!hayVarios) return;
+        if (timer) clearInterval(timer);
+        timer = setInterval(() => mover(1), 6000);
+      }
+
+      function render() {
+        const item = items[indiceActivo] || items[0];
+        const titulo = escaparHtmlNovedades(item.titulo || "");
+        const descripcion = escaparHtmlNovedades(item.descripcion || "");
+        const imagen = escaparHtmlNovedades(item.imagen || "");
+        const link = (item.link || "").toString().trim();
+        const linkTexto = escaparHtmlNovedades(item.linkTexto || "Ver más");
+
+        carrusel.innerHTML = `
+          <article class="novedades-slide">
+            ${imagen ? `
+              <div class="novedades-slide__media">
+                <img src="${imagen}" alt="${titulo}" onerror="this.closest('.novedades-slide__media').remove()">
+              </div>
+            ` : ""}
+            <div class="novedades-slide__body">
+              <h3>${titulo}</h3>
+              ${descripcion ? `<p>${descripcion}</p>` : ""}
+              ${link ? `<a class="btn novedades-slide__link" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener">${linkTexto}</a>` : ""}
+            </div>
+            ${hayVarios ? `
+              <button class="novedades-arrow novedades-arrow--prev" type="button" aria-label="Novedad anterior">‹</button>
+              <button class="novedades-arrow novedades-arrow--next" type="button" aria-label="Novedad siguiente">›</button>
+            ` : ""}
+          </article>
+          ${hayVarios ? `
+            <div class="novedades-dots" aria-label="Indicadores de novedades">
+              ${items.map((_, index) => `
+                <button type="button" class="novedades-dot${index === indiceActivo ? " is-active" : ""}" aria-label="Ver novedad ${index + 1}"></button>
+              `).join("")}
+            </div>
+          ` : ""}
+        `;
+
+        carrusel.querySelector(".novedades-arrow--prev")?.addEventListener("click", () => mover(-1));
+        carrusel.querySelector(".novedades-arrow--next")?.addEventListener("click", () => mover(1));
+        carrusel.querySelectorAll(".novedades-dot").forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            indiceActivo = index;
+            render();
+            reiniciarTimer();
+          });
+        });
+      }
+
+      section.hidden = false;
+      carrusel.hidden = false;
+      badge.textContent = items.length === 1 ? "1 novedad" : `${items.length} novedades`;
+      badge.hidden = false;
+      render();
+      reiniciarTimer();
+
+      const popupItem = items.find((item) => item.popup === true);
+      if (popupItem && data.version && getNovedadesVistas() !== data.version) {
+        setTimeout(() => abrirModalNovedades(popupItem, data.version), 350);
+      }
+    })
+    .catch((error) => {
+      console.error("Error cargando novedades:", error);
+      section.hidden = true;
+      carrusel.hidden = true;
+      badge.hidden = true;
+    });
+}
+
 function renderCarnet(c) {
   const fecha = fechaHoraValidacion24();
   const discapacidad = (c.discapacidad || "-").toString().toUpperCase();
@@ -576,6 +747,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (anio) anio.textContent = new Date().getFullYear();
 
   cargarConsultorios();
+  cargarNovedades();
   activarAnimacionCards();
   registrarServiceWorker();
   activarBotonInstalarApp();
