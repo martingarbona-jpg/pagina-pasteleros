@@ -1807,3 +1807,345 @@ body.is-standalone #installPanel {
   appearance:none !important;
   -webkit-appearance:none !important;
 }
+
+/* ============================= */
+/* NOVEDADES */
+/* ============================= */
+.novedades-section{
+  padding:32px 0 40px;
+}
+
+.novedades-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:16px;
+}
+
+.novedades-head h2{
+  margin-bottom:4px;
+}
+
+.novedades-head .muted{
+  margin:0;
+}
+
+.novedades-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:32px;
+  padding:7px 13px;
+  border-radius:999px;
+  background:rgba(var(--verde-principal-rgb),0.12);
+  color:var(--verde-principal);
+  border:1px solid rgba(var(--verde-principal-rgb),0.22);
+  font-size:13px;
+  font-weight:900;
+  white-space:nowrap;
+}
+
+.novedades-carrusel{
+  position:relative;
+  background:#ffffff;
+  border:1px solid rgba(var(--verde-principal-rgb),0.12);
+  border-radius:22px;
+  box-shadow:0 18px 45px rgba(0,0,0,0.11);
+  overflow:hidden;
+}
+
+.novedades-card{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(260px, 46%) 1fr;
+  gap:0;
+  min-height:260px;
+}
+
+.novedades-card__media{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:#f6fbf8;
+}
+
+.novedades-card__media img{
+  width:100%;
+  max-height:300px;
+  border-radius:18px;
+  object-fit:contain;
+  display:block;
+  background:#ffffff;
+}
+
+.novedades-card__body{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  padding:34px 58px 34px 30px;
+}
+
+.novedades-card__body h3{
+  margin:0 0 10px;
+  color:var(--verde-principal);
+  font-size:25px;
+  line-height:1.18;
+  font-weight:900;
+}
+
+.novedades-card__body p{
+  margin:0;
+  color:#33423f;
+  font-size:16px;
+  line-height:1.55;
+}
+
+.novedades-card__link{
+  margin-top:18px;
+  background:var(--verde-principal);
+  color:#ffffff;
+}
+
+.novedades-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:#ffffff;
+  color:var(--verde-principal);
+  box-shadow:0 12px 28px rgba(0,0,0,0.18);
+  font-size:28px;
+  line-height:1;
+  font-weight:900;
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.novedades-arrow:hover{
+  transform:translateY(-50%) scale(1.05);
+  box-shadow:0 16px 34px rgba(0,0,0,0.22);
+  background:#f7fff9;
+}
+
+.novedades-arrow--prev{
+  left:14px;
+}
+
+.novedades-arrow--next{
+  right:14px;
+}
+
+.novedades-dots{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:13px;
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  pointer-events:none;
+}
+
+.novedades-dot{
+  width:9px;
+  height:9px;
+  border:none;
+  border-radius:999px;
+  background:rgba(var(--verde-principal-rgb),0.28);
+  cursor:pointer;
+  pointer-events:auto;
+  transition:width .18s ease, background .18s ease;
+}
+
+.novedades-dot.is-active{
+  width:24px;
+  background:var(--verde-principal);
+}
+
+.novedades-modal{
+  position:fixed;
+  inset:0;
+  z-index:10002;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.novedades-modal[hidden]{
+  display:none;
+}
+
+.novedades-modal__backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.58);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+
+.novedades-modal__box{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:620px;
+  max-height:calc(100vh - 36px);
+  overflow:auto;
+  background:#ffffff;
+  border-radius:24px;
+  border:1px solid rgba(var(--verde-principal-rgb),0.18);
+  padding:26px;
+  box-shadow:0 26px 78px rgba(0,0,0,0.32);
+  animation:novedadesModalIn .22s ease both;
+}
+
+@keyframes novedadesModalIn{
+  from{ opacity:0; transform:translateY(12px) scale(.98); }
+  to{ opacity:1; transform:translateY(0) scale(1); }
+}
+
+.novedades-modal__close{
+  position:absolute;
+  top:12px;
+  right:14px;
+  width:36px;
+  height:36px;
+  border:none;
+  border-radius:999px;
+  background:rgba(var(--verde-principal-rgb),0.10);
+  color:var(--verde-principal);
+  font-size:26px;
+  line-height:1;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.novedades-modal__box h2{
+  margin:0 46px 14px 0;
+  color:var(--verde-principal);
+  font-size:26px;
+  line-height:1.2;
+}
+
+.novedades-modal__box p{
+  margin:14px 0 0;
+  color:#2f3c39;
+  line-height:1.55;
+  font-size:16px;
+}
+
+.novedades-modal__img{
+  width:100%;
+  max-height:360px;
+  object-fit:contain;
+  border-radius:18px;
+  background:#f6fbf8;
+  display:block;
+}
+
+.novedades-modal__btn{
+  margin-top:18px;
+  background:var(--verde-principal);
+  color:#ffffff;
+}
+
+@media (max-width:768px){
+  .novedades-section{
+    padding:26px 0 34px;
+  }
+
+  .novedades-head{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .novedades-card{
+    grid-template-columns:1fr;
+    min-height:0;
+  }
+
+  .novedades-card__media{
+    padding:14px 14px 0;
+    background:#ffffff;
+  }
+
+  .novedades-card__media img{
+    max-height:230px;
+    width:100%;
+  }
+
+  .novedades-card__body{
+    padding:20px 18px 46px;
+    align-items:stretch;
+  }
+
+  .novedades-card__body h3{
+    font-size:21px;
+  }
+
+  .novedades-card__body p{
+    font-size:15px;
+  }
+
+  .novedades-card__link{
+    width:100%;
+    text-align:center;
+  }
+
+  .novedades-arrow{
+    top:auto;
+    bottom:10px;
+    width:34px;
+    height:34px;
+    font-size:22px;
+    transform:none;
+  }
+
+  .novedades-arrow:hover{
+    transform:scale(1.04);
+  }
+
+  .novedades-arrow--prev{
+    left:12px;
+  }
+
+  .novedades-arrow--next{
+    right:12px;
+  }
+
+  .novedades-dots{
+    bottom:21px;
+  }
+
+  .novedades-modal{
+    padding:10px;
+  }
+
+  .novedades-modal__box{
+    max-width:calc(100vw - 20px);
+    border-radius:22px;
+    padding:22px 18px;
+  }
+
+  .novedades-modal__box h2{
+    font-size:22px;
+  }
+
+  .novedades-modal__img{
+    max-height:300px;
+  }
+
+  .novedades-modal__btn{
+    width:100%;
+    text-align:center;
+  }
+}

@@ -20,7 +20,7 @@
 
 <meta name="keywords" content="obra social pasteleros mendoza, osp pasteleros mendoza, cartilla pasteleros mendoza, consultorios pasteleros mendoza">
 
-  <link rel="stylesheet" href="style.css?v=34">
+  <link rel="stylesheet" href="style.css?v=35">
 
 <link rel="icon" type="image/png" href="/favicon.png?v=38">
 <link rel="shortcut icon" href="/favicon.png?v=38">
@@ -125,6 +125,20 @@
           Obra Social Trabajadores Pasteleros, Confiteros, Heladeros,
           Pizzeros y Alfajoreros de la República Argentina.
         </p>
+      </div>
+    </section>
+
+    <section class="section novedades-section" id="novedades">
+      <div class="container">
+        <div class="novedades-head">
+          <div>
+            <h2>Novedades</h2>
+            <p class="muted">Información importante para afiliados.</p>
+          </div>
+          <span id="novedadesBadge" class="novedades-badge" hidden></span>
+        </div>
+
+        <div id="novedadesCarrusel" class="novedades-carrusel" hidden></div>
       </div>
     </section>
 
@@ -592,9 +606,17 @@
       </form>
     </div>
   </div>
+  <div id="novedadesModal" class="novedades-modal" hidden>
+    <div class="novedades-modal__backdrop" data-close-novedades></div>
+    <div class="novedades-modal__box" role="dialog" aria-modal="true" aria-labelledby="novedadesModalTitle">
+      <button type="button" class="novedades-modal__close" data-close-novedades aria-label="Cerrar">×</button>
+      <h2 id="novedadesModalTitle">Novedad</h2>
+      <div id="novedadesModalContent"></div>
+    </div>
+  </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="app.js?v=40" defer></script>
+<script src="app.js?v=41" defer></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
