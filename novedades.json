@@ -14,8 +14,8 @@
     },
     {
       "id": "gastro-2026-07",
-      "titulo": "Segunda novedad",
-      "descripcion": "Esta es una segunda novedad para probar el carrusel.",
+      "titulo": "Nueva especialidad",
+      "descripcion": "Nueva especialidad en nuestros consultorios.",
       "imagen": "banners/gastroenterologia2.jpg",
       "linkTexto": "Ver más",
       "link": "#consultorios",
