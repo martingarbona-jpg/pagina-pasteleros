@@ -121,7 +121,7 @@ function find_item_index($items, $id) {
 }
 
 function valid_tipo($tipo) {
-  return in_array($tipo, ['banner', 'aviso', 'alerta'], true) ? $tipo : 'banner';
+  return in_array($tipo, ['banner', 'aviso', 'alerta', 'video', 'pdf'], true) ? $tipo : 'banner';
 }
 
 function unique_item_id($items) {
@@ -721,6 +721,8 @@ $editItem = $editIndex === null ? null : $items[$editIndex];
               <option value="banner" <?= $selectedTipo === 'banner' ? 'selected' : '' ?>>Banner con imagen</option>
               <option value="aviso" <?= $selectedTipo === 'aviso' ? 'selected' : '' ?>>Aviso solo texto</option>
               <option value="alerta" <?= $selectedTipo === 'alerta' ? 'selected' : '' ?>>Alerta importante</option>
+              <option value="video" <?= $selectedTipo === 'video' ? 'selected' : '' ?>>Video</option>
+              <option value="pdf" <?= $selectedTipo === 'pdf' ? 'selected' : '' ?>>Documento PDF</option>
             </select>
           </label>
 
