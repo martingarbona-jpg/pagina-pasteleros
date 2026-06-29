@@ -120,6 +120,23 @@ function find_item_index($items, $id) {
   return null;
 }
 
+function valid_tipo($tipo) {
+  return in_array($tipo, ['banner', 'aviso', 'alerta'], true) ? $tipo : 'banner';
+}
+
+function unique_item_id($items) {
+  $base = date('Ymd_His');
+  $id = $base;
+  $suffix = 1;
+
+  while (find_item_index($items, $id) !== null) {
+    $id = $base . '_' . $suffix;
+    $suffix++;
+  }
+
+  return $id;
+}
+
 ensure_storage($jsonFile, $bannersDir);
 
 $error = '';
@@ -151,19 +168,29 @@ if ($loggedIn && $_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
       $data = load_data($jsonFile);
 
-      if ($action === 'crear') {
-        $tipo = (string) ($_POST['tipo'] ?? 'banner');
+      if ($action === 'crear' || $action === 'guardar_edicion') {
+        $tipo = valid_tipo((string) ($_POST['tipo'] ?? 'banner'));
         $titulo = trim((string) ($_POST['titulo'] ?? ''));
         $descripcion = trim((string) ($_POST['descripcion'] ?? ''));
         $linkTexto = trim((string) ($_POST['linkTexto'] ?? ''));
         $link = trim((string) ($_POST['link'] ?? ''));
 
-        if (!in_array($tipo, ['banner', 'aviso', 'alerta'], true)) {
-          throw new RuntimeException('Tipo de novedad inválido.');
-        }
-
         if ($titulo === '' || $descripcion === '') {
           throw new RuntimeException('Completá título y descripción.');
+        }
+
+        $existingImage = '';
+        $index = null;
+
+        if ($action === 'guardar_edicion') {
+          $id = (string) ($_POST['id'] ?? '');
+          $index = find_item_index($data['items'], $id);
+
+          if ($index === null) {
+            throw new RuntimeException('No se encontró la novedad.');
+          }
+
+          $existingImage = (string) ($data['items'][$index]['imagen'] ?? '');
         }
 
         $imagePath = upload_image(
@@ -171,27 +198,38 @@ if ($loggedIn && $_SERVER['REQUEST_METHOD'] === 'POST') {
           $bannersDir,
           $allowedExtensions,
           $allowedMimeTypes,
-          $tipo === 'banner'
+          $tipo === 'banner' && $existingImage === ''
         );
 
-        $data['items'][] = [
-          'id' => date('Ymd_His'),
+        if ($imagePath === '') {
+          $imagePath = $existingImage;
+        }
+
+        $item = [
+          'id' => $action === 'crear' ? unique_item_id($data['items']) : (string) ($_POST['id'] ?? ''),
           'tipo' => $tipo,
           'titulo' => $titulo,
           'descripcion' => $descripcion,
           'imagen' => $imagePath,
-          'linkTexto' => $linkTexto !== '' ? $linkTexto : 'Ver más',
+          'linkTexto' => $linkTexto,
           'link' => $link,
           'popup' => isset($_POST['popup']),
           'activo' => isset($_POST['activo']),
         ];
 
+        if ($action === 'crear') {
+          $data['items'][] = $item;
+          $notice = 'Novedad agregada correctamente.';
+        } else {
+          $data['items'][$index] = $item;
+          $notice = 'Novedad editada correctamente.';
+        }
+
         $data['version'] = current_version();
         save_data($jsonFile, $data);
-        $notice = 'Novedad agregada correctamente.';
       }
 
-      if (in_array($action, ['toggle_activo', 'toggle_popup', 'eliminar'], true)) {
+      if (in_array($action, ['activar', 'desactivar', 'toggle_popup', 'eliminar', 'duplicar'], true)) {
         $id = (string) ($_POST['id'] ?? '');
         $index = find_item_index($data['items'], $id);
 
@@ -199,9 +237,14 @@ if ($loggedIn && $_SERVER['REQUEST_METHOD'] === 'POST') {
           throw new RuntimeException('No se encontró la novedad.');
         }
 
-        if ($action === 'toggle_activo') {
-          $data['items'][$index]['activo'] = empty($data['items'][$index]['activo']);
-          $notice = 'Estado actualizado.';
+        if ($action === 'activar') {
+          $data['items'][$index]['activo'] = true;
+          $notice = 'Novedad activada.';
+        }
+
+        if ($action === 'desactivar') {
+          $data['items'][$index]['activo'] = false;
+          $notice = 'Novedad desactivada.';
         }
 
         if ($action === 'toggle_popup') {
@@ -212,6 +255,15 @@ if ($loggedIn && $_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($action === 'eliminar') {
           array_splice($data['items'], $index, 1);
           $notice = 'Novedad eliminada del JSON. La imagen física no se borró.';
+        }
+
+        if ($action === 'duplicar') {
+          $copy = $data['items'][$index];
+          $copy['id'] = unique_item_id($data['items']);
+          $copy['activo'] = false;
+          $copy['titulo'] = trim(($copy['titulo'] ?? 'Novedad') . ' (copia)');
+          $data['items'][] = $copy;
+          $notice = 'Novedad duplicada como inactiva.';
         }
 
         $data['version'] = current_version();
@@ -225,6 +277,24 @@ if ($loggedIn && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $data = $loggedIn ? load_data($jsonFile) : default_data();
 $items = $data['items'] ?? [];
+$filter = $_GET['filtro'] ?? 'todas';
+if (!in_array($filter, ['todas', 'activas', 'inactivas'], true)) {
+  $filter = 'todas';
+}
+
+$totalCount = count($items);
+$activeCount = count(array_filter($items, function ($item) {
+  return !empty($item['activo']);
+}));
+$inactiveCount = $totalCount - $activeCount;
+$filteredItems = array_values(array_filter($items, function ($item) use ($filter) {
+  if ($filter === 'activas') return !empty($item['activo']);
+  if ($filter === 'inactivas') return empty($item['activo']);
+  return true;
+}));
+$editId = $loggedIn ? (string) ($_GET['editar'] ?? '') : '';
+$editIndex = $editId !== '' ? find_item_index($items, $editId) : null;
+$editItem = $editIndex === null ? null : $items[$editIndex];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -437,6 +507,32 @@ $items = $data['items'] ?? [];
       margin-top:12px;
     }
 
+    .filters{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:0 0 16px;
+    }
+
+    .filter-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:38px;
+      padding:8px 13px;
+      border-radius:999px;
+      background:#eef7f2;
+      color:var(--verde-principal);
+      text-decoration:none;
+      font-weight:900;
+      font-size:14px;
+    }
+
+    .filter-link.is-active{
+      background:var(--verde-principal);
+      color:#fff;
+    }
+
     .novedad{
       display:grid;
       grid-template-columns:170px 1fr;
@@ -497,6 +593,39 @@ $items = $data['items'] ?? [];
     .badge--off{
       background:#f2f2f2;
       color:#667;
+    }
+
+    .estado{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:900;
+      margin:10px 0 4px;
+    }
+
+    .estado__dot{
+      width:11px;
+      height:11px;
+      border-radius:999px;
+      background:#b8c0bd;
+    }
+
+    .estado--activo .estado__dot{
+      background:#10a353;
+    }
+
+    .estado--inactivo{
+      color:#667;
+    }
+
+    .edit-note{
+      margin:-4px 0 14px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:#edf7f1;
+      color:var(--verde-principal);
+      font-weight:800;
+      font-size:13px;
     }
 
     .login-wrap{
@@ -576,56 +705,69 @@ $items = $data['items'] ?? [];
 
     <div class="grid">
       <section class="card">
-        <h2>Agregar novedad</h2>
+        <h2><?= $editItem ? 'Editar novedad' : 'Agregar novedad' ?></h2>
+        <?php if ($editItem): ?>
+          <div class="edit-note">Editando: <?= h($editItem['titulo'] ?? '') ?> · <a href="admin-novedades.php" style="color:inherit;">cancelar edición</a></div>
+        <?php endif; ?>
         <form method="post" enctype="multipart/form-data">
-          <input type="hidden" name="action" value="crear">
+          <input type="hidden" name="action" value="<?= $editItem ? 'guardar_edicion' : 'crear' ?>">
+          <?php if ($editItem): ?>
+            <input type="hidden" name="id" value="<?= h($editItem['id'] ?? '') ?>">
+          <?php endif; ?>
 
           <label>Tipo
             <select name="tipo" id="tipoNovedad">
-              <option value="banner">Banner con imagen</option>
-              <option value="aviso">Aviso solo texto</option>
-              <option value="alerta">Alerta importante</option>
+              <?php $selectedTipo = valid_tipo($editItem['tipo'] ?? 'banner'); ?>
+              <option value="banner" <?= $selectedTipo === 'banner' ? 'selected' : '' ?>>Banner con imagen</option>
+              <option value="aviso" <?= $selectedTipo === 'aviso' ? 'selected' : '' ?>>Aviso solo texto</option>
+              <option value="alerta" <?= $selectedTipo === 'alerta' ? 'selected' : '' ?>>Alerta importante</option>
             </select>
           </label>
 
           <label>Título
-            <input type="text" name="titulo" required>
+            <input type="text" name="titulo" value="<?= h($editItem['titulo'] ?? '') ?>" required>
           </label>
 
           <label>Descripción
-            <textarea name="descripcion" required></textarea>
+            <textarea name="descripcion" required><?= h($editItem['descripcion'] ?? '') ?></textarea>
           </label>
 
           <label>Texto del botón
-            <input type="text" name="linkTexto" value="Solicitar turno">
+            <input type="text" name="linkTexto" value="<?= h($editItem['linkTexto'] ?? 'Solicitar turno') ?>">
           </label>
 
           <label>Link
-            <input type="text" name="link" value="https://wa.me/5492613434536">
+            <input type="text" name="link" value="<?= h($editItem['link'] ?? 'https://wa.me/5492613434536') ?>">
           </label>
 
           <label>Imagen JPG, PNG o WEBP
-            <input type="file" name="imagen" id="imagenNovedad" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+            <input type="file" name="imagen" id="imagenNovedad" data-existing-image="<?= h($editItem['imagen'] ?? '') ?>" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
             <span class="field-hint" id="imagenHint">Obligatoria para banner. Opcional para aviso o alerta.</span>
           </label>
 
           <div class="checks">
-            <label><input type="checkbox" name="popup"> Popup</label>
-            <label><input type="checkbox" name="activo" checked> Activo</label>
+            <label><input type="checkbox" name="popup" <?= !empty($editItem['popup']) ? 'checked' : '' ?>> Popup</label>
+            <label><input type="checkbox" name="activo" <?= $editItem ? (!empty($editItem['activo']) ? 'checked' : '') : 'checked' ?>> Activo</label>
           </div>
 
-          <button class="btn" type="submit">Guardar novedad</button>
+          <button class="btn" type="submit"><?= $editItem ? 'Guardar cambios' : 'Guardar novedad' ?></button>
         </form>
       </section>
 
       <section class="card">
         <h2>Novedades existentes</h2>
 
-        <?php if (!count($items)): ?>
-          <p class="muted">Todavía no hay novedades cargadas.</p>
+        <nav class="filters" aria-label="Filtros de novedades">
+          <a class="filter-link <?= $filter === 'todas' ? 'is-active' : '' ?>" href="admin-novedades.php?filtro=todas">Todas <?= $totalCount ?></a>
+          <a class="filter-link <?= $filter === 'activas' ? 'is-active' : '' ?>" href="admin-novedades.php?filtro=activas">Activas <?= $activeCount ?></a>
+          <a class="filter-link <?= $filter === 'inactivas' ? 'is-active' : '' ?>" href="admin-novedades.php?filtro=inactivas">Inactivas <?= $inactiveCount ?></a>
+        </nav>
+
+        <?php if (!count($filteredItems)): ?>
+          <p class="muted">No hay novedades para este filtro.</p>
         <?php endif; ?>
 
-        <?php foreach ($items as $item): ?>
+        <?php foreach ($filteredItems as $item): ?>
           <article class="novedad">
             <div>
               <?php if (!empty($item['imagen'])): ?>
@@ -637,6 +779,10 @@ $items = $data['items'] ?? [];
             <div>
               <h3><?= h($item['titulo'] ?? '') ?></h3>
               <p class="muted"><?= h($item['descripcion'] ?? '') ?></p>
+              <div class="estado <?= !empty($item['activo']) ? 'estado--activo' : 'estado--inactivo' ?>">
+                <span class="estado__dot" aria-hidden="true"></span>
+                <?= !empty($item['activo']) ? '🟢 Activa' : '⚪ Inactiva' ?>
+              </div>
               <p class="muted" style="font-size:13px;margin-bottom:0;">
                 ID: <?= h($item['id'] ?? '') ?><br>
                 Imagen: <?= h($item['imagen'] ?? '') ?>
@@ -653,26 +799,30 @@ $items = $data['items'] ?? [];
               </div>
 
               <div class="btn-row">
+                <a class="btn btn--ghost" href="admin-novedades.php?editar=<?= h($item['id'] ?? '') ?>">
+                  ✏️ Editar
+                </a>
+
                 <form method="post">
-                  <input type="hidden" name="action" value="toggle_activo">
+                  <input type="hidden" name="action" value="<?= !empty($item['activo']) ? 'desactivar' : 'activar' ?>">
                   <input type="hidden" name="id" value="<?= h($item['id'] ?? '') ?>">
                   <button class="btn btn--ghost" type="submit">
-                    <?= !empty($item['activo']) ? 'Desactivar' : 'Activar' ?>
+                    <?= !empty($item['activo']) ? '⏸️ Desactivar' : '▶️ Activar' ?>
                   </button>
                 </form>
 
                 <form method="post">
-                  <input type="hidden" name="action" value="toggle_popup">
+                  <input type="hidden" name="action" value="duplicar">
                   <input type="hidden" name="id" value="<?= h($item['id'] ?? '') ?>">
                   <button class="btn btn--ghost" type="submit">
-                    <?= !empty($item['popup']) ? 'Quitar popup' : 'Marcar popup' ?>
+                    📋 Duplicar
                   </button>
                 </form>
 
                 <form method="post" onsubmit="return confirm('¿Eliminar esta novedad del JSON? La imagen física no se borrará.');">
                   <input type="hidden" name="action" value="eliminar">
                   <input type="hidden" name="id" value="<?= h($item['id'] ?? '') ?>">
-                  <button class="btn btn--danger" type="submit">Eliminar</button>
+                  <button class="btn btn--danger" type="submit">🗑️ Eliminar</button>
                 </form>
               </div>
             </div>
@@ -690,9 +840,12 @@ $items = $data['items'] ?? [];
   function actualizarImagenRequerida() {
     if (!tipoNovedad || !imagenNovedad || !imagenHint) return;
     const esBanner = tipoNovedad.value === 'banner';
-    imagenNovedad.required = esBanner;
-    imagenHint.textContent = esBanner
+    const tieneImagenExistente = Boolean(imagenNovedad.dataset.existingImage);
+    imagenNovedad.required = esBanner && !tieneImagenExistente;
+    imagenHint.textContent = esBanner && !tieneImagenExistente
       ? 'Obligatoria para banner.'
+      : esBanner
+        ? 'Ya hay una imagen cargada. Subí otra solo si querés reemplazarla.'
       : 'Opcional. Si subís una imagen, se mostrará en la novedad.';
   }
 
