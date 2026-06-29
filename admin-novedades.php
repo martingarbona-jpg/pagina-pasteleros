@@ -71,8 +71,12 @@ function slug_file_name($name) {
   return $name ?: 'banner';
 }
 
-function upload_image($file, $bannersDir, $allowedExtensions, $allowedMimeTypes) {
+function upload_image($file, $bannersDir, $allowedExtensions, $allowedMimeTypes, $required = true) {
   if (!isset($file) || !is_array($file) || $file['error'] === UPLOAD_ERR_NO_FILE) {
+    if (!$required) {
+      return '';
+    }
+
     throw new RuntimeException('Subí una imagen JPG, PNG o WEBP.');
   }
 
@@ -148,19 +152,31 @@ if ($loggedIn && $_SERVER['REQUEST_METHOD'] === 'POST') {
       $data = load_data($jsonFile);
 
       if ($action === 'crear') {
+        $tipo = (string) ($_POST['tipo'] ?? 'banner');
         $titulo = trim((string) ($_POST['titulo'] ?? ''));
         $descripcion = trim((string) ($_POST['descripcion'] ?? ''));
         $linkTexto = trim((string) ($_POST['linkTexto'] ?? ''));
         $link = trim((string) ($_POST['link'] ?? ''));
 
+        if (!in_array($tipo, ['banner', 'aviso', 'alerta'], true)) {
+          throw new RuntimeException('Tipo de novedad inválido.');
+        }
+
         if ($titulo === '' || $descripcion === '') {
           throw new RuntimeException('Completá título y descripción.');
         }
 
-        $imagePath = upload_image($_FILES['imagen'] ?? null, $bannersDir, $allowedExtensions, $allowedMimeTypes);
+        $imagePath = upload_image(
+          $_FILES['imagen'] ?? null,
+          $bannersDir,
+          $allowedExtensions,
+          $allowedMimeTypes,
+          $tipo === 'banner'
+        );
 
         $data['items'][] = [
           'id' => date('Ymd_His'),
+          'tipo' => $tipo,
           'titulo' => $titulo,
           'descripcion' => $descripcion,
           'imagen' => $imagePath,
@@ -335,6 +351,7 @@ $items = $data['items'] ?? [];
     input[type="text"],
     input[type="url"],
     input[type="password"],
+    select,
     textarea{
       width:100%;
       border:1px solid var(--borde);
@@ -351,6 +368,7 @@ $items = $data['items'] ?? [];
     }
 
     input:focus,
+    select:focus,
     textarea:focus{
       border-color:var(--verde-principal);
       box-shadow:0 0 0 4px rgba(15,122,67,.12);
@@ -363,6 +381,13 @@ $items = $data['items'] ?? [];
       border-radius:14px;
       padding:12px;
       background:#f6fbf8;
+    }
+
+    .field-hint{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:700;
+      line-height:1.35;
     }
 
     .checks{
@@ -432,6 +457,19 @@ $items = $data['items'] ?? [];
       border-radius:14px;
       background:#f6fbf8;
       border:1px solid var(--borde);
+    }
+
+    .novedad-empty-img{
+      min-height:112px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      border-radius:14px;
+      border:1px dashed rgba(15,122,67,.3);
+      background:#f6fbf8;
+      color:var(--verde-principal);
+      font-weight:900;
+      padding:16px;
     }
 
     .novedad h3{
@@ -542,6 +580,14 @@ $items = $data['items'] ?? [];
         <form method="post" enctype="multipart/form-data">
           <input type="hidden" name="action" value="crear">
 
+          <label>Tipo
+            <select name="tipo" id="tipoNovedad">
+              <option value="banner">Banner con imagen</option>
+              <option value="aviso">Aviso solo texto</option>
+              <option value="alerta">Alerta importante</option>
+            </select>
+          </label>
+
           <label>Título
             <input type="text" name="titulo" required>
           </label>
@@ -559,7 +605,8 @@ $items = $data['items'] ?? [];
           </label>
 
           <label>Imagen JPG, PNG o WEBP
-            <input type="file" name="imagen" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required>
+            <input type="file" name="imagen" id="imagenNovedad" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+            <span class="field-hint" id="imagenHint">Obligatoria para banner. Opcional para aviso o alerta.</span>
           </label>
 
           <div class="checks">
@@ -583,6 +630,8 @@ $items = $data['items'] ?? [];
             <div>
               <?php if (!empty($item['imagen'])): ?>
                 <img src="<?= h($item['imagen']) ?>" alt="<?= h($item['titulo'] ?? 'Novedad') ?>">
+              <?php else: ?>
+                <div class="novedad-empty-img">Sin imagen</div>
               <?php endif; ?>
             </div>
             <div>
@@ -594,6 +643,7 @@ $items = $data['items'] ?? [];
               </p>
 
               <div class="badges">
+                <span class="badge"><?= h($item['tipo'] ?? 'banner') ?></span>
                 <span class="badge<?= empty($item['activo']) ? ' badge--off' : '' ?>">
                   <?= !empty($item['activo']) ? 'Activa' : 'Inactiva' ?>
                 </span>
@@ -632,5 +682,22 @@ $items = $data['items'] ?? [];
     </div>
   </main>
 <?php endif; ?>
+<script>
+  const tipoNovedad = document.getElementById('tipoNovedad');
+  const imagenNovedad = document.getElementById('imagenNovedad');
+  const imagenHint = document.getElementById('imagenHint');
+
+  function actualizarImagenRequerida() {
+    if (!tipoNovedad || !imagenNovedad || !imagenHint) return;
+    const esBanner = tipoNovedad.value === 'banner';
+    imagenNovedad.required = esBanner;
+    imagenHint.textContent = esBanner
+      ? 'Obligatoria para banner.'
+      : 'Opcional. Si subís una imagen, se mostrará en la novedad.';
+  }
+
+  tipoNovedad?.addEventListener('change', actualizarImagenRequerida);
+  actualizarImagenRequerida();
+</script>
 </body>
 </html>

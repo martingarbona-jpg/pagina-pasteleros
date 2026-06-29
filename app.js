@@ -335,6 +335,8 @@ function abrirModalNovedades(item, version) {
   const titulo = escaparHtmlNovedades(item.titulo || "Novedad");
   const descripcion = escaparHtmlNovedades(item.descripcion || "");
   const imagen = escaparHtmlNovedades(item.imagen || "");
+  const tipo = ["banner", "aviso", "alerta"].includes(item.tipo) ? item.tipo : "banner";
+  const icono = tipo === "alerta" ? "⚠️" : (tipo === "aviso" ? "📢" : "");
   const link = (item.link || "").toString().trim();
   const linkTexto = escaparHtmlNovedades(item.linkTexto || "Ver más");
 
@@ -344,8 +346,16 @@ function abrirModalNovedades(item, version) {
       <div class="novedades-modal__banner">
         <img class="novedades-modal__img" src="${imagen}" alt="${titulo}" onerror="this.closest('.novedades-modal__banner').remove()">
       </div>
-    ` : ""}
-    ${descripcion ? `<p class="novedades-modal__desc">${descripcion}</p>` : ""}
+    ` : `
+      <div class="novedad-texto novedad-texto--${tipo}">
+        ${icono ? `<span class="novedad-icono" aria-hidden="true">${icono}</span>` : ""}
+        <div>
+          <h3>${titulo}</h3>
+          ${descripcion ? `<p>${descripcion}</p>` : ""}
+        </div>
+      </div>
+    `}
+    ${imagen && descripcion ? `<p class="novedades-modal__desc">${descripcion}</p>` : ""}
     <div class="novedades-modal__actions">
       <button type="button" class="btn novedades-modal__btn novedades-modal__btn--secondary" data-close-novedades>Entendido</button>
       ${link ? `<a class="btn novedades-modal__btn novedades-modal__btn--primary" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener" data-close-novedades>${linkTexto}</a>` : ""}
@@ -413,6 +423,8 @@ function cargarNovedades() {
             const titulo = escaparHtmlNovedades(item.titulo || "");
             const descripcion = escaparHtmlNovedades(item.descripcion || "");
             const imagen = escaparHtmlNovedades(item.imagen || "");
+            const tipo = ["banner", "aviso", "alerta"].includes(item.tipo) ? item.tipo : "banner";
+            const icono = tipo === "alerta" ? "⚠️" : (tipo === "aviso" ? "📢" : "");
             const link = (item.link || "").toString().trim();
             const linkTexto = escaparHtmlNovedades(item.linkTexto || "Ver más");
 
@@ -422,10 +434,18 @@ function cargarNovedades() {
                   <div class="novedades-slide__media">
                     <img src="${imagen}" alt="${titulo}" onerror="this.closest('.novedades-slide__media').remove()">
                   </div>
-                ` : ""}
+                ` : `
+                  <div class="novedad-texto novedad-texto--${tipo}">
+                    ${icono ? `<span class="novedad-icono" aria-hidden="true">${icono}</span>` : ""}
+                    <div>
+                      <h3>${titulo}</h3>
+                      ${descripcion ? `<p>${descripcion}</p>` : ""}
+                    </div>
+                  </div>
+                `}
                 <div class="novedades-slide__body">
-                  <h3>${titulo}</h3>
-                  ${descripcion ? `<p>${descripcion}</p>` : ""}
+                  ${imagen ? `<h3>${titulo}</h3>` : ""}
+                  ${imagen && descripcion ? `<p>${descripcion}</p>` : ""}
                   ${link ? `<a class="btn novedades-slide__link" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener">${linkTexto}</a>` : ""}
                 </div>
               </article>

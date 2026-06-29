@@ -4,6 +4,7 @@
   "items": [
     {
       "id": "gastro-2026-06",
+      "tipo": "banner",
       "titulo": "Nueva especialidad: Gastroenterología",
       "descripcion": "Dra. Pamela Daffra atiende los lunes de 11:30 a 13:15 hs en Consultorios Pasteleros.",
       "imagen": "banners/gastroenterologia.jpg",
@@ -14,6 +15,7 @@
     },
     {
       "id": "gastro-2026-07",
+      "tipo": "banner",
       "titulo": "Nueva especialidad",
       "descripcion": "Nueva especialidad en nuestros consultorios.",
       "imagen": "banners/gastroenterologia2.jpg",
