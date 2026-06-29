@@ -1996,14 +1996,14 @@ body.is-standalone #installPanel {
 .novedades-modal__box{
   position:relative;
   z-index:1;
-  width:100%;
-  max-width:620px;
-  max-height:calc(100vh - 36px);
+  width:min(920px, 94vw);
+  max-width:920px;
+  max-height:90vh;
   overflow:auto;
   background:#ffffff;
   border-radius:24px;
   border:1px solid rgba(var(--verde-principal-rgb),0.18);
-  padding:26px;
+  padding:24px;
   box-shadow:0 26px 78px rgba(0,0,0,0.32);
   animation:novedadesModalIn .22s ease both;
 }
@@ -2030,32 +2030,65 @@ body.is-standalone #installPanel {
 }
 
 .novedades-modal__box h2{
-  margin:0 46px 14px 0;
+  margin:0 46px 16px 0;
   color:var(--verde-principal);
-  font-size:26px;
+  font-size:28px;
   line-height:1.2;
 }
 
 .novedades-modal__box p{
-  margin:14px 0 0;
+  margin:16px 0 0;
   color:#2f3c39;
   line-height:1.55;
   font-size:16px;
 }
 
+.novedades-modal__banner{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#f6fbf8;
+  border-radius:20px;
+  overflow:hidden;
+}
+
 .novedades-modal__img{
   width:100%;
-  max-height:360px;
+  max-width:100%;
+  height:auto;
+  max-height:62vh;
   object-fit:contain;
-  border-radius:18px;
-  background:#f6fbf8;
   display:block;
 }
 
+.novedades-modal__actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
 .novedades-modal__btn{
-  margin-top:18px;
+  margin-top:0;
+  border:none;
+  min-height:46px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+.novedades-modal__btn--primary{
   background:var(--verde-principal);
   color:#ffffff;
+}
+
+.novedades-modal__btn--secondary{
+  background:#eef7f2;
+  color:var(--verde-principal);
+  box-shadow:none;
 }
 
 @media (max-width:768px){
@@ -2130,11 +2163,14 @@ body.is-standalone #installPanel {
 
   .novedades-modal{
     align-items:center;
-    padding:10px 10px 104px;
+    padding:10px 10px 98px;
   }
 
   .novedades-modal__box{
-    max-width:calc(100vw - 20px);
+    width:92vw;
+    max-width:92vw;
+    max-height:86vh;
+    overflow:auto;
     border-radius:22px;
     padding:22px 18px;
   }
@@ -2144,7 +2180,15 @@ body.is-standalone #installPanel {
   }
 
   .novedades-modal__img{
-    max-height:300px;
+    max-width:100%;
+    height:auto;
+    max-height:none;
+    object-fit:contain;
+  }
+
+  .novedades-modal__actions{
+    flex-direction:column-reverse;
+    gap:10px;
   }
 
   .novedades-modal__btn{

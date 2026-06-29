@@ -340,19 +340,32 @@ function abrirModalNovedades(item, version) {
 
   title.textContent = item.titulo || "Novedad";
   content.innerHTML = `
-    ${imagen ? `<img class="novedades-modal__img" src="${imagen}" alt="${titulo}" onerror="this.remove()">` : ""}
-    ${descripcion ? `<p>${descripcion}</p>` : ""}
-    ${link ? `<a class="btn novedades-modal__btn" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener">${linkTexto}</a>` : ""}
+    ${imagen ? `
+      <div class="novedades-modal__banner">
+        <img class="novedades-modal__img" src="${imagen}" alt="${titulo}" onerror="this.closest('.novedades-modal__banner').remove()">
+      </div>
+    ` : ""}
+    ${descripcion ? `<p class="novedades-modal__desc">${descripcion}</p>` : ""}
+    <div class="novedades-modal__actions">
+      <button type="button" class="btn novedades-modal__btn novedades-modal__btn--secondary" data-close-novedades>Entendido</button>
+      ${link ? `<a class="btn novedades-modal__btn novedades-modal__btn--primary" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener" data-close-novedades>${linkTexto}</a>` : ""}
+    </div>
   `;
 
   function cerrar() {
+    if (modal.hidden) return;
     modal.hidden = true;
     document.body.style.overflow = "";
     setNovedadesVistas(version);
     document.querySelectorAll("[data-close-novedades]").forEach((el) => {
       el.removeEventListener("click", cerrar);
     });
+    modal.removeEventListener("click", cerrarDesdeFondo);
     document.removeEventListener("keydown", cerrarConEscape);
+  }
+
+  function cerrarDesdeFondo(event) {
+    if (event.target === modal) cerrar();
   }
 
   function cerrarConEscape(event) {
@@ -362,6 +375,7 @@ function abrirModalNovedades(item, version) {
   document.querySelectorAll("[data-close-novedades]").forEach((el) => {
     el.addEventListener("click", cerrar);
   });
+  modal.addEventListener("click", cerrarDesdeFondo);
   document.addEventListener("keydown", cerrarConEscape);
 
   modal.hidden = false;
