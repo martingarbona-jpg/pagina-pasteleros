@@ -1,6 +1,6 @@
-// VERSION SW 5
+// VERSION SW 7
 
-const CACHE_NAME = "ospasteleros-v5";
+const CACHE_NAME = "ospasteleros-v7";
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();
