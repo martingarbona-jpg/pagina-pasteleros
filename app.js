@@ -335,6 +335,9 @@ function getTipoContenidoNovedad(item) {
   if (["imagen", "video", "pdf", "texto"].includes(tipo)) return tipo;
 
   const archivo = getArchivoNovedad(item);
+  const tipoNovedad = (item.tipo || "").toString().trim();
+  if (["video", "pdf"].includes(tipoNovedad) && archivo) return tipoNovedad;
+
   const extension = archivo.split(".").pop().toLowerCase();
   if (["mp4", "webm"].includes(extension)) return "video";
   if (extension === "pdf") return "pdf";
@@ -344,14 +347,14 @@ function getTipoContenidoNovedad(item) {
 
 function getTipoVisualNovedad(item) {
   const tipo = (item.tipo || "").toString().trim();
-  if (["banner", "aviso", "alerta"].includes(tipo)) return tipo;
+  if (["banner", "aviso", "alerta", "video", "pdf"].includes(tipo)) return tipo;
   return getTipoContenidoNovedad(item) === "texto" ? "aviso" : "banner";
 }
 
 function renderArchivoNovedad(item, titulo, contexto) {
   const archivo = escaparHtmlNovedades(getArchivoNovedad(item));
   const tipoContenido = getTipoContenidoNovedad(item);
-  const claseMedia = contexto === "modal" ? "novedades-modal__banner" : "novedades-slide__media";
+  const claseMedia = contexto === "modal" ? "novedades-modal__banner" : "novedades-bar-media";
 
   if (tipoContenido === "imagen" && archivo) {
     return `
@@ -490,29 +493,24 @@ function cargarNovedades() {
           ${items.map((item, index) => {
             const titulo = escaparHtmlNovedades(item.titulo || "");
             const descripcion = escaparHtmlNovedades(item.descripcion || "");
-            const archivo = getArchivoNovedad(item);
-            const tipoContenido = getTipoContenidoNovedad(item);
             const tipo = getTipoVisualNovedad(item);
-            const icono = tipo === "alerta" ? "⚠️" : (tipo === "aviso" ? "📢" : "");
+            const icono = tipo === "alerta" ? "&#9888;&#65039;" : "&#128226;";
             const link = (item.link || "").toString().trim();
             const linkTexto = escaparHtmlNovedades(item.linkTexto || "Ver más");
             const mediaHtml = renderArchivoNovedad(item, titulo, "slide");
 
             return `
-              <article class="novedades-slide${index === 0 ? " is-active" : ""}" data-novedad-index="${index}" ${index === 0 ? "" : "hidden"} aria-hidden="${index === 0 ? "false" : "true"}">
+              <article class="novedades-slide novedades-bar-slide novedades-bar-slide--${tipo}${index === 0 ? " is-active" : ""}" data-novedad-index="${index}" ${index === 0 ? "" : "hidden"} aria-hidden="${index === 0 ? "false" : "true"}">
                 ${mediaHtml || `
-                  <div class="novedad-texto novedad-texto--${tipo}">
-                    ${icono ? `<span class="novedad-icono" aria-hidden="true">${icono}</span>` : ""}
-                    <div>
-                      <h3>${titulo}</h3>
-                      ${descripcion ? `<p>${descripcion}</p>` : ""}
-                    </div>
+                  <div class="novedades-bar-media novedades-bar-media--texto novedad-texto novedad-texto--${tipo}">
+                    <span class="novedad-icono" aria-hidden="true">${icono}</span>
                   </div>
                 `}
-                <div class="novedades-slide__body">
-                  ${archivo && tipoContenido !== "texto" ? `<h3>${titulo}</h3>` : ""}
-                  ${archivo && tipoContenido !== "texto" && descripcion ? `<p>${descripcion}</p>` : ""}
-                  ${link ? `<a class="btn novedades-slide__link" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener">${linkTexto}</a>` : ""}
+                <div class="novedades-bar-content novedades-slide__body">
+                  <span class="novedades-bar-kicker">Novedad</span>
+                  <h3>${titulo}</h3>
+                  ${descripcion ? `<p>${descripcion}</p>` : ""}
+                  ${link ? `<a class="btn novedades-bar-link novedades-slide__link" href="${escaparHtmlNovedades(link)}" target="_blank" rel="noopener">${linkTexto}</a>` : ""}
                 </div>
               </article>
             `;
