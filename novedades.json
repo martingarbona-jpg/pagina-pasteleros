@@ -1,45 +1,5 @@
 {
     "activo": true,
-    "version": "2026-06-30-12-17-18",
-    "items": [
-        {
-            "id": "20260630_120506",
-            "tipo": "banner",
-            "tipoContenido": "imagen",
-            "titulo": "NUEVA ESPECIALIDAD",
-            "descripcion": "GASTROENTEROLOGIA EN NUESTROS CONSULTORIOS",
-            "imagen": "banners\/gastroenterologia2-20260630-120506.jpg",
-            "archivo": "banners\/gastroenterologia2-20260630-120506.jpg",
-            "linkTexto": "Solicitar turno",
-            "link": "https:\/\/wa.me\/5492613434536",
-            "popup": false,
-            "activo": true
-        },
-        {
-            "id": "20260630_121217",
-            "tipo": "banner",
-            "tipoContenido": "imagen",
-            "titulo": "ANALISIS BIOQUIMICOS",
-            "descripcion": "EXTRACCION DE LABORATORIO EN NUESTROS CONSULTORIOS.\r\nLUNES Y MIERCOLES DE 8AM A 10 AM",
-            "imagen": "banners\/whatsapp-image-2026-06-29-at-13-10-35-1-20260630-121217.jpeg",
-            "archivo": "banners\/whatsapp-image-2026-06-29-at-13-10-35-1-20260630-121217.jpeg",
-            "linkTexto": "CONSULTAS",
-            "link": "https:\/\/wa.me\/5492613434536",
-            "popup": false,
-            "activo": true
-        },
-        {
-            "id": "20260630_121613",
-            "tipo": "banner",
-            "tipoContenido": "imagen",
-            "titulo": "CARNET DIGITAL",
-            "descripcion": "ACCEDE A TU CARNET DIGITAL\r\nCONULTORIOS NUEVOS,\r\nMAS DE 20 ESPECIALIDADES, \r\nTURNOS INMEDIATOS, \r\nESTUDIOS DE MEDIA Y ALTA COMPLEJIDAD\"",
-            "imagen": "banners\/whatsapp-image-2026-06-29-at-13-10-35-3-20260630-121613.jpeg",
-            "archivo": "banners\/whatsapp-image-2026-06-29-at-13-10-35-3-20260630-121613.jpeg",
-            "linkTexto": "CONSULTAS",
-            "link": "https:\/\/wa.me\/5492615092602",
-            "popup": false,
-            "activo": true
-        }
-    ]
+    "version": "2026-06-30-13-55-38",
+    "items": []
 }
