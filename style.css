@@ -2302,7 +2302,7 @@ body.is-standalone #installPanel {
   .novedades-slide__body{
     order:1;
     min-height:0;
-    padding:22px;
+    padding:18px 16px 20px;
     background:#ffffff;
     width:100%;
     max-width:100%;
@@ -2318,6 +2318,18 @@ body.is-standalone #installPanel {
     word-wrap:normal;
     hyphens:none;
     white-space:normal;
+  }
+
+  #novedades,
+  #novedades *{
+    word-break:normal;
+    hyphens:none;
+  }
+
+  .novedades-slide__body,
+  .novedades-slide__body *{
+    word-break:normal !important;
+    hyphens:none !important;
   }
 
   .novedad-icono{
@@ -2355,17 +2367,25 @@ body.is-standalone #installPanel {
   .novedades-slide__body h3{
     max-width:100%;
     width:100%;
-    font-size:clamp(26px, 8vw, 38px);
+    font-size:clamp(24px, 7vw, 34px);
     line-height:1.08;
+    word-break:normal;
+    overflow-wrap:normal;
+    hyphens:none;
   }
 
   .novedades-slide__body p{
-    font-size:clamp(16px, 5vw, 22px);
+    font-size:17px;
     line-height:1.45;
     letter-spacing:0;
     max-width:100%;
     width:100%;
     min-width:0;
+    word-break:normal !important;
+    overflow-wrap:break-word;
+    word-wrap:normal;
+    hyphens:none;
+    white-space:normal;
   }
 
   .novedades-slide__link{

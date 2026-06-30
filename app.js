@@ -312,6 +312,15 @@ function escaparHtmlNovedades(valor) {
     .replace(/'/g, "&#039;");
 }
 
+function limpiarTextoNovedad(valor) {
+  return (valor || "")
+    .toString()
+    .replace(/\u00A0/g, " ")
+    .replace(/[\u200B-\u200D\uFEFF]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function getNovedadesVistas() {
   try {
     return localStorage.getItem("novedades_vistas");
@@ -392,8 +401,9 @@ function abrirModalNovedades(item, version) {
   const content = document.getElementById("novedadesModalContent");
   if (!modal || !title || !content) return;
 
-  const titulo = escaparHtmlNovedades(item.titulo || "Novedad");
-  const descripcion = escaparHtmlNovedades(item.descripcion || "");
+  const tituloLimpio = limpiarTextoNovedad(item.titulo || "Novedad");
+  const titulo = escaparHtmlNovedades(tituloLimpio);
+  const descripcion = escaparHtmlNovedades(limpiarTextoNovedad(item.descripcion || ""));
   const archivo = getArchivoNovedad(item);
   const tipoContenido = getTipoContenidoNovedad(item);
   const tipo = getTipoVisualNovedad(item);
@@ -402,7 +412,7 @@ function abrirModalNovedades(item, version) {
   const linkTexto = escaparHtmlNovedades(item.linkTexto || "Ver más");
   const mediaHtml = renderArchivoNovedad(item, titulo, "modal");
 
-  title.textContent = item.titulo || "Novedad";
+  title.textContent = tituloLimpio || "Novedad";
   content.innerHTML = `
     ${mediaHtml || `
       <div class="novedad-texto novedad-texto--${tipo}">
@@ -491,8 +501,8 @@ function cargarNovedades() {
       carrusel.innerHTML = `
         <div class="novedades-track">
           ${items.map((item, index) => {
-            const titulo = escaparHtmlNovedades(item.titulo || "");
-            const descripcion = escaparHtmlNovedades(item.descripcion || "");
+            const titulo = escaparHtmlNovedades(limpiarTextoNovedad(item.titulo || ""));
+            const descripcion = escaparHtmlNovedades(limpiarTextoNovedad(item.descripcion || ""));
             const tipo = getTipoVisualNovedad(item);
             const icono = tipo === "alerta" ? "&#9888;&#65039;" : "&#128226;";
             const link = (item.link || "").toString().trim();
