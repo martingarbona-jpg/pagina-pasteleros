@@ -238,6 +238,68 @@ body{
   color: rgba(255,255,255,0.85);
 }
 
+.turnos-consultorios-card{
+  background-image: url("img/fondo_card_consultorios.png");
+  background-size: cover;
+  background-position: 68% center;
+  background-repeat: no-repeat;
+}
+
+.turnos-consultorios-card::before{
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: linear-gradient(90deg, rgba(6,74,49,0.88) 0%, rgba(6,74,49,0.72) 42%, rgba(6,74,49,0.18) 100%);
+}
+
+.turnos-consultorios-card > *{
+  position:relative;
+  z-index:1;
+}
+
+.turnos-consultorios-card h3,
+.turnos-consultorios-card .muted{
+  max-width:70%;
+  text-shadow:0 2px 8px rgba(0,0,0,0.26);
+}
+
+.turnos-consultorios-badge{
+  display:inline-flex;
+  align-items:center;
+  width:max-content;
+  max-width:70%;
+  margin:8px 0 10px;
+  padding:6px 11px;
+  border:1px solid rgba(255,255,255,0.45);
+  border-radius:999px;
+  background:rgba(255,255,255,0.16);
+  color:#ffffff;
+  font-size:12px;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:0.8px;
+  text-transform:uppercase;
+  box-shadow:0 8px 18px rgba(0,0,0,0.14);
+  backdrop-filter:blur(6px);
+}
+
+@media (max-width:768px){
+  .turnos-consultorios-card{
+    background-position:72% center;
+  }
+
+  .turnos-consultorios-card::before{
+    background: linear-gradient(90deg, rgba(6,74,49,0.9) 0%, rgba(6,74,49,0.76) 54%, rgba(6,74,49,0.22) 100%);
+  }
+
+  .turnos-consultorios-card h3,
+  .turnos-consultorios-card .muted,
+  .turnos-consultorios-badge{
+    max-width:74%;
+  }
+}
+
 /* FIX DEFINITIVO: Gestiones Online - 3 cards alineadas */
 #gestiones .cards{
   align-items:stretch;
