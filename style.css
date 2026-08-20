@@ -260,6 +260,69 @@ body{
   z-index:1;
 }
 
+.estudios-consultorios-card{
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5,76,48,0.92) 0%,
+      rgba(5,76,48,0.75) 38%,
+      rgba(5,76,48,0.20) 65%,
+      rgba(5,76,48,0.03) 100%
+    ),
+    url("img/fondo_card_estudios.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.estudios-consultorios-card > *{
+  position:relative;
+  z-index:1;
+}
+
+.estudios-consultorios-card h3,
+.estudios-consultorios-card .muted{
+  max-width:70%;
+  text-shadow:0 2px 8px rgba(0,0,0,0.26);
+}
+
+.gestiones-imagen-card{
+  min-height:220px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  position:relative;
+  overflow:hidden;
+}
+
+.gestiones-imagen-card > *{
+  position:relative;
+  z-index:1;
+}
+
+.gestiones-autorizaciones-card{
+  background-image:url("archivos/autorizaciones.png");
+  background-size:100% 100%;
+  background-position:center center;
+}
+
+.gestiones-altas-card{
+  background-image:url("archivos/altas.png");
+  background-size:100% 100%;
+  background-position:center center;
+}
+
+.gestiones-recetas-card{
+  background-image:url("archivos/recetas.png");
+  background-size:100% 100%;
+  background-position:center center;
+}
+
 .turnos-consultorios-card h3,
 .turnos-consultorios-card .muted{
   max-width:70%;
@@ -290,9 +353,23 @@ body{
     background-position:58% center;
   }
 
+  .estudios-consultorios-card{
+    background-position:58% center;
+  }
+
+  .gestiones-imagen-card{
+    min-height:220px;
+    background-position:left center;
+  }
+
   .turnos-consultorios-card h3,
   .turnos-consultorios-card .muted,
   .turnos-consultorios-badge{
+    max-width:74%;
+  }
+
+  .estudios-consultorios-card h3,
+  .estudios-consultorios-card .muted{
     max-width:74%;
   }
 }
@@ -915,6 +992,7 @@ section[id]{
 }
 
 .turnos-oval a{
+  min-width:238px;
   height:46px;
   min-height:46px;
   padding:0 20px;
@@ -940,9 +1018,10 @@ section[id]{
 }
 
 .turnos-icon{
-  width:18px;
-  height:18px;
+  width:20px;
+  height:20px;
   color:var(--verde-secundario);
+  flex-shrink:0;
 }
 
 /* Alineación desktop: cards superiores de Consultorios */
@@ -1122,6 +1201,63 @@ section[id]{
   gap:12px;
   flex-wrap:wrap;
   margin-top:14px;
+}
+
+.doc-imagen-card{
+  min-height:250px;
+  padding:0;
+  background-size:100% 100%;
+  background-position:center center;
+  background-repeat:no-repeat;
+  position:relative;
+  overflow:hidden;
+}
+
+.cartilla-imagen-card{
+  background-image:url("archivos/cartilla.png");
+}
+
+.coseguros-imagen-card{
+  background-image:url("archivos/coseguros.png");
+}
+
+.doc-imagen-card .doc-actions{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  margin:0;
+  z-index:1;
+}
+
+.doc-imagen-card .doc-actions .btn{
+  height:40px;
+  min-height:40px;
+  padding:0 16px;
+  font-size:13px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 18px rgba(0,0,0,0.14);
+}
+
+@media (max-width:768px){
+  .doc-imagen-card{
+    min-height:235px;
+    background-size:100% 100%;
+    background-position:center center;
+  }
+
+  .doc-imagen-card .doc-actions{
+    left:16px;
+    bottom:16px;
+  }
+
+  .doc-imagen-card .doc-actions .btn{
+    height:38px;
+    min-height:38px;
+    padding:0 14px;
+    font-size:12px;
+  }
 }
 
 /* Botón Ver (secundario) */
@@ -1865,6 +2001,67 @@ body.is-standalone #installPanel {
   text-decoration:none !important;
   appearance:none !important;
   -webkit-appearance:none !important;
+}
+
+/* Ajuste de botones sobre cards con imagen en Gestiones Online */
+#gestiones .card.gestiones-imagen-card{
+  min-height:250px !important;
+  padding:0 !important;
+}
+
+#gestiones .card.gestiones-imagen-card .card-actions{
+  position:absolute !important;
+  left:18px !important;
+  bottom:18px !important;
+  width:auto !important;
+  margin:0 !important;
+  justify-content:flex-start !important;
+  align-items:flex-end !important;
+}
+
+#gestiones .card.gestiones-autorizaciones-card,
+#gestiones .card.gestiones-altas-card,
+#gestiones .card.gestiones-recetas-card{
+  background-size:100% 100% !important;
+  background-position:center center !important;
+}
+
+#gestiones .card.gestiones-imagen-card .card-actions .btn,
+#gestiones .card.gestiones-imagen-card .card-actions button.btn,
+#gestiones .card.gestiones-imagen-card .card-actions a.btn{
+  height:40px !important;
+  min-height:40px !important;
+  padding:0 16px !important;
+  font-size:13px !important;
+  box-shadow:0 8px 18px rgba(0,0,0,0.14) !important;
+}
+
+@media (max-width:768px){
+  #gestiones .card.gestiones-imagen-card{
+    min-height:235px !important;
+    padding:0 !important;
+  }
+
+  #gestiones .card.gestiones-imagen-card .card-actions{
+    left:16px !important;
+    bottom:16px !important;
+  }
+
+  #gestiones .card.gestiones-autorizaciones-card,
+  #gestiones .card.gestiones-altas-card,
+  #gestiones .card.gestiones-recetas-card{
+    background-size:100% 100% !important;
+    background-position:center center !important;
+  }
+
+  #gestiones .card.gestiones-imagen-card .card-actions .btn,
+  #gestiones .card.gestiones-imagen-card .card-actions button.btn,
+  #gestiones .card.gestiones-imagen-card .card-actions a.btn{
+    height:38px !important;
+    min-height:38px !important;
+    padding:0 14px !important;
+    font-size:12px !important;
+  }
 }
 
 /* ============================= */
