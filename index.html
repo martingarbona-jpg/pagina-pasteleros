@@ -20,7 +20,7 @@
 
 <meta name="keywords" content="obra social pasteleros mendoza, osp pasteleros mendoza, cartilla pasteleros mendoza, consultorios pasteleros mendoza">
 
-  <link rel="stylesheet" href="style.css?v=47">
+  <link rel="stylesheet" href="style.css?v=101">
 
 <link rel="icon" type="image/png" href="/favicon.png?v=42">
 <link rel="shortcut icon" href="/favicon.png?v=42">
@@ -186,7 +186,7 @@
 
         <div class="cards" style="margin-top: 18px;">
           <article class="card turnos-consultorios-card">
-            <h3><span class="icon">📲</span>Turnos Consultorios</h3>
+            <h3>Turnos Consultorios</h3>
             <p class="turnos-consultorios-badge">PRÓXIMAMENTE BOT IA</p>
             <p class="muted">Solicitá tu turno por WhatsApp.</p>
            <div class="turnos-oval">
@@ -204,7 +204,7 @@
           
 
           <article class="card estudios-consultorios-card">
-            <h3><span class="icon">📄</span>Solicite Aquí sus Estudios</h3>
+            <h3>Solicite Aquí sus Estudios</h3>
             <p class="muted">Completá tus datos para solicitar estudios realizados en nuestros consultorios.</p>
 
             <div class="card-actions">
@@ -279,46 +279,49 @@
         <h2>Emergencias / Guardias</h2>
         <p class="muted">Información útil para atención urgente.</p>
 
-        <div class="contacto-wrapper">
-          <div class="contacto-mails">
-            <p>
-              🚑 <strong>Ambulancias Serca 24hs</strong> (coseguro a cargo del cliente):
-              <a href="tel:4248080">4248080</a>
-            </p>
+        <div class="emergencias-grid">
+          <article class="emergencia-card emergencia-card--destacada">
+            <p class="emergencia-eyebrow">Ambulancias 24 hs</p>
+            <h3>Ambulancias Serca 24hs</h3>
+            <p class="emergencia-note">Coseguro a cargo del afiliado.</p>
+            <a class="emergencia-btn" href="tel:4248080">Llamar</a>
+          </article>
 
-            <p>
-              🧒 <strong>Guardia pediátrica Medikids</strong><br>
-              Sede Ciudad:
-              <a class="contacto-map" href="https://www.google.com/maps?q=Rodr%C3%ADguez+118,+Mendoza" target="_blank" rel="noopener">
-                <strong>Rodríguez 118, Ciudad</strong>
-              </a>
-              <br>
-              Lun a Jue de 8.45 a 21.30 / Vie - Sab - Dom - Feriados de 9 a 20.30 hs.
-              <br><br>
-              Sede Godoy Cruz:
-              <a class="contacto-map" href="https://www.google.com/maps?q=Juan+de+Garay+75,+Godoy+Cruz,+Mendoza" target="_blank" rel="noopener">
-                <strong>Juan de Garay 75, Godoy Cruz</strong>
-              </a>
-              <br>
-              Demanda espontánea, lun a sáb de 9 a 20.30 hs.
-              <br><br>
-              Sede Maipú:
-              <a class="contacto-map" href="https://www.google.com/maps?q=J.+Domingo+Per%C3%B3n+120,+Maip%C3%BA,+Mendoza" target="_blank" rel="noopener">
-                <strong>J. Domingo Perón 120, Maipú</strong>
-              </a>
-              <br>
-              Lunes a sábado y feriados de 8 a 20.30 hs.
-              <br>
-              Teléfono: <a href="tel:2616838860">2616838860</a>
-            </p>
+          <article class="emergencia-card emergencia-card--medikids">
+            <p class="emergencia-eyebrow">Guardia Pediátrica</p>
+            <h3>Medikids</h3>
+            <a class="emergencia-btn" href="tel:2616838860">Llamar</a>
 
-            <p>
-              🏥 <strong>Guardia Clínica Santa Clara</strong>
-              <a class="contacto-map" href="https://www.google.com/maps?q=San+Mart%C3%ADn+835,+Godoy+Cruz,+Mendoza" target="_blank" rel="noopener">
-                <strong>San Martín 835, Godoy Cruz</strong>
-              </a>
-            </p>
-          </div>
+            <div class="emergencia-sedes">
+              <div class="emergencia-sede">
+                <h4>Ciudad</h4>
+                <p class="emergencia-address">Rodríguez 118, Ciudad</p>
+                <p class="emergencia-hours">Lun a Jue de 8:45 a 21:30<br>Vie - Sáb - Dom - Feriados de 9:00 a 20:30 hs.</p>
+                <a class="emergencia-btn emergencia-btn--outline" href="https://www.google.com/maps?q=Rodr%C3%ADguez+118,+Mendoza" target="_blank" rel="noopener">Cómo llegar</a>
+              </div>
+
+              <div class="emergencia-sede">
+                <h4>Godoy Cruz</h4>
+                <p class="emergencia-address">Juan de Garay 75, Godoy Cruz</p>
+                <p class="emergencia-hours">Demanda espontánea<br>Lun a sáb de 9:00 a 20:30 hs.</p>
+                <a class="emergencia-btn emergencia-btn--outline" href="https://www.google.com/maps?q=Juan+de+Garay+75,+Godoy+Cruz,+Mendoza" target="_blank" rel="noopener">Cómo llegar</a>
+              </div>
+
+              <div class="emergencia-sede">
+                <h4>Maipú</h4>
+                <p class="emergencia-address">J. Domingo Perón 120, Maipú</p>
+                <p class="emergencia-hours">Lunes a sábado y feriados de 8:00 a 20:30 hs.</p>
+                <a class="emergencia-btn emergencia-btn--outline" href="https://www.google.com/maps?q=J.+Domingo+Per%C3%B3n+120,+Maip%C3%BA,+Mendoza" target="_blank" rel="noopener">Cómo llegar</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="emergencia-card">
+            <p class="emergencia-eyebrow">Guardia Clínica</p>
+            <h3>Santa Clara</h3>
+            <p class="emergencia-address">San Martín 835, Godoy Cruz</p>
+            <a class="emergencia-btn emergencia-btn--outline" href="https://www.google.com/maps?q=San+Mart%C3%ADn+835,+Godoy+Cruz,+Mendoza" target="_blank" rel="noopener">Cómo llegar</a>
+          </article>
         </div>
       </div>
     </section>
@@ -329,18 +332,39 @@
     <h2>Carnet Digital</h2>
     <p class="muted">Ingresá tu DNI y nombre para validar tu afiliación.</p>
 
-    <div class="cards" style="max-width:500px;margin:auto;">
+    <div class="cards carnet-form-wrap" style="max-width:500px;margin:auto;">
 
-      <div class="card">
-        <input id="dni" placeholder="DNI (solo números)" style="width:100%;margin-bottom:10px;">
-        <input id="nombre" placeholder="Nombre y Apellido (en cualquier orden)" style="width:100%;margin-bottom:10px;">
-        <button class="btn" id="btnGenerar" style="width:100%;">GENERAR CARNET</button>
+      <div class="card carnet-form-card">
+        <div class="carnet-form-head">
+          <div class="carnet-form-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M5 5.5A2.5 2.5 0 0 1 7.5 3h9A2.5 2.5 0 0 1 19 5.5v13A2.5 2.5 0 0 1 16.5 21h-9A2.5 2.5 0 0 1 5 18.5v-13Z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M8 8h8M8 16h8M8 12h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Validá tu afiliación</h3>
+            <p>Completá tus datos para generar tu carnet digital.</p>
+          </div>
+        </div>
+
+        <label class="carnet-field" for="dni">
+          <span>DNI</span>
+          <input id="dni" placeholder="DNI (solo números)">
+        </label>
+
+        <label class="carnet-field" for="nombre">
+          <span>Nombre y apellido</span>
+          <input id="nombre" placeholder="Nombre y Apellido (en cualquier orden)">
+        </label>
+
+        <button class="btn" id="btnGenerar">GENERAR CARNET</button>
 <div id="carnetLoading" style="display:none; text-align:center; margin-top:12px;">
   <div class="spinner-carnet"></div>
   <p style="font-size:13px; margin-top:6px;">Validando afiliado...</p>
 </div>
 
-<p style="font-size:12px;color:#ffffff;text-align:center;margin-top:6px;opacity:0.85;">
+<p class="carnet-delay-note">
   Puede demorar unos segundos.
 </p>
 
@@ -361,47 +385,54 @@
         <p class="muted">Canales de contacto.</p>
 <div class="contacto-wrapper">
 
-  <div class="contacto-mails">
+  <div class="contacto-col contacto-mails">
+    <h3>Gestiones por email</h3>
     <p>
-      📧 Altas: 
-      <a href="mailto:altasobrasocial@pastelerosmendoza.org">altasobrasocial@pastelerosmendoza.org</a>
+      <strong>Altas</strong>
+      <a href="/cdn-cgi/l/email-protection#5938352d382a363b2b382a363a3038351929382a2d3c353c2b362a343c373d36233877362b3e"><span class="__cf_email__" data-cfemail="52333e2633213d302033213d313b333e1222332126373e37203d213f373c363d28337c3d2035">[email&#160;protected]</span></a>
     </p>
 
     <p>
-      📧 Autorizaciones: 
-      <a href="mailto:autorizaciones@pastelerosmendoza.org">autorizaciones@pastelerosmendoza.org</a>
+      <strong>Autorizaciones</strong>
+      <a href="/cdn-cgi/l/email-protection#fd9c8889928f94879c9e949293988ebd8d9c8e899891988f928e9098939992879cd3928f9a"><span class="__cf_email__" data-cfemail="2d4c5859425f44574c4e444243485e6d5d4c5e594841485f425e4048434942574c03425f4a">[email&#160;protected]</span></a>
     </p>
 
     <p>
-      📧 Auditoría: 
-      <a href="mailto:auditoria@pastelerosmendoza.org">auditoria@pastelerosmendoza.org</a>
+      <strong>Auditoría</strong>
+      <a href="/cdn-cgi/l/email-protection#076672636e7368756e664777667473626b627568746a626963687d6629687560"><span class="__cf_email__" data-cfemail="a8c9ddccc1dcc7dac1c9e8d8c9dbdccdc4cddac7dbc5cdc6ccc7d2c986c7dacf">[email&#160;protected]</span></a>
     </p>
   </div>
-<div class="contacto-direcciones">
+<div class="contacto-col contacto-direcciones">
+  <h3>Nuestras sedes</h3>
   <p>
-    📍 Consultorios:
-    <a class="contacto-map" href="https://www.google.com/maps?q=Maip%C3%BA+165,+Mendoza" target="_blank" rel="noopener">
-      <strong>Maipú 165, Mendoza</strong>
-    </a>
+    <strong>Consultorios</strong>
+    <span>Maipú 165, Mendoza</span>
+    <a class="contacto-map contacto-link-btn" href="https://www.google.com/maps?q=Maip%C3%BA+165,+Mendoza" target="_blank" rel="noopener">Cómo llegar</a>
   </p>
 
   <p>
-    🏢 Obra Social:
-    <a class="contacto-map" href="https://www.google.com/maps?q=Salta+2278,+Mendoza" target="_blank" rel="noopener">
-      <strong>Salta 2278, Mendoza</strong>
-    </a>
+    <strong>Obra Social</strong>
+    <span>Salta 2278, Mendoza</span>
+    <a class="contacto-map contacto-link-btn" href="https://www.google.com/maps?q=Salta+2278,+Mendoza" target="_blank" rel="noopener">Cómo llegar</a>
   </p>
 </div>
-  <div class="contacto-instagram">
-    <a href="https://instagram.com/sindicatopastelerosmendoza" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" class="instagram-icon">
+  <div class="contacto-col contacto-instagram">
+    <h3>Redes sociales</h3>
+    <p>
+      <strong>Instagram</strong>
+      <span>Seguinos en Instagram</span>
+    </p>
+    <a class="contacto-link-btn contacto-instagram-btn" href="https://instagram.com/sindicatopastelerosmendoza" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" class="instagram-icon" aria-hidden="true">
         <path fill="currentColor" d="M7.75 2C4.574 2 2 4.574 2 7.75v8.5C2 19.426 4.574 22 7.75 22h8.5C19.426 22 22 19.426 22 16.25v-8.5C22 4.574 19.426 2 16.25 2h-8.5zm0 2h8.5C18.321 4 20 5.679 20 7.75v8.5c0 2.071-1.679 3.75-3.75 3.75h-8.5C5.679 20 4 18.321 4 16.25v-8.5C4 5.679 5.679 4 7.75 4zm4.25 2.5A5.5 5.5 0 1 0 17.5 12 5.507 5.507 0 0 0 12 6.5zm0 2A3.5 3.5 0 1 1 8.5 12 3.504 3.504 0 0 1 12 8.5zm5.25-2.25a1.25 1.25 0 1 0 1.25 1.25A1.252 1.252 0 0 0 17.25 6.25z"/>
       </svg>
-      Seguinos en Instagram
+      Ir a Instagram
     </a>
   </div>
 
 </div>
+      </div>
+    </section>
     <!-- FOOTER -->
     <footer class="footer">
       <div class="container">
@@ -594,7 +625,7 @@
     <div id="novedadesModalContent"></div>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="app.js?v=50" defer></script>
 
