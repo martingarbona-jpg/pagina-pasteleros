@@ -1,0 +1,211 @@
+{
+  "hashes": {
+    "admin-novedades.php": "sin cambios",
+    "app.js": "sin cambios",
+    "cartilla.pdf": "sin cambios",
+    "consultorios.json": "sin cambios",
+    "coseguros.pdf": "sin cambios",
+    "icon-192.png": "sin cambios",
+    "icon-512.png": "sin cambios",
+    "logo-elevar.png": "sin cambios",
+    "manifest.json": "sin cambios",
+    "novedades.json": "sin cambios",
+    "service-worker.js": "sin cambios",
+    "archivos\\altas.png": "sin cambios",
+    "archivos\\autorizaciones.png": "sin cambios",
+    "archivos\\cartilla.png": "sin cambios",
+    "archivos\\coseguros.png": "sin cambios",
+    "archivos\\recetas.png": "sin cambios",
+    "banners\\gastroenterologia.jpg": "sin cambios",
+    "banners\\gastroenterologia2-20260629-163513.jpg": "sin cambios",
+    "banners\\gastroenterologia2-20260630-120506.jpg": "sin cambios",
+    "banners\\whatsapp-image-2026-06-29-at-13-10-35-1-20260630-121217.jpeg": "sin cambios",
+    "banners\\whatsapp-image-2026-06-29-at-13-10-35-3-20260630-121613.jpeg": "sin cambios",
+    "banners\\whatsapp-image-2026-06-29-at-13-10-36-20260629-170811.jpeg": "sin cambios",
+    "img\\fondo_card_consultorios.png": "sin cambios",
+    "img\\fondo_card_estudios.png": "sin cambios"
+  },
+  "viewports": [
+    {
+      "width": 1440,
+      "overflow": false,
+      "cards": [
+        {
+          "width": 341,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar autorización"
+        },
+        {
+          "width": 341,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Iniciar alta"
+        },
+        {
+          "width": 341,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar receta"
+        },
+        {
+          "width": 521,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Turnos Consultorios"
+        },
+        {
+          "width": 521,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar Estudios"
+        },
+        {
+          "width": 521,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Cartilla Médica"
+        },
+        {
+          "width": 521,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Coseguros"
+        }
+      ],
+      "modales": "abren y cierran",
+      "buscador": "filtra, muestra vacíos y conserva el desplegable móvil",
+      "links": "idénticos",
+      "emergencias": "HTML y estilos calculados idénticos"
+    },
+    {
+      "width": 768,
+      "overflow": false,
+      "cards": [
+        {
+          "width": 728,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar autorización"
+        },
+        {
+          "width": 728,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Iniciar alta"
+        },
+        {
+          "width": 728,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar receta"
+        },
+        {
+          "width": 728,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Turnos Consultorios"
+        },
+        {
+          "width": 728,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar Estudios"
+        },
+        {
+          "width": 728,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Cartilla Médica"
+        },
+        {
+          "width": 728,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Coseguros"
+        }
+      ],
+      "modales": "abren y cierran",
+      "buscador": "filtra, muestra vacíos y conserva el desplegable móvil",
+      "links": "idénticos",
+      "emergencias": "HTML y estilos calculados idénticos"
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "cards": [
+        {
+          "width": 350,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar autorización"
+        },
+        {
+          "width": 350,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Iniciar alta"
+        },
+        {
+          "width": 350,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar receta"
+        },
+        {
+          "width": 350,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Turnos Consultorios"
+        },
+        {
+          "width": 350,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar Estudios"
+        },
+        {
+          "width": 350,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Cartilla Médica"
+        },
+        {
+          "width": 350,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Coseguros"
+        }
+      ],
+      "modales": "abren y cierran",
+      "buscador": "filtra, muestra vacíos y conserva el desplegable móvil",
+      "links": "idénticos",
+      "emergencias": "HTML y estilos calculados idénticos"
+    },
+    {
+      "width": 320,
+      "overflow": false,
+      "cards": [
+        {
+          "width": 280,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar autorización"
+        },
+        {
+          "width": 280,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Iniciar alta"
+        },
+        {
+          "width": 280,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar receta"
+        },
+        {
+          "width": 280,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Turnos Consultorios"
+        },
+        {
+          "width": 280,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Solicitar Estudios"
+        },
+        {
+          "width": 280,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Cartilla Médica"
+        },
+        {
+          "width": 280,
+          "background": "linear-gradient(135deg, rgb(255, 255, 255) 30%, rgb(240, 249, 244) 100%)",
+          "title": "Coseguros"
+        }
+      ],
+      "modales": "abren y cierran",
+      "buscador": "filtra, muestra vacíos y conserva el desplegable móvil",
+      "links": "idénticos",
+      "emergencias": "HTML y estilos calculados idénticos"
+    }
+  ],
+  "errors": []
+}

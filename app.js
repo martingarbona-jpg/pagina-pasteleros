@@ -160,7 +160,7 @@ function setConsultoriosOpen(open) {
 
   if (toggle) {
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.textContent = open ? "Ocultar especialidades" : "Ver especialidades";
+    toggle.textContent = open ? "Ocultar especialidades ↑" : "Ver todas las especialidades ↓";
   }
 }
 
@@ -760,7 +760,7 @@ function registrarServiceWorker() {
 
   window.addEventListener("load", async () => {
     try {
-      const reg = await navigator.serviceWorker.register("service-worker.js?v=8");
+      const reg = await navigator.serviceWorker.register("service-worker.js?v=11");
 
       if (reg.update) {
         reg.update();

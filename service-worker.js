@@ -1,6 +1,6 @@
-// VERSION SW 8
+// VERSION SW 11
 
-const CACHE_NAME = "ospasteleros-v8";
+const CACHE_NAME = "ospasteleros-v11";
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();

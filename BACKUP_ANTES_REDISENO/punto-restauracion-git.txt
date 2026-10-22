@@ -1,0 +1,2 @@
+Rama: codex/respaldo-antes-rediseno-20261016-102748
+Commit: 3b26ae1e574c6e69ce65c58d3811a53050904b16

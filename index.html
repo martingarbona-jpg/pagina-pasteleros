@@ -20,7 +20,7 @@
 
 <meta name="keywords" content="obra social pasteleros mendoza, osp pasteleros mendoza, cartilla pasteleros mendoza, consultorios pasteleros mendoza">
 
-  <link rel="stylesheet" href="style.css?v=101">
+  <link rel="stylesheet" href="style.css?v=105">
 
 <link rel="icon" type="image/png" href="/favicon.png?v=42">
 <link rel="shortcut icon" href="/favicon.png?v=42">
@@ -150,7 +150,10 @@
 
         <div class="cards">
 
-          <article class="card gestiones-imagen-card gestiones-autorizaciones-card">
+          <article class="card servicio-card">
+            <span class="servicio-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2h6v2M8 12l3 3 5-6"/></svg></span>
+            <h3>Solicitar autorización</h3>
+            <p class="muted">Completá el formulario y adjuntá la documentación para tu solicitud.</p>
             <div class="card-actions">
               <button type="button" class="btn" id="btnAbrirAutorizaciones">
                 Solicitar autorización
@@ -158,7 +161,10 @@
             </div>
           </article>
 
-          <article class="card gestiones-imagen-card gestiones-altas-card">
+          <article class="card servicio-card">
+            <span class="servicio-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="4"/><path d="M3 21v-2a7 7 0 0 1 12-5M19 13v8M15 17h8"/></svg></span>
+            <h3>Iniciar alta</h3>
+            <p class="muted">Iniciá tu afiliación y enviá la documentación necesaria desde aquí.</p>
             <div class="card-actions">
               <button type="button" class="btn" id="btnAbrirAltas">
                 Iniciar alta
@@ -166,7 +172,10 @@
             </div>
           </article>
 
-          <article class="card gestiones-imagen-card gestiones-recetas-card">
+          <article class="card servicio-card">
+            <span class="servicio-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M12 5v6M9 15h6M9 18h4"/></svg></span>
+            <h3>Solicitar receta</h3>
+            <p class="muted">Comunicate por WhatsApp para gestionar tu solicitud de receta.</p>
             <div class="card-actions">
               <a class="btn" href="https://wa.me/5492615092602" target="_blank" rel="noopener">
                 Solicitar receta
@@ -185,7 +194,8 @@
         <p class="muted">Especialidades, profesionales y horarios.</p>
 
         <div class="cards" style="margin-top: 18px;">
-          <article class="card turnos-consultorios-card">
+          <article class="card servicio-card servicio-card--turnos">
+            <span class="servicio-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18M8 16h2M14 16h2"/></svg></span>
             <h3>Turnos Consultorios</h3>
             <p class="turnos-consultorios-badge">YA DISPONIBLE BOT IA</p>
             <p class="muted">Solicitá tu turno por WhatsApp.</p>
@@ -203,8 +213,9 @@
 
           
 
-          <article class="card estudios-consultorios-card">
-            <h3>Solicite Aquí sus Estudios</h3>
+          <article class="card servicio-card">
+            <span class="servicio-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-6 9a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-9V3M8 15h8"/></svg></span>
+            <h3>Solicitar Estudios</h3>
             <p class="muted">Completá tus datos para solicitar estudios realizados en nuestros consultorios.</p>
 
             <div class="card-actions">
@@ -217,14 +228,23 @@
 
         <!-- LISTADO DINÁMICO (JSON) -->
         <div class="consultorios-controls">
+          <div class="consultorios-mobile-intro">
+            <div class="consultorios-mobile-title">
+              <span class="consultorios-mobile-icon">🩺</span>
+              <span>Buscar médico o especialidad</span>
+            </div>
+            <p>Consultá profesionales y horarios de nuestros consultorios.</p>
+          </div>
+
           <button type="button" class="btn consultorios-toggle" id="btnToggleConsultorios" aria-expanded="false">
-            Ver especialidades
+            Ver todas las especialidades ↓
           </button>
 
           <input
             type="search"
             id="buscadorConsultorios"
             class="consultorios-search"
+            aria-label="Buscar especialidad o profesional"
             placeholder="Buscar especialidad o profesional..."
             autocomplete="off"
           >
@@ -248,7 +268,10 @@
 
         <div class="cards">
 
-          <article class="card doc-imagen-card cartilla-imagen-card">
+          <article class="card servicio-card servicio-card--documento">
+            <span class="servicio-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
+            <h3>Cartilla Médica</h3>
+            <p class="muted">Consultá los prestadores y centros de atención de nuestra cartilla.</p>
            <div class="doc-actions">
   <a class="btn btn--ghost" href="cartilla.pdf" target="_blank" rel="noopener">
     Ver
@@ -259,12 +282,15 @@
 </div>
           </article>
 
-          <article class="card doc-imagen-card coseguros-imagen-card">
+          <article class="card servicio-card servicio-card--documento">
+            <span class="servicio-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
+            <h3>Coseguros</h3>
+            <p class="muted">Consultá la información de coseguros para tus prestaciones.</p>
             <div class="doc-actions">
-  <a class="btn btn--ghost" href="coseguros.pdf?v=33" target="_blank" rel="noopener">
+  <a class="btn btn--ghost" href="coseguros.pdf?v=35" target="_blank" rel="noopener">
     Ver
   </a>
-  <a class="btn" href="coseguros.pdf?v=33" download>
+  <a class="btn" href="coseguros.pdf?v=35" download>
     Descargar
   </a>
 </div>
@@ -627,7 +653,7 @@
 </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<script src="app.js?v=50" defer></script>
+<script src="app.js?v=53" defer></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {

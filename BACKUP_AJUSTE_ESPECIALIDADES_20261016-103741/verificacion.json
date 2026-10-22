@@ -1,0 +1,547 @@
+{
+  "report": [
+    {
+      "width": 390,
+      "movil": "estilos idénticos al estado anterior, incluso con una especialidad abierta"
+    },
+    {
+      "width": 768,
+      "movil": "estilos idénticos al estado anterior, incluso con una especialidad abierta"
+    },
+    {
+      "width": 1440,
+      "columns": 4,
+      "gap": "18px",
+      "cards": [
+        {
+          "name": "Cardiología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Clínica Médica",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Cirugía General",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Dermatología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Diabetología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Ecografistas",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Endocrinología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Gastroenterología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Ginecología Y Obstetricia",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Kinesiología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Neurocirugía",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Nutrición",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Odontología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Otorrinolaringología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Pediatría",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Psicología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Psiquiatría",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Traumatología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Urología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Análisis",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Fonoaudiología",
+          "w": 252,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        }
+      ],
+      "longTitleLines": 2,
+      "tallest": 338,
+      "expansion": "todas las especialidades sin recortes ni superposiciones; hover y teclado conservados"
+    },
+    {
+      "width": 1024,
+      "columns": 4,
+      "gap": "18px",
+      "cards": [
+        {
+          "name": "Cardiología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Clínica Médica",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Cirugía General",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Dermatología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Diabetología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Ecografistas",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Endocrinología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Gastroenterología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Ginecología Y Obstetricia",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Kinesiología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Neurocirugía",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Nutrición",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Odontología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Otorrinolaringología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Pediatría",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Psicología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Psiquiatría",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Traumatología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Urología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Análisis",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Fonoaudiología",
+          "w": 233,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        }
+      ],
+      "longTitleLines": 2,
+      "tallest": 338,
+      "expansion": "todas las especialidades sin recortes ni superposiciones; hover y teclado conservados"
+    },
+    {
+      "width": 900,
+      "columns": 2,
+      "gap": "18px",
+      "cards": [
+        {
+          "name": "Cardiología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Clínica Médica",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Cirugía General",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Dermatología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Diabetología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Ecografistas",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Endocrinología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Gastroenterología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Ginecología Y Obstetricia",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Kinesiología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Neurocirugía",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Nutrición",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Odontología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Otorrinolaringología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Pediatría",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Psicología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Psiquiatría",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Traumatología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Urología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Análisis",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        },
+        {
+          "name": "Fonoaudiología",
+          "w": 421,
+          "h": 112,
+          "titleHeight": 112,
+          "align": "center",
+          "justify": "center"
+        }
+      ],
+      "longTitleLines": 1,
+      "tallest": 296,
+      "expansion": "todas las especialidades sin recortes ni superposiciones; hover y teclado conservados"
+    }
+  ],
+  "errors": []
+}

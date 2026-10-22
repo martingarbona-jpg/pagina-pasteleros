@@ -379,29 +379,29 @@ body{
   align-items:stretch;
 }
 
-#gestiones .card{
+#gestiones .card:not(.servicio-card){
   min-height:220px;
   display:flex;
   flex-direction:column;
 }
 
-#gestiones .card h3{
+#gestiones .card:not(.servicio-card) h3{
   min-height:48px;
   margin-bottom:12px;
 }
 
-#gestiones .card p{
+#gestiones .card:not(.servicio-card) p{
   flex:1;
   margin-bottom:18px;
 }
 
-#gestiones .card .card-actions{
+#gestiones .card:not(.servicio-card) .card-actions{
   margin-top:auto;
   display:flex;
   align-items:flex-end;
 }
 
-#gestiones .card .btn{
+#gestiones .card:not(.servicio-card) .btn{
   margin-top:0;
 }
 
@@ -564,6 +564,10 @@ body{
   margin-top:18px;
 }
 
+.consultorios-mobile-intro{
+  display:none;
+}
+
 .consultorios-toggle{
   margin-top:0;
   border:none;
@@ -625,15 +629,75 @@ body{
   .consultorios-controls{
     flex-direction:column;
     align-items:stretch;
+    gap:14px;
+    margin-top:28px;
+    padding:20px 16px 18px;
+    background:
+      linear-gradient(135deg, rgba(var(--verde-secundario-rgb),0.1), rgba(255,255,255,0.96) 42%),
+      #fff;
+    border:1px solid rgba(var(--verde-principal-rgb),0.24);
+    border-radius:18px;
+    box-shadow:0 10px 26px rgba(0,0,0,0.08);
+  }
+
+  .consultorios-mobile-intro{
+    display:block;
+    order:1;
+  }
+
+  .consultorios-mobile-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--verde-principal);
+    font-size:20px;
+    font-weight:900;
+    line-height:1.2;
+  }
+
+  .consultorios-mobile-icon{
+    display:grid;
+    place-items:center;
+    flex:0 0 42px;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:rgba(var(--verde-principal-rgb),0.1);
+    font-size:23px;
+  }
+
+  .consultorios-mobile-intro p{
+    margin:10px 0 0;
+    color:var(--muted);
+    font-size:15px;
+    font-weight:800;
+    line-height:1.45;
   }
 
   .consultorios-search{
+    order:2;
     min-width:0;
     width:100%;
+    min-height:54px;
+    padding:15px 16px 15px 48px;
+    border:2px solid rgba(var(--verde-principal-rgb),0.22);
+    border-radius:16px;
+    background-color:#fff;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='%23007a3d' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:16px center;
+    font-size:16px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.06);
   }
 
   .consultorios-toggle{
+    order:3;
     width:100%;
+    min-height:52px;
+    border-radius:16px;
+    font-size:16px;
+    font-weight:900;
+    box-shadow:0 8px 18px rgba(var(--verde-principal-rgb),0.22);
   }
 }
 
@@ -1480,7 +1544,12 @@ section[id]{
   align-items:stretch;
 }
 
-.emergencia-card{
+/* Acabado institucional compartido con las tarjetas y el buscador. */
+.emergencia-card,
+#gestiones .servicio-card,
+#consultorios .servicio-card,
+#cartilla .servicio-card,
+#consultorios .consultorios-controls{
   background:
     radial-gradient(540px 230px at 100% 0%, rgba(var(--verde-secundario-rgb),0.18), transparent 63%),
     radial-gradient(420px 180px at 0% 100%, rgba(var(--verde-principal-rgb),0.07), transparent 72%),
@@ -1494,7 +1563,11 @@ section[id]{
   overflow:hidden;
 }
 
-.emergencia-card::before{
+.emergencia-card::before,
+#gestiones .servicio-card::before,
+#consultorios .servicio-card::before,
+#cartilla .servicio-card::before,
+#consultorios .consultorios-controls::before{
   content:"";
   position:absolute;
   inset:0;
@@ -1522,7 +1595,10 @@ section[id]{
   letter-spacing:.4px;
 }
 
-.emergencia-card h3{
+.emergencia-card h3,
+#gestiones .servicio-card h3,
+#consultorios .servicio-card h3,
+#cartilla .servicio-card h3{
   margin:0;
   color:var(--verde-principal);
   font-size:24px;
@@ -1546,7 +1622,10 @@ section[id]{
 
 .emergencia-note,
 .emergencia-address,
-.emergencia-hours{
+.emergencia-hours,
+#gestiones .servicio-card p.muted,
+#consultorios .servicio-card p.muted,
+#cartilla .servicio-card p.muted{
   margin:10px 0 0;
   color:#42514e;
   line-height:1.45;
@@ -1560,7 +1639,12 @@ section[id]{
   font-weight:900;
 }
 
-.emergencia-btn{
+.emergencia-btn,
+#gestiones .servicio-card .btn,
+#consultorios .servicio-card .btn,
+#consultorios .servicio-card .turnos-oval a,
+#cartilla .servicio-card .btn,
+#consultorios .consultorios-toggle{
   min-height:42px;
   margin-top:18px;
   padding:0 18px;
@@ -1577,20 +1661,29 @@ section[id]{
   transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
 }
 
-.emergencia-btn:hover{
+.emergencia-btn:hover,
+#gestiones .servicio-card .btn:hover,
+#consultorios .servicio-card .btn:hover,
+#consultorios .servicio-card .turnos-oval a:hover,
+#cartilla .servicio-card .btn:hover,
+#consultorios .consultorios-toggle:hover{
   transform:translateY(-2px);
   background:var(--verde-secundario);
   box-shadow:0 14px 28px rgba(var(--verde-principal-rgb),0.22);
 }
 
-.emergencia-btn--outline{
+.emergencia-btn--outline,
+#cartilla .servicio-card .btn--ghost,
+#consultorios .consultorios-toggle{
   background:#ffffff;
   color:var(--verde-principal);
   border:1px solid rgba(var(--verde-principal-rgb),0.28);
   box-shadow:none;
 }
 
-.emergencia-btn--outline:hover{
+.emergencia-btn--outline:hover,
+#cartilla .servicio-card .btn--ghost:hover,
+#consultorios .consultorios-toggle:hover{
   background:#f2fbf6;
   color:var(--verde-principal);
 }
@@ -1644,12 +1737,19 @@ section[id]{
 }
 
 @media (max-width:520px){
-  .emergencia-card{
+  .emergencia-card,
+#gestiones .servicio-card,
+#consultorios .servicio-card,
+#cartilla .servicio-card,
+#consultorios .consultorios-controls{
     padding:20px;
     border-radius:16px;
   }
 
-  .emergencia-card h3{
+  .emergencia-card h3,
+#gestiones .servicio-card h3,
+#consultorios .servicio-card h3,
+#cartilla .servicio-card h3{
     font-size:22px;
   }
 
@@ -1661,7 +1761,12 @@ section[id]{
     font-size:19px;
   }
 
-  .emergencia-btn{
+  .emergencia-btn,
+#gestiones .servicio-card .btn,
+#consultorios .servicio-card .btn,
+#consultorios .servicio-card .turnos-oval a,
+#cartilla .servicio-card .btn,
+#consultorios .consultorios-toggle{
     width:100%;
     min-height:44px;
   }
@@ -1693,7 +1798,7 @@ section[id]{
 }
 
 .coseguros-imagen-card{
-  background-image:url("archivos/coseguros.png");
+  background-image:url("archivos/coseguros.png?v=35");
 }
 
 .doc-imagen-card .doc-actions{
@@ -2405,29 +2510,29 @@ body.is-standalone #installPanel {
     align-items:stretch !important;
   }
 
-  #gestiones .card{
+  #gestiones .card:not(.servicio-card){
     min-height:220px !important;
     display:flex !important;
     flex-direction:column !important;
   }
 
-  #gestiones .card h3{
+  #gestiones .card:not(.servicio-card) h3{
     min-height:48px !important;
     margin-bottom:12px !important;
   }
 
-  #gestiones .card p{
+  #gestiones .card:not(.servicio-card) p{
     flex:1 1 auto !important;
     margin-bottom:18px !important;
   }
 
-  #gestiones .card .card-actions{
+  #gestiones .card:not(.servicio-card) .card-actions{
     margin-top:auto !important;
     display:flex !important;
     align-items:flex-end !important;
   }
 
-  #gestiones .card .btn{
+  #gestiones .card:not(.servicio-card) .btn{
     margin-top:0 !important;
     height:46px !important;
     display:inline-flex !important;
@@ -2435,7 +2540,7 @@ body.is-standalone #installPanel {
     justify-content:center !important;
   }
 }
-#gestiones .card .card-actions .btn{
+#gestiones .card:not(.servicio-card) .card-actions .btn{
   height:46px !important;
   min-height:46px !important;
   padding:0 20px !important;
@@ -2454,9 +2559,9 @@ body.is-standalone #installPanel {
   box-shadow:0 10px 24px rgba(0,0,0,0.12) !important;
 }
 /* FIX TIPOGRAFÍA BOTONES GESTIONES */
-#gestiones .card .card-actions .btn,
-#gestiones .card .card-actions button.btn,
-#gestiones .card .card-actions a.btn{
+#gestiones .card:not(.servicio-card) .card-actions .btn,
+#gestiones .card:not(.servicio-card) .card-actions button.btn,
+#gestiones .card:not(.servicio-card) .card-actions a.btn{
   font-family:'Segoe UI', Arial, sans-serif !important;
   font-size:14px !important;
   font-weight:900 !important;
@@ -2479,12 +2584,12 @@ body.is-standalone #installPanel {
 }
 
 /* Ajuste de botones sobre cards con imagen en Gestiones Online */
-#gestiones .card.gestiones-imagen-card{
+#gestiones .card:not(.servicio-card).gestiones-imagen-card{
   min-height:250px !important;
   padding:0 !important;
 }
 
-#gestiones .card.gestiones-imagen-card .card-actions{
+#gestiones .card:not(.servicio-card).gestiones-imagen-card .card-actions{
   position:absolute !important;
   left:18px !important;
   bottom:18px !important;
@@ -2494,16 +2599,16 @@ body.is-standalone #installPanel {
   align-items:flex-end !important;
 }
 
-#gestiones .card.gestiones-autorizaciones-card,
-#gestiones .card.gestiones-altas-card,
-#gestiones .card.gestiones-recetas-card{
+#gestiones .card:not(.servicio-card).gestiones-autorizaciones-card,
+#gestiones .card:not(.servicio-card).gestiones-altas-card,
+#gestiones .card:not(.servicio-card).gestiones-recetas-card{
   background-size:100% 100% !important;
   background-position:center center !important;
 }
 
-#gestiones .card.gestiones-imagen-card .card-actions .btn,
-#gestiones .card.gestiones-imagen-card .card-actions button.btn,
-#gestiones .card.gestiones-imagen-card .card-actions a.btn{
+#gestiones .card:not(.servicio-card).gestiones-imagen-card .card-actions .btn,
+#gestiones .card:not(.servicio-card).gestiones-imagen-card .card-actions button.btn,
+#gestiones .card:not(.servicio-card).gestiones-imagen-card .card-actions a.btn{
   height:40px !important;
   min-height:40px !important;
   padding:0 16px !important;
@@ -2512,26 +2617,26 @@ body.is-standalone #installPanel {
 }
 
 @media (max-width:768px){
-  #gestiones .card.gestiones-imagen-card{
+  #gestiones .card:not(.servicio-card).gestiones-imagen-card{
     min-height:235px !important;
     padding:0 !important;
   }
 
-  #gestiones .card.gestiones-imagen-card .card-actions{
+  #gestiones .card:not(.servicio-card).gestiones-imagen-card .card-actions{
     left:16px !important;
     bottom:16px !important;
   }
 
-  #gestiones .card.gestiones-autorizaciones-card,
-  #gestiones .card.gestiones-altas-card,
-  #gestiones .card.gestiones-recetas-card{
+  #gestiones .card:not(.servicio-card).gestiones-autorizaciones-card,
+  #gestiones .card:not(.servicio-card).gestiones-altas-card,
+  #gestiones .card:not(.servicio-card).gestiones-recetas-card{
     background-size:100% 100% !important;
     background-position:center center !important;
   }
 
-  #gestiones .card.gestiones-imagen-card .card-actions .btn,
-  #gestiones .card.gestiones-imagen-card .card-actions button.btn,
-  #gestiones .card.gestiones-imagen-card .card-actions a.btn{
+  #gestiones .card:not(.servicio-card).gestiones-imagen-card .card-actions .btn,
+  #gestiones .card:not(.servicio-card).gestiones-imagen-card .card-actions button.btn,
+  #gestiones .card:not(.servicio-card).gestiones-imagen-card .card-actions a.btn{
     height:38px !important;
     min-height:38px !important;
     padding:0 14px !important;
@@ -3185,3 +3290,207 @@ body.is-standalone #installPanel {
     text-align:center;
   }
 }
+
+/* Rediseño experimental: tarjetas de servicios y panel de búsqueda.
+   Alcance limitado; Emergencias y las demás secciones conservan sus estilos. */
+#gestiones .servicio-card,
+#consultorios .servicio-card,
+#cartilla .servicio-card{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:flex-start;
+  gap:0;
+  min-width:0;
+  min-height:0;
+  transition:box-shadow .2s ease,border-color .2s ease;
+}
+.servicio-card::before{top:0;left:0;width:auto;height:auto;background:none;}
+#gestiones .servicio-card:hover,
+#consultorios .servicio-card:hover,
+#cartilla .servicio-card:hover{
+
+  transform:none;
+}
+.servicio-card .servicio-icon{
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+  width:46px;
+  height:46px;
+  margin-bottom:16px;
+  border:1px solid rgba(var(--verde-principal-rgb),.10);
+  border-radius:14px;
+  background:#e6f4ec;
+  color:var(--verde-principal);
+}
+.servicio-icon svg{width:25px;height:25px;}
+#gestiones .servicio-card h3,
+#consultorios .servicio-card h3,
+#cartilla .servicio-card h3{
+  min-height:0;
+  margin:0 0 9px;
+  letter-spacing:0;
+}
+#gestiones .servicio-card p.muted,
+#consultorios .servicio-card p.muted,
+#cartilla .servicio-card p.muted{
+  flex:1;
+  margin:0 0 22px;
+  max-width:48ch;
+  font-size:15px;
+  text-shadow:none;
+}
+#gestiones .servicio-card .card-actions,
+#consultorios .servicio-card .card-actions,
+#consultorios .servicio-card .turnos-oval,
+#cartilla .servicio-card .doc-actions{
+  position:static;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  width:100%;
+  margin: auto 0 0;
+}
+#gestiones .servicio-card .btn,
+#consultorios .servicio-card .btn,
+#consultorios .servicio-card .turnos-oval a,
+#cartilla .servicio-card .btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-width:0;
+  height:auto;
+  min-height:46px;
+  margin:0;
+  padding:11px 18px;
+  line-height:1.35;
+  text-align:center;
+  text-decoration:none;
+  cursor:pointer;
+}
+#consultorios .servicio-card .turnos-icon{color:currentColor;}
+#consultorios .servicio-card .turnos-consultorios-badge{
+  order:0;
+  max-width:100%;
+  width:fit-content;
+  margin:0 0 12px;
+  padding:6px 10px;
+  border:1px solid #cce8d8;
+  background:#e6f4ec;
+  color:#0a6235;
+  font-size:11px;
+  line-height:1.35;
+  letter-spacing:.4px;
+  box-shadow:none;
+  backdrop-filter:none;
+}
+#consultorios .consultorios-controls{
+  padding:22px;
+  gap:14px;
+}
+#consultorios .consultorios-mobile-intro{display:block;flex-basis:100%;}
+#consultorios .consultorios-mobile-title{
+  display:flex;align-items:center;gap:10px;
+  color:var(--verde-principal);font-size:18px;font-weight:800;line-height:1.3;
+}
+#consultorios .consultorios-mobile-icon{
+  display:grid;place-items:center;flex:0 0 40px;
+  width:40px;height:40px;border-radius:12px;background:#e6f4ec;font-size:22px;
+}
+#consultorios .consultorios-mobile-intro p{
+  margin:8px 0 2px;color:#52655a;font-size:14px;line-height:1.5;font-weight:400;
+}
+#consultorios .consultorios-search{border-radius:12px;box-shadow:none;}
+#consultorios .consultorios-toggle{
+  min-height:48px;margin:0;padding:12px 18px;
+}
+
+.servicio-card :is(a,button):focus-visible,
+#consultorios .consultorios-toggle:focus-visible{
+  outline:3px solid var(--verde-principal);outline-offset:4px;
+}
+@media (min-width:769px){
+  #cartilla > .container > .cards,
+  #consultorios > .container > .cards:first-of-type{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:768px){
+  #gestiones > .container > .cards,
+  #cartilla > .container > .cards,
+  #consultorios > .container > .cards:first-of-type{grid-template-columns:minmax(0,1fr);gap:14px;}
+  #gestiones .servicio-card,
+  #consultorios .servicio-card,
+  #cartilla .servicio-card{padding:20px;}
+  #gestiones .servicio-card .btn,
+  #consultorios .servicio-card .btn,
+  #consultorios .servicio-card .turnos-oval a{width:100%;min-height:48px;}
+  #cartilla .servicio-card .doc-actions .btn{flex:1;min-height:48px;}
+  #consultorios .consultorios-controls{padding:20px 16px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .servicio-card,.servicio-card .btn{animation:none;transition:none;}
+}
+
+/* Especialidades: tamaño cerrado uniforme solo en escritorio.
+   Las filas crecen con el detalle; las tarjetas vecinas no se estiran. */
+@media (min-width:769px){
+  #consultoriosContainer{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    align-items:start;
+    gap:18px;
+  }
+
+  #consultoriosContainer .consultorio-card{
+    min-width:0;
+    padding:0;
+    transform:none;
+  }
+
+  #consultoriosContainer .consultorio-title{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:112px;
+    margin:0;
+    padding:18px;
+    font-size:18px;
+    line-height:1.35;
+    text-align:center;
+    overflow-wrap:anywhere;
+  }
+
+  #consultoriosContainer .consultorio-detalle{
+    display:none;
+    max-height:none;
+    margin:0 20px 20px;
+    padding-top:16px;
+    overflow:visible;
+    overflow-wrap:anywhere;
+    transition:opacity .25s ease;
+  }
+
+  #consultoriosContainer .consultorio-card:hover .consultorio-detalle,
+  #consultoriosContainer .consultorio-card.is-open .consultorio-detalle{
+    display:block;
+    max-height:none;
+    padding-top:16px;
+  }
+}
+
+@media (min-width:1024px){
+  #consultoriosContainer{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+}
+
+/* Restablecer apariencia nativa de botones sin cambiar los controles. */
+#gestiones .servicio-card .btn,
+#consultorios .servicio-card .btn,
+#consultorios .servicio-card .turnos-oval a,
+#cartilla .servicio-card .btn,
+#consultorios .consultorios-toggle{font-family:inherit;cursor:pointer;}
+#gestiones .servicio-card .btn,
+#consultorios .servicio-card .btn{border:0;}
+#consultorios .consultorios-controls .consultorios-mobile-title{font-weight:900;}
